@@ -32,10 +32,6 @@ def get_weather(location):
 
     # Process first location. Add a for-loop for multiple locations or weather models
     response = responses[0]
-    print(f"Coordinates: {response.Latitude()}°N {response.Longitude()}°E")
-    print(f"Elevation: {response.Elevation()} m asl")
-    print(f"Timezone: {response.Timezone()}{response.TimezoneAbbreviation()}")
-    print(f"Timezone difference to GMT+0: {response.UtcOffsetSeconds()}s")
 
     # Process hourly data. The order of variables needs to be the same as requested.
     hourly = response.Hourly()
@@ -59,7 +55,6 @@ def get_weather(location):
     hourly_data["wind_speed_10m"] = hourly_wind_speed_10m
 
     hourly_dataframe = pd.DataFrame(data = hourly_data)
-    print("\nHourly data\n", hourly_dataframe)
 
     # Process daily data. The order of variables needs to be the same as requested.
     daily = response.Daily()
@@ -91,6 +86,5 @@ def get_weather(location):
     daily_data["sunshine_duration"] = daily_sunshine_duration
 
     daily_dataframe = pd.DataFrame(data = daily_data)
-    print("\nDaily data\n", daily_dataframe)
     
     return hourly_dataframe, daily_dataframe
