@@ -1,6 +1,6 @@
 import config
 from data.weather import get_weather
-from data.transport.tansport import get_transport
+from data.transport.transport import get_transport
 
 def main():
 

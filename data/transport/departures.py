@@ -1,6 +1,6 @@
 import datetime
 import pandas as pd
-
+from .delays import get_delays
 
 def departure_schedule(
     stop_id,
@@ -9,7 +9,8 @@ def departure_schedule(
     routes,
     calendar,
     calendar_dates,
-    stops
+    stops,
+    delays
 ):
     # --------------------------------------------------
     # 1. Get current date and time
@@ -124,8 +125,46 @@ def departure_schedule(
     ].sort_values("departure_seconds")
 
     # --------------------------------------------------
-    # 12. Return next 5 departures
+    # 12. Add realtime delays
     # --------------------------------------------------
+
+
+    next_departures["delay"] = next_departures.apply(
+        lambda row: delays.get(
+            (row["trip_id"], row["stop_id"]),
+            0
+        ),
+        axis=1
+    )
+
+    # --------------------------------------------------
+    # 13. Calculate realtime departure time
+    # --------------------------------------------------
+
+    next_departures["realtime_departure_seconds"] = (
+        next_departures["departure_seconds"]
+        + next_departures["delay"]
+    )
+    # --------------------------------------------------
+    # 14. Drop not needed columns
+    # --------------------------------------------------
+    
+    next_departures = next_departures.drop(columns=[
+        "route_long_name",
+        "trip_id",
+        "stop_id",
+        "stop_sequence",
+        "pickup_type",
+        "drop_off_type",
+        "route_id",
+        "service_id"
+        ])
+    
+    
+    # --------------------------------------------------
+    # 15. Return next 5
+    # --------------------------------------------------
+
     return next_departures.head(5)
 
 
