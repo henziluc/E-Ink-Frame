@@ -10,7 +10,7 @@ def get_health_data():
     client.login()
     
     return {
-        "steps": client.get_steps(),
+        "steps": client.get_daily_steps(),
         "heart_rate": client.get_heart_rates(),
         "sleep": client.get_sleep_data(),
     }
