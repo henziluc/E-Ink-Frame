@@ -21,10 +21,11 @@ def main():
     #    print("Could not get transport data.")
     #    return
     
+    print("Gettin health data...")
     health_data = get_health_data()
     
-    print(health_data["steps"])
-    print(health_data["heart_rate"])
-    print(health_data["sleep"])    
+    for key, value in health_data.items():
+        print(f"{key}: {value}")
+    
 if __name__ == "__main__":
     main()
