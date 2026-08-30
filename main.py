@@ -1,14 +1,13 @@
 import config
 from data.weather import get_weather
 from data.transport.transport import get_transport
+from data.garmin import get_health_data
 
 def main():
 
     # Get weather data from open-meteo.com. The data is returned as two pandas dataframes, one for hourly data and one for daily data.
     print("Getting weather data...")
     weather_hourly, weather_daily = get_weather(config.location)
-    print(weather_hourly.to_string(index=False))
-    print(weather_daily.to_string(index=False))
 
     if weather_hourly is None or weather_daily is None:
        print("Could not get weather data.")
@@ -17,12 +16,15 @@ def main():
     
     print("Getting transport data...")
     departures_seen, departures_etzberg = get_transport()
-    print(departures_seen.to_string(index=False))
-    print(departures_etzberg.to_string(index=False))
 
     if departures_seen is None or departures_etzberg is None:
         print("Could not get transport data.")
         return
     
+    health_data = get_health_data()
+    
+    print(health_data["steps"])
+    print(health_data["heart_rate"])
+    print(health_data["sleep"])    
 if __name__ == "__main__":
     main()
