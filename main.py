@@ -15,11 +15,11 @@ def main():
 
     
     print("Getting transport data...")
-    departures_seen, departures_etzberg = get_transport()
+    #departures_seen, departures_etzberg = get_transport()
 
-    if departures_seen is None or departures_etzberg is None:
-        print("Could not get transport data.")
-        return
+    #if departures_seen is None or departures_etzberg is None:
+    #    print("Could not get transport data.")
+    #    return
     
     health_data = get_health_data()
     
