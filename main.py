@@ -2,6 +2,7 @@ import config
 from data.weather import get_weather
 from data.transport.transport import get_transport
 from data.garmin import get_health_data
+from data.sport import get_sport_data
 
 def main():
 
@@ -22,10 +23,17 @@ def main():
     #    return
     
     print("Gettin health data...")
-    health_data = get_health_data()
+    #health_data = get_health_data()
+    #if health_data is None:
+        #print("Could not get health data.")
+        #return
     
-    for key, value in health_data.items():
-        print(f"{key}: {value}")
+    
+    print("Gettin sport data...")
+    sport_data = get_sport_data()
+    if sport_data is None:
+        print("Could not get sport data.")
+        return
     
 if __name__ == "__main__":
     main()
