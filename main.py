@@ -2,6 +2,7 @@ import config
 from data.weather import get_weather
 from data.transport.transport import get_transport
 from data.garmin import get_health_data
+from data.moon import get_moon_phase
 
 
 def main():
@@ -24,11 +25,18 @@ def main():
     
     print("Gettin health data...")
     health_data = get_health_data()
-    #if health_data is None:
-        #print("Could not get health data.")
-        #return
-    print("Health data:", health_data)
+    if health_data is None:
+        print("Could not get health data.")
+        return
+    
  
+    print("Getting moon phase data...")
+    moon_data = get_moon_phase()
+    if moon_data is None:
+        print("Could not get moon phase data.")
+        return
+    print("Moon phase data:", moon_data)
+    
     
 if __name__ == "__main__":
     main()
