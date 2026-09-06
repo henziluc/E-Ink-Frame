@@ -4,6 +4,7 @@ from data.transport.transport import get_transport
 from data.garmin import get_health_data
 from data.moon import get_moon_phase
 from data.news import get_news
+from data.quote import get_quote
 
 
 def main():
@@ -42,7 +43,17 @@ def main():
     if news_data is None:
         print("Could not get news data.")
         return
-    print(news_data)
+    
+    print("Getting quote data...")
+    quote_data = get_quote()
+    if quote_data is None:
+        print("Could not get quote data.")
+        return  
+    
+    print(quote_data)
+    
+    
+    
     
 if __name__ == "__main__":
     main()

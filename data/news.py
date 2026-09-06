@@ -16,6 +16,9 @@ NEWS_FEEDS = {
         "https://feeds.bbci.co.uk/news/business/rss.xml",
         "https://feeds.bbci.co.uk/news/entertainment_and_arts/rss.xml",
     ],
+    "sport": [
+        "https://feeds.bbci.co.uk/sport/rss.xml",
+    ]
 }
 
 
@@ -33,6 +36,9 @@ def get_news():
         "random": parse_feed(
             get_feed(NEWS_FEEDS["random"][0])
         ),
+        "sport": parse_feed(
+            get_feed(NEWS_FEEDS["sport"][0])
+        )
     }
     
     return news
