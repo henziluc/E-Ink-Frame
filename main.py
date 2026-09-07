@@ -1,4 +1,6 @@
 import config
+import os
+
 from data.weather import get_weather
 from data.transport.transport import get_transport
 from data.garmin import get_health_data
@@ -25,12 +27,13 @@ def main():
     #    print("Could not get transport data.")
     #    return
     
+
     print("Gettin health data...")
-    #health_data = get_health_data()
+    health_data = get_health_data()
     #if health_data is None:
         #print("Could not get health data.")
         #return
-    
+    print("Health data:", health_data)
  
     print("Getting moon phase data...")
     #moon_data = get_moon_phase()

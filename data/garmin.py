@@ -4,11 +4,18 @@ import datetime
 
 
 def get_health_data():
+     
+    
+    health_dict = {
+        "Luca": load_health_data(os.getenv("garmin_mail"), os.getenv("garmin_password")),
+        "Jojo": load_health_data(os.getenv("garmin_mail_jojo"), os.getenv("garmin_password_jojo"))
+    }
+    
+    return health_dict
+
+def load_health_data(email=None, password=None):
     today = datetime.date.today()
-    
-    email = os.getenv("garmin_mail")
-    password = os.getenv("garmin_password")
-    
+        
     client = Garmin(email, password)
     client.login()
     
@@ -64,8 +71,6 @@ def get_health_data():
     }
     
     return healt_dict
-
-
 
 def speed_to_pace(speed):
     pace_seconds = 1000 / speed
