@@ -8,7 +8,7 @@ libdir = "e_ink_lib"
 if os.path.exists(libdir):
     sys.path.append(libdir)
 
-import epd13in3E
+from display.e_ink_lib import epd13in3E
 import time
 import datetime
 import traceback
