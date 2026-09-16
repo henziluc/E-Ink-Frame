@@ -7,7 +7,7 @@ def get_health_data():
      
     
     health_dict = {
-        "Luca": load_health_data(os.getenv("garmin_mail"), os.getenv("garmin_password")),
+        #"Luca": load_health_data(os.getenv("garmin_mail"), os.getenv("garmin_password")),
         "Jojo": load_health_data(os.getenv("garmin_mail_jojo"), os.getenv("garmin_password_jojo"))
     }
     
@@ -51,7 +51,8 @@ def load_health_data(email=None, password=None):
     activity_speed = activity.get("averageSpeed")
 
     activity_pace = speed_to_pace(activity_speed) if activity_speed else None
-        
+    
+    client.logout()    
         
     healt_dict = {
         "steps": steps,
