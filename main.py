@@ -4,7 +4,7 @@ from datetime import datetime
 from fetch_data import fetch_all_data
 from .layout.dashboard import make_dashbord
 
-UPDATE_INTERVAL = 30 * 60  # 30 minutes
+UPDATE_INTERVAL = 15 * 60  # 15 minutes
 
 
 def run_update():

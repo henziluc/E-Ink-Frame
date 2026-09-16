@@ -37,18 +37,7 @@ from .room_climate_widget import display_room_climate_widget
 from .fonts import font_small, font_medium, font_large, fill_main
 
 
-def make_dashbord(weather_hourly,
-                  weather_daily,
-                  departures_seen,
-                  departures_etzberg,
-                  health_data_1,
-                  health_data_2,
-                  birthday_data,
-                  moon_data,
-                  news_data,
-                  quote_data,
-                  status_data,
-                  room_climate_data):
+def make_dashbord(data):
 
     epd = epd13in3E.EPD()
     try:
@@ -65,16 +54,16 @@ def make_dashbord(weather_hourly,
         draw.text((30, 1575),"Last refresh: " + now_str, font=font_small,fill=fill_main)
         
         # Draw welcome message
-        display_welcome(draw, image, 30, 30, moon_data)
+        display_welcome(draw, image, 30, 30, data['moon_data'])
         
         # Draw Wi-Fi QR code
         display_wifi_qr_code(draw, image, 1040, 10)
         
         # Draw weather curve
-        display_weather_graph(draw, image, weather_hourly, weather_daily, 30, 120)
+        display_weather_graph(draw, image, data['weather_hourly'], data['weather_daily'], 30, 120)
         
         # Draw transport schedule
-        display_schedule_complet(draw, image, 'Seen', departures_seen, 'Etzberg', departures_etzberg, 30, 450)
+        display_schedule_complet(draw, image, 'Seen', data['departures_seen'], 'Etzberg', data['departures_etzberg'], 30, 450)
         
         # Draw next holidays
         display_holiday(draw, holidays, 30, 910)
@@ -83,22 +72,22 @@ def make_dashbord(weather_hourly,
         display_photo(draw, image, 365, 460, 830)
         
         # draw health data
-        display_health_widget(draw, image, 30, 1170, health_data_1, health_data_2)
+        display_health_widget(draw, image, 30, 1170, data['health_data'])
         
         # draw news data
-        display_news_widget(draw, image, 365, 1090, news_data)
+        display_news_widget(draw, image, 365, 1090, data['news_data'])
         
         # draw birthday data
-        display_birthday_widget(draw, image, 850, 450, birthday_data)
+        display_birthday_widget(draw, image, 850, 450, data['birthday_data'])
         
         # draw quote data
-        display_quote_widget(draw,  850, 680, quote_data)
+        display_quote_widget(draw,  850, 680, data['quote_data'])
         
         # draw room climate data
-        display_room_climate_widget(draw, 850, 870, room_climate_data)
+        #display_room_climate_widget(draw, 850, 870, room_climate_data)
         
         # draw software status
-        display_software_status(draw, image, 1170, 1575, status_data)
+        #display_software_status(draw, image, 1170, 1575, status_data)
         
         # Draw helper grid
         # draw = draw_grid(draw, 20, 1600, 1200)

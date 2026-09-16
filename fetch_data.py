@@ -7,6 +7,7 @@ from data.garmin import get_health_data
 from data.moon import get_moon_phase
 from data.news import get_news
 from data.quote import get_quote
+from data.birthday import get_birthday_data
 
 
 def fetch_all_data():
@@ -53,7 +54,9 @@ def fetch_all_data():
         print("Could not get quote data.")
         return  
     
-    print(quote_data)
+    print('Gettin birthdays...')
+    birthday_data = get_birthday_data()
+   
     return {
         "weather_hourly": weather_hourly,
         "weather_daily": weather_daily,
@@ -62,5 +65,6 @@ def fetch_all_data():
         "health_data": health_data,
         "moon_data": moon_data,
         "news_data": news_data,
-        "quote_data": quote_data
+        "quote_data": quote_data,
+        "birthday_data": birthday_data
     }
