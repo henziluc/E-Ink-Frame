@@ -1,32 +1,36 @@
 from PIL import ImageFont
+from pathlib import Path
+
+BASE_DIR = Path(__file__).resolve().parent.parent
+FONT_DIR = BASE_DIR / "display" / "fonts"
 
 font_massiv = ImageFont.truetype(
-    "fonts/RobotoCondensed-Bold.ttf",
+    FONT_DIR / "RobotoCondensed-Bold.ttf",
     80
 )
 
 font_large = ImageFont.truetype(
-    "fonts/RobotoCondensed-Bold.ttf",
+    FONT_DIR / "RobotoCondensed-Bold.ttf",
     60
 )
 
 font_medium = ImageFont.truetype(
-    "fonts/RobotoCondensed-Regular.ttf",
+    FONT_DIR / "RobotoCondensed-Regular.ttf",
     40
 )
 
 font_normal = ImageFont.truetype(
-    "fonts/RobotoCondensed-Regular.ttf",
+    FONT_DIR / "RobotoCondensed-Regular.ttf",
     30
 )
 
 font_small = ImageFont.truetype(
-    "fonts/RobotoCondensed-Regular.ttf",
+    FONT_DIR / "RobotoCondensed-Regular.ttf",
     20
 )
 
 font_very_small = ImageFont.truetype(
-    "fonts/RobotoCondensed-Regular.ttf",
+    FONT_DIR / "RobotoCondensed-Regular.ttf",
     15
 )
 
