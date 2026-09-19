@@ -1,4 +1,4 @@
-
+from datetime import date
 
 def get_birthday_data():
     birthday_data = [
