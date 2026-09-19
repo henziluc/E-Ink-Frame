@@ -51,7 +51,7 @@ def display_weather_graph(draw, image, df_hourly, df_daily, x_start, y_start):
             hour = str(hour)
         
         # Draw vertical line where the day ends
-        if hour == '24':
+        if int(hour) % 24 == 0:
             draw.line([(x_start + i * hour_spacing, y),(x_start + i * hour_spacing, y - graph_height)], fill= fill_main, width = 0)
             x_day_start.append(x_start + i * hour_spacing)
         
