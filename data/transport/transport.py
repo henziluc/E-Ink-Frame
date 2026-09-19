@@ -6,135 +6,43 @@ from .delays import get_delays
 
 
 # ============================================================
-# GTFS DATA PREPARATION
+# LOAD PREPROCESSED DATA
 # ============================================================
 
-def prepare_gtfs():
-    """
-    Load and prepare all static GTFS data.
+def load_transport_data():
 
-    This function should only be called ONCE when the program
-    starts.
-    """
+    BASE_DIR = Path(
+        __file__
+    ).resolve().parents[2]
 
-    BASE_DIR = Path(__file__).resolve().parents[2]
-    GTFS_DIR = BASE_DIR / "assets" / "gtfs"
-
-    print("Loading GTFS data...")
-
-    # --------------------------------------------------------
-    # Load GTFS files
-    # --------------------------------------------------------
-
-    stops = pd.read_csv(
-        GTFS_DIR / "stops.txt"
+    TRANSPORT_DIR = (
+        BASE_DIR
+        / "assets"
+        / "transport"
     )
 
-    stop_times = pd.read_csv(
-        GTFS_DIR / "stop_times.txt"
+    print("Loading preprocessed transport data...")
+
+    stop_times = pd.read_pickle(
+        TRANSPORT_DIR
+        / "stop_times.pkl"
     )
 
-    trips = pd.read_csv(
-        GTFS_DIR / "trips.txt"
+    calendar = pd.read_pickle(
+        TRANSPORT_DIR
+        / "calendar.pkl"
     )
 
-    routes = pd.read_csv(
-        GTFS_DIR / "routes.txt"
+    calendar_dates = pd.read_pickle(
+        TRANSPORT_DIR
+        / "calendar_dates.pkl"
     )
 
-    calendar = pd.read_csv(
-        GTFS_DIR / "calendar.txt"
+    print(
+        f"Loaded {len(stop_times):,} departures."
     )
-
-    calendar_dates = pd.read_csv(
-        GTFS_DIR / "calendar_dates.txt"
-    )
-
-    # --------------------------------------------------------
-    # Convert calendar dates ONCE
-    # --------------------------------------------------------
-
-    calendar["start_date"] = pd.to_datetime(
-        calendar["start_date"].astype(str),
-        format="%Y%m%d"
-    )
-
-    calendar["end_date"] = pd.to_datetime(
-        calendar["end_date"].astype(str),
-        format="%Y%m%d"
-    )
-
-    calendar_dates["date"] = pd.to_datetime(
-        calendar_dates["date"].astype(str),
-        format="%Y%m%d"
-    )
-
-    # --------------------------------------------------------
-    # Convert departure times ONCE
-    # --------------------------------------------------------
-
-    print("Converting departure times...")
-
-    time_parts = stop_times["departure_time"].str.split(
-        ":",
-        expand=True
-    ).astype(int)
-
-    stop_times["departure_seconds"] = (
-        time_parts[0] * 3600
-        + time_parts[1] * 60
-        + time_parts[2]
-    )
-
-    # --------------------------------------------------------
-    # Add trip information ONCE
-    # --------------------------------------------------------
-
-    print("Merging trips...")
-
-    stop_times = stop_times.merge(
-        trips[
-            [
-                "trip_id",
-                "route_id",
-                "service_id",
-                "trip_headsign"
-            ]
-        ],
-        on="trip_id",
-        how="left"
-    )
-
-    # --------------------------------------------------------
-    # Add route information ONCE
-    # --------------------------------------------------------
-
-    print("Merging routes...")
-
-    stop_times = stop_times.merge(
-        routes[
-            [
-                "route_id",
-                "route_short_name",
-                "route_long_name"
-            ]
-        ],
-        on="route_id",
-        how="left"
-    )
-
-    # --------------------------------------------------------
-    # Index stop_times by stop_id
-    # --------------------------------------------------------
-
-    print("Indexing stop times...")
-
-    stop_times = stop_times.set_index("stop_id")
-
-    print("GTFS preparation finished.")
 
     return (
-        stops,
         stop_times,
         calendar,
         calendar_dates
@@ -150,11 +58,10 @@ def get_active_services(
     calendar_dates,
     date
 ):
-    """
-    Get all services operating on a specific date.
-    """
 
-    weekday = date.strftime("%A").lower()
+    weekday = date.strftime(
+        "%A"
+    ).lower()
 
     # --------------------------------------------------------
     # Normal weekly services
@@ -174,21 +81,27 @@ def get_active_services(
     )
 
     # --------------------------------------------------------
-    # Apply exceptions
+    # Calendar exceptions
     # --------------------------------------------------------
 
     exceptions = calendar_dates[
         calendar_dates["date"] == date
     ]
 
-    for row in exceptions.itertuples(index=False):
+    for row in exceptions.itertuples(
+        index=False
+    ):
 
         if row.exception_type == 1:
+
+            # Service added
             active_services.add(
                 row.service_id
             )
 
         elif row.exception_type == 2:
+
+            # Service removed
             active_services.discard(
                 row.service_id
             )
@@ -204,12 +117,8 @@ def departure_schedule(
     stop_id,
     stop_times,
     active_services,
-    stops,
     delays
 ):
-    """
-    Get the next 5 departures for a station.
-    """
 
     # --------------------------------------------------------
     # Current time
@@ -224,40 +133,15 @@ def departure_schedule(
     )
 
     # --------------------------------------------------------
-    # Find child stops
+    # Filter station
     # --------------------------------------------------------
 
-    station_id = "Parent" + stop_id
-
-    child_stops = stops.loc[
-        stops["parent_station"] == station_id,
-        "stop_id"
-    ].tolist()
-
-    relevant_stop_ids = [
-        stop_id
-    ] + child_stops
-
-    # --------------------------------------------------------
-    # Find stop IDs that actually exist
-    # --------------------------------------------------------
-
-    available_stop_ids = (
-        stop_times.index.intersection(
-            relevant_stop_ids
-        )
-    )
-
-    if len(available_stop_ids) == 0:
-        return pd.DataFrame()
-
-    # --------------------------------------------------------
-    # Get departures
-    # --------------------------------------------------------
-
-    departures = stop_times.loc[
-        available_stop_ids
+    departures = stop_times[
+        stop_times["stop_id"] == stop_id
     ]
+
+    if departures.empty:
+        return pd.DataFrame()
 
     # --------------------------------------------------------
     # Filter active services
@@ -293,7 +177,7 @@ def departure_schedule(
     )
 
     # --------------------------------------------------------
-    # Take only next 5
+    # Take next 5
     # --------------------------------------------------------
 
     next_departures = departures.head(
@@ -311,12 +195,12 @@ def departure_schedule(
         )
         for trip_id, current_stop_id in zip(
             next_departures["trip_id"],
-            next_departures.index
+            next_departures["stop_id"]
         )
     ]
 
     # --------------------------------------------------------
-    # Realtime departure
+    # Calculate realtime departure
     # --------------------------------------------------------
 
     next_departures[
@@ -327,16 +211,7 @@ def departure_schedule(
     )
 
     # --------------------------------------------------------
-    # Reset index
-    # --------------------------------------------------------
-
-    next_departures = (
-        next_departures
-        .reset_index()
-    )
-
-    # --------------------------------------------------------
-    # Return only required data
+    # Return
     # --------------------------------------------------------
 
     return next_departures[
@@ -348,27 +223,27 @@ def departure_schedule(
             "trip_headsign",
             "delay"
         ]
-    ]
+    ].reset_index(
+        drop=True
+    )
 
 
 # ============================================================
-# TRANSPORT
+# GET TRANSPORT
 # ============================================================
 
 def get_transport(
-    stops,
     stop_times,
     calendar,
     calendar_dates
 ):
-    """
-    Get transport data for the dashboard.
 
-    GTFS data is already prepared and stays in memory.
-    Only realtime delays are downloaded here.
-    """
+    # --------------------------------------------------------
+    # Station IDs
+    # --------------------------------------------------------
 
     stop_id_seen = "ch:1:sloid:6002"
+
     stop_id_etzberg = "ch:1:sloid:90937"
 
     # --------------------------------------------------------
@@ -378,7 +253,7 @@ def get_transport(
     delays = get_delays()
 
     # --------------------------------------------------------
-    # Get active services ONCE
+    # Current date
     # --------------------------------------------------------
 
     now = datetime.datetime.now()
@@ -389,6 +264,10 @@ def get_transport(
         now.day
     )
 
+    # --------------------------------------------------------
+    # Determine active services ONCE
+    # --------------------------------------------------------
+
     active_services = get_active_services(
         calendar,
         calendar_dates,
@@ -396,22 +275,24 @@ def get_transport(
     )
 
     # --------------------------------------------------------
-    # Get departures
+    # Seen
     # --------------------------------------------------------
 
     departures_seen = departure_schedule(
         stop_id_seen,
         stop_times,
         active_services,
-        stops,
         delays
     )
+
+    # --------------------------------------------------------
+    # Etzberg
+    # --------------------------------------------------------
 
     departures_etzberg = departure_schedule(
         stop_id_etzberg,
         stop_times,
         active_services,
-        stops,
         delays
     )
 

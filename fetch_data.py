@@ -10,7 +10,7 @@ from data.quote import get_quote
 from data.birthday import get_birthday_data
 
 
-def fetch_all_data():
+def fetch_all_data(stop_times, calendar, calendar_dates):
 
     # Get weather data from open-meteo.com. The data is returned as two pandas dataframes, one for hourly data and one for daily data.
     print("Getting weather data...")
@@ -22,7 +22,7 @@ def fetch_all_data():
 
     
     print("Getting transport data...")
-    departures_seen, departures_etzberg = get_transport()
+    departures_seen, departures_etzberg = get_transport(stop_times, calendar, calendar_dates)
 
     if departures_seen is None or departures_etzberg is None:
         print("Could not get transport data.")

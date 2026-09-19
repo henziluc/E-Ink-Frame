@@ -2,7 +2,7 @@ import time
 from datetime import datetime
 
 from fetch_data import fetch_all_data
-from data.transport.transport import prepare_gtfs
+from data.transport.transport import load_transport_data
 from layout.dashboard import make_dashbord
 
 UPDATE_INTERVAL = 15 * 60  # 15 minutes
@@ -19,11 +19,10 @@ def main():
     # --------------------------------------------------------
 
     (
-        stops,
         stop_times,
         calendar,
         calendar_dates
-    ) = prepare_gtfs()
+    ) = load_transport_data()
 
     # --------------------------------------------------------
     # Main loop
@@ -33,7 +32,9 @@ def main():
         print(f"\n[{datetime.now()}] Starting update...")
         try:
             # 1. Fetch all data
-            data = fetch_all_data()
+            data = fetch_all_data(stop_times,
+                    calendar,
+                    calendar_dates)
 
             # 2. Display the data
             make_dashbord(data)
