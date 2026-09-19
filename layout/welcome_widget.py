@@ -36,6 +36,9 @@ def display_moon_phase(image, x_start, y_start, moon_data):
     icon_size = 60
     illumination = moon_data['illumination']
     
+    if moon_data['phase'] == 'unkown':
+        return
+    
     # Choose path of moon icon based on illumination
     if illumination > 87:
         moon_icon_path = moon_full_icon_path
