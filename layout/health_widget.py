@@ -23,16 +23,18 @@ speed_icon_path = BASE_DIR / "assets" / "sport_symbol" / "gauge.png"
 
 
 
-def display_health_widget(draw, image, x_start, y_start, health_data1, health_data2):
+def display_health_widget(draw, image, x_start, y_start, health_data):
     y = y_start
     icon_size = 25
    
     draw.text((x_start, y), 'Health Stats', font = font_large, fill = fill_main)
     
     y += spacing_large
-    
-    display_personal_health(draw, image, x_start, y, health_data1, "Luca")
-    display_personal_health(draw, image, x_start + 160, y, health_data2, "Jojo")
+    if 'Luca' in health_data:
+        display_personal_health(draw, image, x_start, y, health_data['Luca'], "Luca")
+        
+    if 'Jojo' in health_data:
+        display_personal_health(draw, image, x_start + 160, y, health_data['Jojo'], "Jojo")
 
 
     
