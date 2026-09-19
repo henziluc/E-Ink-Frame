@@ -44,6 +44,9 @@ def make_dashbord(data):
         
         epd.Init()
         
+        print("clearing...")
+        epd.Clear()
+        
         # Set background to white
         image = Image.new("RGB", (1200, 1600), "white")
         draw = ImageDraw.Draw(image)
@@ -94,10 +97,6 @@ def make_dashbord(data):
         
         # Write picture on to screen
         epd.display(epd.getbuffer(image))
-        time.sleep(30)
-
-        print("clearing...")
-        epd.Clear()
 
         print("goto sleep...")
         epd.sleep()
