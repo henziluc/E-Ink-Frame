@@ -23,7 +23,12 @@ def main():
         calendar,
         calendar_dates
     ) = load_transport_data()
-
+    
+    data = {'health_data' : {
+        'Luca' : None,
+        'Jojo' : None
+    }
+        }
     # --------------------------------------------------------
     # Main loop
     # --------------------------------------------------------
@@ -34,7 +39,7 @@ def main():
             # 1. Fetch all data
             data = fetch_all_data(stop_times,
                     calendar,
-                    calendar_dates)
+                    calendar_dates, data)
 
             # 2. Display the data
             make_dashbord(data)

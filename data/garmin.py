@@ -1,14 +1,21 @@
 import os
 from garminconnect import Garmin
 import datetime
+request_toggle = True
 
-
-def get_health_data():
-     
+def get_health_data(health_dict):
+    
+    if request_toggle:
+        luca_data = load_health_data(os.getenv("garmin_mail"), os.getenv("garmin_password"))
+        jojo_data = health_dict['Jojo']
+    else:
+        luca_data = health_dict['Jojo']
+        jojo_data = load_health_data(os.getenv("garmin_mail_jojo"), os.getenv("garmin_password_jojo"))
+        
     
     health_dict = {
-        #"Luca": load_health_data(os.getenv("garmin_mail"), os.getenv("garmin_password")),
-        "Jojo": load_health_data(os.getenv("garmin_mail_jojo"), os.getenv("garmin_password_jojo"))
+        "Luca": luca_data,
+        "Jojo": jojo_data
     }
     
     return health_dict
