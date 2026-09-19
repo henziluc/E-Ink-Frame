@@ -31,10 +31,12 @@ def display_health_widget(draw, image, x_start, y_start, health_data):
     
     y += spacing_large
     if 'Luca' in health_data:
-        display_personal_health(draw, image, x_start, y, health_data['Luca'], "Luca")
+        if health_data['Luca'] is not None:
+            display_personal_health(draw, image, x_start, y, health_data['Luca'], "Luca")
         
     if 'Jojo' in health_data:
-        display_personal_health(draw, image, x_start + 160, y, health_data['Jojo'], "Jojo")
+        if health_data['Jojo'] is not None:
+            display_personal_health(draw, image, x_start + 160, y, health_data['Jojo'], "Jojo")
 
 
     
