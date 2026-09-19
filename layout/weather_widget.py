@@ -173,7 +173,7 @@ def draw_rain_graph(draw, df_from_now, x_start, y_start, graph_height, hour_spac
     offset = 20
     
     # calculate spacing per mm precipitation
-    rain_max = math.ceil(df_from_now['precipitation'].max())
+    rain_max = max(math.ceil(df_from_now['precipitation'].max()), 10)
     rain_spacing = (graph_height - offset) / rain_max
     
     # draw rain bargraph
