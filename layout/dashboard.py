@@ -43,7 +43,7 @@ def make_dashbord(data):
     try:
         
         epd.Init()
-        
+        print(data)
         print("clearing...")
         epd.Clear()
         

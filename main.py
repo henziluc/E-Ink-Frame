@@ -44,7 +44,6 @@ def main():
                     transport_info,
                     data)
             
-            print(data)
 
             # 2. Display the data
             make_dashbord(data)
