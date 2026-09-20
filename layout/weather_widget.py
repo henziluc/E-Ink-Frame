@@ -27,10 +27,10 @@ def display_weather_graph(draw, image, df_hourly, df_daily, x_start, y_start):
     hour_spacing = (1200 - x_start * 2) / 48
     
     # draw top horizontal line of the graph
-    draw.line([(x_start, y), (1200-x_start, y)], fill= fill_main, width = 0)
+    draw.line([(x_start, y), (1200-x_start, y)], fill= fill_main, width = 1)
     
     #draw vertical line at beginning of graph
-    draw.line([(x_start, y),(x_start, y + graph_height)], fill= fill_main, width = 0)
+    draw.line([(x_start, y),(x_start, y + graph_height)], fill= fill_main, width = 1)
     
     y += graph_height
     
@@ -52,10 +52,10 @@ def display_weather_graph(draw, image, df_hourly, df_daily, x_start, y_start):
         
         # Draw vertical line where the day ends
         if int(hour) % 24 == 0:
-            draw.line([(x_start + i * hour_spacing, y),(x_start + i * hour_spacing, y - graph_height)], fill= fill_main, width = 0)
+            draw.line([(x_start + i * hour_spacing, y),(x_start + i * hour_spacing, y - graph_height)], fill= fill_main, width = 1)
             x_day_start.append(x_start + i * hour_spacing)
         
-        draw.line([(x_start + i * hour_spacing, y), (x_start + i * hour_spacing, y - 5)], fill= fill_main, width = 0)
+        draw.line([(x_start + i * hour_spacing, y), (x_start + i * hour_spacing, y - 5)], fill= fill_main, width = 1)
         
         # Draw text at every second hour    
         if  print_hour == 1:
@@ -65,7 +65,7 @@ def display_weather_graph(draw, image, df_hourly, df_daily, x_start, y_start):
             print_hour = 1
             
     # draw bottom horizontal line of the graph       
-    draw.line([(x_start, y), (1200-x_start, y)], fill= fill_main, width = 0)
+    draw.line([(x_start, y), (1200-x_start, y)], fill= fill_main, width = 1)
     
     y -= graph_height + spacing_small + spacing_normal
     
@@ -134,7 +134,7 @@ def draw_temperature_graph(draw, df_from_now, x_start, y_start, graph_height, ho
     # draw temperature scale
     for i in range(0, temp_delta + 1):
         y = y_start + offset + i * degrees_spacing
-        draw.line([(x_start, y),(x_start + 5, y)], fill= fill_main, width = 0)
+        draw.line([(x_start, y),(x_start + 5, y)], fill= fill_main, width = 1)
         
         # draw every second temperature value
         temp = temp_max - i
@@ -190,14 +190,14 @@ def draw_rain_graph(draw, df_from_now, x_start, y_start, graph_height, hour_spac
     if rain_max > 0:
         for i in range(0, rain_max + 1):
             y = y_start + offset + i * rain_spacing
-            draw.line([(1200-x_start, y),(1200 - x_start - 5, y)], fill= fill_main, width = 0)
+            draw.line([(1200-x_start, y),(1200 - x_start - 5, y)], fill= fill_main, width = 1)
             
             # draw every second rain value
             rain = rain_max - i
             if i % 2 == 0 and rain > 0:
                 draw.text((1200- x_start + 2, y), str(rain), font=font_small, fill=fill_main, anchor= 'lm')
             
-    draw.line([(1200-x_start, y_start),(1200-x_start, y_start + graph_height)], fill= fill_main, width = 0)
+    draw.line([(1200-x_start, y_start),(1200-x_start, y_start + graph_height)], fill= fill_main, width = 1)
 
     
 def get_weather_icon(code, day):
