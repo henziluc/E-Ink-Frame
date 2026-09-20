@@ -61,7 +61,7 @@ def fetch_all_data(stop_times, calendar, calendar_dates, transport_info, data):
         "weather_daily": weather_daily,
         "departures_seen": departures_seen,
         "departures_etzberg": departures_etzberg,
-        #"health_data": health_data,
+        "health_data": health_data,
         "moon_data": moon_data,
         "news_data": news_data,
         "quote_data": quote_data,

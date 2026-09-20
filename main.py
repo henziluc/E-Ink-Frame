@@ -43,6 +43,8 @@ def main():
                     calendar_dates,
                     transport_info,
                     data)
+            
+            print(data)
 
             # 2. Display the data
             make_dashbord(data)
