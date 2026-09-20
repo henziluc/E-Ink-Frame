@@ -21,7 +21,8 @@ def main():
     (
         stop_times,
         calendar,
-        calendar_dates
+        calendar_dates,
+        transport_info
     ) = load_transport_data()
     
     data = {'health_data' : {
@@ -39,7 +40,9 @@ def main():
             # 1. Fetch all data
             data = fetch_all_data(stop_times,
                     calendar,
-                    calendar_dates, data)
+                    calendar_dates,
+                    transport_info,
+                    data)
 
             # 2. Display the data
             make_dashbord(data)

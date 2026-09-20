@@ -37,6 +37,11 @@ def load_transport_data():
         TRANSPORT_DIR
         / "calendar_dates.pkl"
     )
+    
+    transport_info = pd.read_pickle(
+            TRANSPORT_DIR
+            / "transport_info.pkl"
+        )
 
     print(
         f"Loaded {len(stop_times):,} departures."
@@ -45,7 +50,8 @@ def load_transport_data():
     return (
         stop_times,
         calendar,
-        calendar_dates
+        calendar_dates,
+        transport_info
     )
 
 
@@ -123,7 +129,13 @@ def departure_schedule(
     # --------------------------------------------------------
     # Current time
     # --------------------------------------------------------
-
+    print(f"Requested stop: ch:1:sloid:6002")
+    print(f"Rows for stop: {len(stop_times[stop_times['stop_id'] == 'ch:1:sloid:6002'])}")
+    print(f"Requested stop: ch:1:sloid:6002:1:1")
+    print(f"Rows for stop: {len(stop_times[stop_times['stop_id'] == 'ch:1:sloid:6002:1:1'])}")
+    print(f"Requested stop: ch:1:sloid:6002:2:2")
+    print(f"Rows for stop: {len(stop_times[stop_times['stop_id'] == 'ch:1:sloid:6002:2:2'])}")
+    
     now = datetime.datetime.now()
 
     current_seconds = (
@@ -136,10 +148,16 @@ def departure_schedule(
     # Filter station
     # --------------------------------------------------------
 
+    stop_ids = stop_id["children"]
+    
+    
     departures = stop_times[
-        stop_times["stop_id"] == stop_id
-    ]
+    stop_times["stop_id"].isin(stop_ids)
+    ].copy()
 
+    print(f"{stop_id}: after stop filter = {len(departures)}")
+    print(departures[["trip_id", "service_id", "departure_time"]].head(20))
+    
     if departures.empty:
         return pd.DataFrame()
 
@@ -210,6 +228,8 @@ def departure_schedule(
         + next_departures["delay"]
     )
 
+
+    
     # --------------------------------------------------------
     # Return
     # --------------------------------------------------------
@@ -235,16 +255,17 @@ def departure_schedule(
 def get_transport(
     stop_times,
     calendar,
-    calendar_dates
+    calendar_dates,
+    transport_info
 ):
 
     # --------------------------------------------------------
     # Station IDs
     # --------------------------------------------------------
 
-    stop_id_seen = "ch:1:sloid:6002"
+    stop_id_seen = transport_info['seen']
 
-    stop_id_etzberg = "ch:1:sloid:90937"
+    stop_id_etzberg = transport_info['etzberg']
 
     # --------------------------------------------------------
     # Get realtime delays
@@ -295,7 +316,14 @@ def get_transport(
         active_services,
         delays
     )
+    print("SEEN:")
+    print(departures_seen)
 
+    print("ETZBERG:")
+    print(departures_etzberg)
+    
+    
+    
     return (
         departures_seen,
         departures_etzberg

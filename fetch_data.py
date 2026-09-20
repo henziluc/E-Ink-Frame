@@ -10,7 +10,7 @@ from data.quote import get_quote
 from data.birthday import get_birthday_data
 
 
-def fetch_all_data(stop_times, calendar, calendar_dates, data):
+def fetch_all_data(stop_times, calendar, calendar_dates, transport_info, data):
 
     # Get weather data from open-meteo.com. The data is returned as two pandas dataframes, one for hourly data and one for daily data.
     print("Getting weather data...")
@@ -22,7 +22,7 @@ def fetch_all_data(stop_times, calendar, calendar_dates, data):
 
     
     print("Getting transport data...")
-    departures_seen, departures_etzberg = get_transport(stop_times, calendar, calendar_dates)
+    departures_seen, departures_etzberg = get_transport(stop_times, calendar, calendar_dates, transport_info)
 
     if departures_seen is None or departures_etzberg is None:
         print("Could not get transport data.")
@@ -33,7 +33,6 @@ def fetch_all_data(stop_times, calendar, calendar_dates, data):
     health_data = get_health_data(data['health_data'])
     if health_data is None:
         print("Could not get health data.")
-        return
     print("Health data:", health_data)
  
     print("Getting moon phase data...")
@@ -62,7 +61,7 @@ def fetch_all_data(stop_times, calendar, calendar_dates, data):
         "weather_daily": weather_daily,
         "departures_seen": departures_seen,
         "departures_etzberg": departures_etzberg,
-        "health_data": health_data,
+        #"health_data": health_data,
         "moon_data": moon_data,
         "news_data": news_data,
         "quote_data": quote_data,

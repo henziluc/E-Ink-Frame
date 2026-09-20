@@ -17,8 +17,8 @@ OUTPUT_FILE = OUTPUT_DIR / "transport_static.pkl"
 
 # Your stations
 STOP_IDS = [
-    "ch:1:sloid:6002",   # Seen
     "ch:1:sloid:90937",  # Etzberg
+    "ch:1:sloid:6002",   # Seen
 ]
 
 
@@ -83,7 +83,7 @@ def main():
     print("\n2. Finding station child stops...")
 
     relevant_stop_ids = set(STOP_IDS)
-
+    station_stop_ids = {}
     for stop_id in STOP_IDS:
 
         # Your GTFS structure uses Parent + stop_id
@@ -97,6 +97,14 @@ def main():
         relevant_stop_ids.update(
             children.dropna().tolist()
         )
+         # Parent + children
+        children_list = children.tolist()
+        station_stop_ids[stop_id] = [stop_id] + children_list
+
+        print(f"\nStation: {stop_id}")
+        print(f"  Parent: {stop_id}")
+        print(f"  Children: {children}")
+        print(f"  Total stops: {len(station_stop_ids[stop_id])}")
 
     print(
         f"Relevant stops: {len(relevant_stop_ids)}"
@@ -326,7 +334,13 @@ def main():
     )
 
     # --------------------------------------------------------
-    # 12. Create transport object
+    # 12. Get child stops
+    # --------------------------------------------------------
+
+
+
+    # --------------------------------------------------------
+    # 13. Create transport object
     # --------------------------------------------------------
 
     transport_data = {
@@ -334,8 +348,20 @@ def main():
         "calendar": calendar,
         "calendar_dates": calendar_dates,
         "stations": {
-            "seen": "ch:1:sloid:6002",
-            "etzberg": "ch:1:sloid:90937"
+            "seen": {
+                "parent": "ch:1:sloid:6002",
+                "children": stops.loc[
+                    stops["parent_station"] == "Parentch:1:sloid:6002",
+                    "stop_id"
+                ].dropna().tolist()
+            },
+            "etzberg": {
+                "parent": "ch:1:sloid:90937",
+                "children": stops.loc[
+                    stops["parent_station"] == "Parentch:1:sloid:90937",
+                    "stop_id"
+                ].dropna().tolist()
+            }
         }
     }
 
