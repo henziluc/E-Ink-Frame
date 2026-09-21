@@ -104,6 +104,7 @@ def make_dashbord(data):
         
     except Exception:
         print("ERROR:")
+        raise
         traceback.print_exc()
         epd.sleep()
 

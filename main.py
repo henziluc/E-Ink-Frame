@@ -1,5 +1,8 @@
 import time
 from datetime import datetime
+import logging
+from logging.handlers import RotatingFileHandler
+from pathlib import Path
 
 from fetch_data import fetch_all_data
 from data.transport.transport import load_transport_data
@@ -8,8 +11,36 @@ from layout.dashboard import make_dashbord
 UPDATE_INTERVAL = 15 * 60
 
 
+BASE_DIR = Path(__file__).resolve().parent
+LOG_DIR = BASE_DIR / "logs"
+LOG_DIR.mkdir(exist_ok=True)
+
+logger = logging.getLogger("E-Ink-Dashboard")
+logger.setLevel(logging.INFO)
+
+file_handler = RotatingFileHandler(
+    LOG_DIR / "dashboard.log",
+    maxBytes=2 * 1024 * 1024,  # 2 MB
+    backupCount=5,
+    encoding="utf-8"
+)
+
+formatter = logging.Formatter(
+    "%(asctime)s | %(levelname)s | %(message)s"
+)
+
+file_handler.setFormatter(formatter)
+logger.addHandler(file_handler)
+
+console_handler = logging.StreamHandler()
+console_handler.setFormatter(formatter)
+logger.addHandler(console_handler)
+
+
+
 def main():
     print("E-Ink Dashboard started")
+    logger.info("E-Ink Dashboard started")
 
     # --------------------------------------------------------
     # Prepare GTFS ONCE
@@ -35,6 +66,7 @@ def main():
 
     while True:
         print(f"\n[{datetime.now()}] Starting update...")
+        logger.info("Start fetching data")
 
         try:
             # 1. Fetch all data
@@ -46,13 +78,17 @@ def main():
                 data
             )
 
+            logger.info("Data fetched successfully")
+            
             # 2. Create and display dashboard
             make_dashbord(data)
 
             print(f"[{datetime.now()}] Update completed successfully.")
+            logger.info("Dashboard displayed successfully")
 
         except Exception as e:
             print(f"[{datetime.now()}] ERROR: {e}")
+            logger.exception("Update failed")
 
         # Schedule next update
         next_update += UPDATE_INTERVAL
@@ -62,6 +98,8 @@ def main():
 
         if wait_time > 0:
             print(f"Waiting {wait_time / 60:.1f} minutes...")
+            logger.info(f"Next update in {wait_time / 60:.1f} minutes")
             time.sleep(wait_time)
         else:
-            print("Update took longer than the interval. Starting next update.")    
+            print("Update took longer than the interval. Starting next update.")
+            logger.info("Update took longer than the interval. Starting next update.")   
