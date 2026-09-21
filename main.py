@@ -39,7 +39,6 @@ logger.addHandler(console_handler)
 
 
 def main():
-    print("E-Ink Dashboard started")
     logger.info("E-Ink Dashboard started")
 
     # --------------------------------------------------------
@@ -65,7 +64,6 @@ def main():
     next_update = time.monotonic()
 
     while True:
-        print(f"\n[{datetime.now()}] Starting update...")
         logger.info("Start fetching data")
 
         try:
@@ -83,11 +81,9 @@ def main():
             # 2. Create and display dashboard
             make_dashbord(data)
 
-            print(f"[{datetime.now()}] Update completed successfully.")
             logger.info("Dashboard displayed successfully")
 
         except Exception as e:
-            print(f"[{datetime.now()}] ERROR: {e}")
             logger.exception("Update failed")
 
         # Schedule next update
