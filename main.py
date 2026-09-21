@@ -93,11 +93,9 @@ def main():
         wait_time = next_update - time.monotonic()
 
         if wait_time > 0:
-            print(f"Waiting {wait_time / 60:.1f} minutes...")
             logger.info(f"Next update in {wait_time / 60:.1f} minutes")
             time.sleep(wait_time)
         else:
-            print("Update took longer than the interval. Starting next update.")
             logger.info("Update took longer than the interval. Starting next update.")   
             
 if __name__ == "__main__":
