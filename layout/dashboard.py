@@ -43,9 +43,6 @@ def make_dashbord(data):
     try:
         
         epd.Init()
-        print(data)
-        print("clearing...")
-        epd.Clear()
         
         # Set background to white
         image = Image.new("RGB", (1200, 1600), "white")
