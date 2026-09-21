@@ -8,9 +8,12 @@ def get_health_data(health_dict):
     if request_toggle:
         luca_data = load_health_data(os.getenv("garmin_mail"), os.getenv("garmin_password"))
         jojo_data = health_dict['Jojo']
+        request_toggle = False
     else:
         luca_data = health_dict['Jojo']
         jojo_data = load_health_data(os.getenv("garmin_mail_jojo"), os.getenv("garmin_password_jojo"))
+        request_toggle = True
+
         
     
     health_dict = {

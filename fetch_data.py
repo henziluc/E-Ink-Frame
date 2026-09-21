@@ -33,7 +33,6 @@ def fetch_all_data(stop_times, calendar, calendar_dates, transport_info, data):
     health_data = get_health_data(data['health_data'])
     if health_data is None:
         print("Could not get health data.")
-    print("Health data:", health_data)
  
     print("Getting moon phase data...")
     moon_data = get_moon_phase()
