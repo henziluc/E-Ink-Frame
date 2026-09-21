@@ -28,64 +28,64 @@ def fetch_all_data(stop_times, calendar, calendar_dates, transport_info, data):
     print("Getting weather data...")
     try:
         weather_hourly, weather_daily = get_weather(config.location)
-        data["status"]["weather"] = True
+        weather_status = True
     except:
         logger.exception("Weather data request failed")
-        data["status"]["weather"] = False
+        weather_status = False
 
     
     print("Getting transport data...")
     try:
         departures_seen, departures_etzberg = get_transport(stop_times, calendar, calendar_dates, transport_info)
-        data["status"]["transport"] = True
+        transport_status = True
     except:
         logger.exception("Transport request failed")
-        data["status"]["transport"] = False
+        transport_status = False
 
 
     print("Gettin health data...")
     try:
         health_data = get_health_data(data['health_data'])
-        data["status"]["health"] = True
+        health_status = True
     except:
         logger.exception("Health request failed")
-        data["status"]["health"] = False
+        health_status = False
 
  
     print("Getting moon phase data...")
     try:
         moon_data = get_moon_phase()
-        data["status"]["moon"] = True
+        moon_status = True
     except:
         logger.exception("Moon request failed")
-        data["status"]["moon"] = False
+        moon_status = False
 
     
     print("Getting news data...")
     try:
         news_data = get_news()
-        data["status"]["news"] = True        
+        news_status = True        
     except:
         logger.exception("News request failed")
-        data["status"]["news"] = False        
+        news_status = False        
     
     
     print("Getting quote data...")
     try:
         quote_data = get_quote()
-        data["status"]["quote"] = True   
+        quote_status = True   
     except:
         logger.exception("Quote request failed")
-        data["status"]["quote"] = False         
+        quote_status = False         
 
     
     print('Gettin birthdays...')
     try:
         birthday_data = get_birthday_data()
-        data["status"]["birthday"] = True            
+        birthday_status = True            
     except:
         logger.exception("Birthday request failed")
-        data["status"]["birthday"] = False            
+        birthday_status = False            
    
    
     return {
@@ -97,5 +97,14 @@ def fetch_all_data(stop_times, calendar, calendar_dates, transport_info, data):
         "moon_data": moon_data,
         "news_data": news_data,
         "quote_data": quote_data,
-        "birthday_data": birthday_data
+        "birthday_data": birthday_data,
+        "status" : {
+            'weather' : weather_status,
+            'transport' : transport_status,
+            'health' : health_status,
+            'moon' : moon_status,
+            'news' : news_status,
+            'quote' : quote_status,
+            'birthday' : birthday_status
+        }
     }
