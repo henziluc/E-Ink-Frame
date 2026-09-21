@@ -1,40 +1,16 @@
 import time
 from datetime import datetime
-import logging
-from logging.handlers import RotatingFileHandler
+
 from pathlib import Path
 
 from fetch_data import fetch_all_data
 from data.transport.transport import load_transport_data
 from layout.dashboard import make_dashbord
+from logger import logger
 
 UPDATE_INTERVAL = 15 * 60
 
 
-BASE_DIR = Path(__file__).resolve().parent
-LOG_DIR = BASE_DIR / "logs"
-LOG_DIR.mkdir(exist_ok=True)
-
-logger = logging.getLogger("E-Ink-Dashboard")
-logger.setLevel(logging.INFO)
-
-file_handler = RotatingFileHandler(
-    LOG_DIR / "dashboard.log",
-    maxBytes=2 * 1024 * 1024,  # 2 MB
-    backupCount=5,
-    encoding="utf-8"
-)
-
-formatter = logging.Formatter(
-    "%(asctime)s | %(levelname)s | %(message)s"
-)
-
-file_handler.setFormatter(formatter)
-logger.addHandler(file_handler)
-
-console_handler = logging.StreamHandler()
-console_handler.setFormatter(formatter)
-logger.addHandler(console_handler)
 
 
 
@@ -52,12 +28,31 @@ def main():
     ) = load_transport_data()
 
     data = {
+        "weather_hourly": None,
+        "weather_daily": None,
+        "departures_seen": None,
+        "departures_etzberg": None,
         "health_data": {
             "Luca": None,
             "Jojo": None
+        },
+        "moon_data": None,
+        "news_data": None,
+        "quote_data": None,
+        "birthday_data": None,
+        "status" : {
+            'weather' : None,
+            'transport' : None,
+            'health' : None,
+            'moon' : None,
+            'news' : None,
+            'quote' : None,
+            'birthday' : None
         }
     }
-
+        
+        
+        
     # --------------------------------------------------------
     # Main loop
     # --------------------------------------------------------
