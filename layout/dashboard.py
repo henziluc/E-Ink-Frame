@@ -91,7 +91,7 @@ def make_dashbord(data):
         #display_room_climate_widget(draw, 850, 870, room_climate_data)
         
         # draw software status
-        #display_software_status(draw, image, 1170, 1575, status_data)
+        display_software_status(draw, image, 1170, 1575, data['status'])
         
         # Draw helper grid
         # draw = draw_grid(draw, 20, 1600, 1200)
