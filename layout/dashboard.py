@@ -50,7 +50,11 @@ def make_dashbord(data):
         
         # Last refresh info
         now = datetime.datetime.now()
-        now_str = str(now.hour) + ':' + str(now.minute) + ' ' + str(now.strftime("%d.%m.%Y"))
+        if now.minute < 10:
+            minute = '0' + str(now.minute)
+        else:
+            minute = str(now.minute)
+        now_str = str(now.hour) + ':' + minute + ' ' + str(now.strftime("%d.%m.%Y"))
         draw.text((30, 1575),"Last refresh: " + now_str, font=font_small,fill=fill_main)
         
         # Draw welcome message
