@@ -21,7 +21,6 @@ def load_transport_data():
         / "transport"
     )
 
-    print("Loading preprocessed transport data...")
 
     stop_times = pd.read_pickle(
         TRANSPORT_DIR
@@ -43,9 +42,7 @@ def load_transport_data():
             / "transport_info.pkl"
         )
 
-    print(
-        f"Loaded {len(stop_times):,} departures."
-    )
+
 
     return (
         stop_times,
@@ -129,12 +126,7 @@ def departure_schedule(
     # --------------------------------------------------------
     # Current time
     # --------------------------------------------------------
-    print(f"Requested stop: ch:1:sloid:6002")
-    print(f"Rows for stop: {len(stop_times[stop_times['stop_id'] == 'ch:1:sloid:6002'])}")
-    print(f"Requested stop: ch:1:sloid:6002:1:1")
-    print(f"Rows for stop: {len(stop_times[stop_times['stop_id'] == 'ch:1:sloid:6002:1:1'])}")
-    print(f"Requested stop: ch:1:sloid:6002:2:2")
-    print(f"Rows for stop: {len(stop_times[stop_times['stop_id'] == 'ch:1:sloid:6002:2:2'])}")
+
     
     now = datetime.datetime.now()
 
@@ -155,8 +147,6 @@ def departure_schedule(
     stop_times["stop_id"].isin(stop_ids)
     ].copy()
 
-    print(f"{stop_id}: after stop filter = {len(departures)}")
-    print(departures[["trip_id", "service_id", "departure_time"]].head(20))
     
     if departures.empty:
         return pd.DataFrame()
@@ -316,11 +306,7 @@ def get_transport(
         active_services,
         delays
     )
-    print("SEEN:")
-    print(departures_seen)
 
-    print("ETZBERG:")
-    print(departures_etzberg)
     
     
     
