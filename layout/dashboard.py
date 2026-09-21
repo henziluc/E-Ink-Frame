@@ -54,7 +54,7 @@ def make_dashbord(data):
             minute = '0' + str(now.minute)
         else:
             minute = str(now.minute)
-        now_str = str(now.hour) + ':' + minute + ' ' + str(now.strftime("%d.%m.%Y"))
+        now_str = str(now.hour) + ':' + minute + '   ' + str(now.strftime("%d.%m.%Y"))
         draw.text((30, 1575),"Last refresh: " + now_str, font=font_small,fill=fill_main)
         
         # Draw welcome message
@@ -104,8 +104,8 @@ def make_dashbord(data):
         
     except Exception:
         print("ERROR:")
-        raise
         traceback.print_exc()
         epd.sleep()
-
+        raise
+    
     return
