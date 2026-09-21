@@ -4,6 +4,7 @@ import datetime
 request_toggle = True
 
 def get_health_data(health_dict):
+    global request_toggle
     
     if request_toggle:
         luca_data = load_health_data(os.getenv("garmin_mail"), os.getenv("garmin_password"))
