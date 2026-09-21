@@ -103,3 +103,6 @@ def main():
         else:
             print("Update took longer than the interval. Starting next update.")
             logger.info("Update took longer than the interval. Starting next update.")   
+            
+if __name__ == "__main__":
+    main()
