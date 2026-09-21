@@ -2,17 +2,20 @@ import os
 from garminconnect import Garmin
 import datetime
 request_toggle = True
+garmin_luca = None
+garmin_jojo = None
+
 
 def get_health_data(health_dict):
     global request_toggle
     
     if request_toggle:
-        luca_data = load_health_data(os.getenv("garmin_mail"), os.getenv("garmin_password"))
+        luca_data = load_health_data(os.getenv("garmin_mail"), os.getenv("garmin_password"), 'Luca')
         jojo_data = health_dict['Jojo']
         request_toggle = False
     else:
         luca_data = health_dict['Luca']
-        jojo_data = load_health_data(os.getenv("garmin_mail_jojo"), os.getenv("garmin_password_jojo"))
+        jojo_data = load_health_data(os.getenv("garmin_mail_jojo"), os.getenv("garmin_password_jojo"), 'Jojo')
         request_toggle = True
 
         
@@ -24,11 +27,24 @@ def get_health_data(health_dict):
     
     return health_dict
 
-def load_health_data(email=None, password=None):
+def load_health_data(email=None, password=None, person=None):
+    garmin_luca = None
+    garmin_jojo = None
     today = datetime.date.today()
         
-    client = Garmin(email, password)
-    client.login()
+    if person == "Luca":
+        if garmin_luca is None:
+            garmin_luca = Garmin(email, password)
+            garmin_luca.login()
+
+        client = garmin_luca
+
+    elif person == "Jojo":
+        if garmin_jojo is None:
+            garmin_jojo = Garmin(email, password)
+            garmin_jojo.login()
+
+    client = garmin_jojo
     
     # Steps
     steps_data = client.get_daily_steps(today.isoformat(), today.isoformat())
@@ -62,8 +78,7 @@ def load_health_data(email=None, password=None):
     activity_speed = activity.get("averageSpeed")
 
     activity_pace = speed_to_pace(activity_speed) if activity_speed else None
-    
-    client.logout()    
+     
         
     healt_dict = {
         "steps": steps,
