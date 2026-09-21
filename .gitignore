@@ -222,3 +222,6 @@ __marimo__/
 assets/gtfs/
 assets/pictures/assets/transport/
 assets/transport/
+
+#not public files
+assets/birthdays

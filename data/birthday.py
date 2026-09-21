@@ -1,12 +1,21 @@
+import json
 from datetime import date
+from pathlib import Path
+
 
 def get_birthday_data():
+
+    file_path = Path(__file__).resolve().parent / 'assets' / 'birthdays' / "birthday_data.json"
+
+    with open(file_path, "r", encoding="utf-8") as f:
+        data = json.load(f)
+
     birthday_data = [
-        {"name": "Fred", "birthday": date(1998, 6, 1)},
-        {"name": "Peter", "birthday": date(1995, 2, 3)},
-        {"name": "Lucy", "birthday": date(1996, 5, 12)},
-        {"name": "Julia", "birthday": date(2000, 1, 15)},
-        {"name": "Simon", "birthday": date(1997, 9, 30)},
+        {
+            "name": person["name"],
+            "birthday": date.fromisoformat(person["birthday"])
+        }
+        for person in data["birthdays"]
     ]
-    
+
     return birthday_data
