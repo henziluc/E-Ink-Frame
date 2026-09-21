@@ -11,7 +11,7 @@ def get_health_data(health_dict):
         jojo_data = health_dict['Jojo']
         request_toggle = False
     else:
-        luca_data = health_dict['Jojo']
+        luca_data = health_dict['Luca']
         jojo_data = load_health_data(os.getenv("garmin_mail_jojo"), os.getenv("garmin_password_jojo"))
         request_toggle = True
 
