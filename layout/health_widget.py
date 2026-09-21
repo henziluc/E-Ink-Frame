@@ -103,7 +103,7 @@ def display_personal_health(draw, image, x_start, y_start, health_data, name):
     image.paste(sleep_icon, (x_start, y), sleep_icon)
     
     sleep_hours = str(int(health_data['sleep_hours']))
-    sleep_minutes = str(round(health_data['sleep_hours'] % 1 * 60, 0))
+    sleep_minutes = str(int(health_data['sleep_hours'] % 1 * 60))
     sleep_score = str(health_data['sleep_score'])
     
     draw.text((x_start + icon_size + 5, y), sleep_hours + ':' + sleep_minutes + 'h -> ' + sleep_score + 'P' , font = font_small, fill = fill_main )
