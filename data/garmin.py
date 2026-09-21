@@ -44,7 +44,7 @@ def load_health_data(email=None, password=None, person=None):
             garmin_jojo = Garmin(email, password)
             garmin_jojo.login()
 
-    client = garmin_jojo
+        client = garmin_jojo
     
     # Steps
     steps_data = client.get_daily_steps(today.isoformat(), today.isoformat())
