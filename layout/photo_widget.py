@@ -2,6 +2,8 @@ import random
 from pathlib import Path
 from PIL import Image, ImageOps, ImageEnhance
 
+from .fonts import font_small, font_normal, font_small_italic, font_large, fill_main, spacing_small, spacing_normal, spacing_medium, spacing_large
+
 BASE_DIR = Path(__file__).resolve().parent.parent
 
 
@@ -46,3 +48,5 @@ def display_photo(draw, image, x_start, y_start, x_end):
     
     # Add frame around picture
     draw.rectangle([(x_start, y_start),(x_end, y_start + y_size)], outline ="black", width = 3)
+    
+    draw.text((x_start, y_start + y_size + spacing_small), "Location and Date",font=font_small, fill=fill_main)
