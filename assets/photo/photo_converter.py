@@ -6,7 +6,7 @@ output_folder = input_folder / "resized"
 
 output_folder.mkdir(exist_ok=True)
 
-MAX_SIZE = (1200, 800)
+MAX_SIZE = (800, 533)
 
 for file in input_folder.iterdir():
 

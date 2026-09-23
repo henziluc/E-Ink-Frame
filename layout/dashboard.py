@@ -67,7 +67,7 @@ def make_dashbord(data):
         display_weather_graph(draw, image, data['weather_hourly'], data['weather_daily'], 30, 120)
         
         # draw random picture
-        #display_photo(draw, image, 30, 460, 800)
+        display_photo(draw, image, 30, 460, 800)
         
         draw.line([(30, 1090), (830, 1090)], fill= fill_gray, width = 1)
         
