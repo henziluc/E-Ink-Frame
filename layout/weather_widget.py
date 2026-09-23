@@ -189,14 +189,14 @@ def draw_rain_graph(draw, df_from_now, x_start, y_start, graph_height, hour_spac
     if rain_max > 0:
         for i in range(0, rain_max + 1):
             y = y_start + offset + i * rain_spacing
-            draw.line([(x_start + hour_spacing * 48, y),(x_start + hour_spacing * 48, y)], fill= fill_main, width = 1)
+            draw.line([(x_start + hour_spacing * 48, y),(x_start + hour_spacing * 48 - 5, y)], fill= fill_main, width = 1)
             
             # draw every second rain value
             rain = rain_max - i
             if i % 2 == 0 and rain > 0:
-                draw.text((1200- x_start + 2, y), str(rain), font=font_small, fill=fill_main, anchor= 'lm')
+                draw.text((x_start + hour_spacing * 48 + 2, y), str(rain), font=font_small, fill=fill_main, anchor= 'lm')
             
-    draw.line([(1200-x_start, y_start),(1200-x_start, y_start + graph_height)], fill= fill_main, width = 1)
+    draw.line([(x_start + hour_spacing * 48, y_start),(x_start + hour_spacing * 48, y_start + graph_height)], fill= fill_main, width = 1)
 
     
 def get_weather_icon(code, day):
