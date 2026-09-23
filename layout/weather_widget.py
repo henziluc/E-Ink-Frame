@@ -60,7 +60,7 @@ def display_weather_graph(draw, image, df_hourly, df_daily, x_start, y_start):
         
         # Draw text at every second hour    
         if  hour % 6 == 0:
-            draw_centered_text(draw, hour_str + ':00',(x_start + i * hour_spacing - 20, y + 5, x_start + i * hour_spacing + 20, y + 15), font_very_small, fill_main)
+            draw_centered_text(draw, hour_str + ':00',(x_start + i * hour_spacing - 20, y + 5, x_start + i * hour_spacing + 20, y + 15), font_small, fill_main)
 
             
     # draw bottom horizontal line of the graph       
