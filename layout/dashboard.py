@@ -72,17 +72,17 @@ def make_dashbord(data):
                     
         # Draw weather curve
         try:
-            display_weather_graph(draw, image, data['weather_hourly'], data['weather_daily'], 30, 120)
+            display_weather_graph(draw, image, data['weather_hourly'], data['weather_daily'], 30, 140)
         except:
             logger.exception("display_weather_graph failed")
         
         # draw random picture
         try:
-            display_photo(draw, image, 30, 460, 800)
+            display_photo(draw, image, 30, 430, 800)
         except:
             logger.exception("display_photo failed")
         
-        draw.line([(30, 1090), (830, 1090)], fill= fill_gray, width = 1)
+        draw.line([(30, 990), (830, 990)], fill= fill_gray, width = 1)
         
         # Draw next holidays
         try:
@@ -106,19 +106,19 @@ def make_dashbord(data):
         
         # Draw transport schedule
         try:
-            display_schedule_complet(draw, image, 'Seen', data['departures_seen'], 'Etzberg', data['departures_etzberg'], 30, 450)
+            display_schedule_complet(draw, image, 'Seen', data['departures_seen'], 'Etzberg', data['departures_etzberg'], 890, 430)
         except:
             logger.exception("display_schedule_complete failed")
                             
         # draw birthday data
         try:
-            display_birthday_widget(draw, image, 850, 450, data['birthday_data'])
+            display_birthday_widget(draw, image, 890, 800, data['birthday_data'])
         except:
             logger.exception("display_birthday_widget failed")
                     
         # draw quote data
         try:
-            data['quote_data'] = display_quote_widget(draw,  850, 680, data['quote_data'])
+            data['quote_data'] = display_quote_widget(draw,  890, 1100, data['quote_data'])
         except:
             logger.exception("display_quote_widget failed")
                     
