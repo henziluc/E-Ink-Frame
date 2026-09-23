@@ -34,7 +34,7 @@ def display_photo(draw, image, x_start, y_start, x_end):
     for file in folder.iterdir():
         if file.suffix.lower() in [".jpg", ".jpeg", ".png", ".webp"]:
             photo_list.append(file.name)
-    mem("after analizing phot folder")    
+    mem("after analizing photo folder")    
     # get random number between 1 and number of photos
     random_photo_number = random.randint(1, photo_count - 1)
     
@@ -43,6 +43,11 @@ def display_photo(draw, image, x_start, y_start, x_end):
     # Get picture and rotate
     picture = Image.open(photo_path).convert("RGBA")
     mem("after Image.open")
+    
+    # Resize picture
+    picture = ImageOps.fit(picture, (x_size, y_size), method=Image.Resampling.LANCZOS)
+    mem("after resize")
+    
     picture = ImageOps.exif_transpose(picture)
     mem("after transpose")
     
@@ -53,9 +58,7 @@ def display_photo(draw, image, x_start, y_start, x_end):
     picture = ImageEnhance.Brightness(picture).enhance(1.1)
     mem("after color improvment")    
     
-    # Resize picture
-    picture = ImageOps.fit(picture, (x_size, y_size), method=Image.Resampling.LANCZOS)
-    mem("after resize")
+    
     image.paste(picture, (x_start, y_start))
     mem("after pasting")
     # Add frame around picture
