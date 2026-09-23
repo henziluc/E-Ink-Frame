@@ -20,6 +20,7 @@ from PIL import Image
 import pandas as pd
 import json
 
+from logger import logger
 from .welcome_widget import display_welcome
 from .transport_widget import display_schedule_complet
 from .weather_widget import  display_weather_graph
@@ -58,39 +59,69 @@ def make_dashbord(data):
         draw.text((30, 1575),"Last refresh: " + now_str, font=font_small,fill=fill_main)
         
         # Draw welcome message
-        display_welcome(draw, image, 30, 30, data['moon_data'])
-        
+        try:
+            display_welcome(draw, image, 30, 30, data['moon_data'])
+        except:
+            logger.exception("display_welcome failed")
+                             
         # Draw Wi-Fi QR code
-        display_wifi_qr_code(draw, image, 1040, 10)
-        
+        try:
+            display_wifi_qr_code(draw, image, 1040, 10)
+        except:
+            logger.exception("display_wifi_qr_code failed")
+                    
         # Draw weather curve
-        display_weather_graph(draw, image, data['weather_hourly'], data['weather_daily'], 30, 120)
+        try:
+            display_weather_graph(draw, image, data['weather_hourly'], data['weather_daily'], 30, 120)
+        except:
+            logger.exception("display_weather_graph failed")
         
         # draw random picture
-        display_photo(draw, image, 30, 460, 800)
+        try:
+            display_photo(draw, image, 30, 460, 800)
+        except:
+            logger.exception("display_photo failed")
         
         draw.line([(30, 1090), (830, 1090)], fill= fill_gray, width = 1)
         
         # Draw next holidays
-        display_holiday(draw, holidays, 30, 910)
-        
+        try:
+            display_holiday(draw, holidays, 30, 910)
+        except:
+            logger.exception("display_holiday failed")
+                    
         # draw health data
-        display_health_widget(draw, image, 30, 1170, data['health_data'])
-        
+        try:
+            display_health_widget(draw, image, 30, 1170, data['health_data'])
+        except:
+            logger.exception("display_health_widget failed")
+                    
         # draw news data
-        display_news_widget(draw, image, 365, 1090, data['news_data'])
+        try:
+            display_news_widget(draw, image, 365, 1090, data['news_data'])
+        except:
+            logger.exception("display_news_widget failed")
         
         draw.line([(860, 165), (860, 1500)], fill= fill_gray, width = 1)
         
         # Draw transport schedule
-        display_schedule_complet(draw, image, 'Seen', data['departures_seen'], 'Etzberg', data['departures_etzberg'], 30, 450)
-                
+        try:
+            display_schedule_complet(draw, image, 'Seen', data['departures_seen'], 'Etzberg', data['departures_etzberg'], 30, 450)
+        except:
+            logger.exception("display_schedule_complete failed")
+                            
         # draw birthday data
-        display_birthday_widget(draw, image, 850, 450, data['birthday_data'])
-        
+        try:
+            display_birthday_widget(draw, image, 850, 450, data['birthday_data'])
+        except:
+            logger.exception("display_birthday_widget failed")
+                    
         # draw quote data
-        data['quote_data'] = display_quote_widget(draw,  850, 680, data['quote_data'])
-        
+        try:
+            data['quote_data'] = display_quote_widget(draw,  850, 680, data['quote_data'])
+        except:
+            logger.exception("display_quote_widget failed")
+                    
         # draw room climate data
         #display_room_climate_widget(draw, 850, 870, room_climate_data)
         
