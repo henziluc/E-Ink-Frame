@@ -82,23 +82,23 @@ def make_dashbord(data):
         except:
             logger.exception("display_photo failed")
         
-        draw.line([(30, 990), (830, 990)], fill= fill_gray, width = 1)
+        draw.line([(30, 990), (830, 980)], fill= fill_gray, width = 1)
         
         # Draw next holidays
         try:
-            display_holiday(draw, holidays, 30, 910)
+            display_holiday(draw, holidays, 30, 1010)
         except:
             logger.exception("display_holiday failed")
                     
         # draw health data
         try:
-            display_health_widget(draw, image, 30, 1170, data['health_data'])
+            display_health_widget(draw, image, 30, 1250, data['health_data'])
         except:
             logger.exception("display_health_widget failed")
                     
         # draw news data
         try:
-            display_news_widget(draw, image, 365, 1090, data['news_data'])
+            display_news_widget(draw, image, 365, 1010, data['news_data'])
         except:
             logger.exception("display_news_widget failed")
         
@@ -106,19 +106,19 @@ def make_dashbord(data):
         
         # Draw transport schedule
         try:
-            display_schedule_complet(draw, image, 'Seen', data['departures_seen'], 'Etzberg', data['departures_etzberg'], 890, 430)
+            display_schedule_complet(draw, image, 'Seen', data['departures_seen'], 'Etzberg', data['departures_etzberg'], 890, 140)
         except:
             logger.exception("display_schedule_complete failed")
                             
         # draw birthday data
         try:
-            display_birthday_widget(draw, image, 890, 800, data['birthday_data'])
+            display_birthday_widget(draw, image, 890, 550, data['birthday_data'])
         except:
             logger.exception("display_birthday_widget failed")
                     
         # draw quote data
         try:
-            data['quote_data'] = display_quote_widget(draw,  890, 1100, data['quote_data'])
+            data['quote_data'] = display_quote_widget(draw,  890, 850, data['quote_data'])
         except:
             logger.exception("display_quote_widget failed")
                     

@@ -64,4 +64,4 @@ def display_photo(draw, image, x_start, y_start, x_end):
     # Add frame around picture
     draw.rectangle([(x_start, y_start),(x_end, y_start + y_size)], outline ="black", width = 3)
     
-    draw.text((x_start, y_start + y_size + spacing_small), "Location and Date",font=font_small, fill=fill_main)
+    draw.text((x_start, y_start + y_size + 10), "Location and Date",font=font_small, fill=fill_main)

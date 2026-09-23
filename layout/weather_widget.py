@@ -142,13 +142,13 @@ def draw_temperature_graph(draw, df_from_now, x_start, y_start, graph_height, ho
             
         # draw dotted helper lines at every 5°C step
         if temp % 5 == 0:
-            draw_dotted_line(draw,(x_start, y ),(1200-x_start, y), dot_length=2, gap=8, fill=fill_main, width=1)
+            draw_dotted_line(draw,(x_start, y ),(x_start + hour_spacing * 48, y), dot_length=2, gap=8, fill=fill_main, width=1)
         
 
 def draw_weather_icons(image, df_from_now, x_start, y_start, sunrise, sunset, hour_spacing):
     
-    # loop through the next 48h in 2h steps
-    for i in range(0, 49, 2):
+    # loop through the next 48h in 4h steps
+    for i in range(0, 49, 4):
          
         # define if day or night symbol  
         hour = df_from_now.loc[i, 'date'].hour
@@ -189,7 +189,7 @@ def draw_rain_graph(draw, df_from_now, x_start, y_start, graph_height, hour_spac
     if rain_max > 0:
         for i in range(0, rain_max + 1):
             y = y_start + offset + i * rain_spacing
-            draw.line([(1200-x_start, y),(1200 - x_start - 5, y)], fill= fill_main, width = 1)
+            draw.line([(x_start + hour_spacing * 48, y),(x_start + hour_spacing * 48, y)], fill= fill_main, width = 1)
             
             # draw every second rain value
             rain = rain_max - i
