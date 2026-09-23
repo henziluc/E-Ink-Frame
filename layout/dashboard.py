@@ -73,7 +73,7 @@ def make_dashbord(data):
         display_holiday(draw, holidays, 30, 910)
         
         # draw random picture
-        display_photo(draw, image, 365, 460, 830)
+        display_photo(draw, image, 30, 460, 800)
         
         # draw health data
         display_health_widget(draw, image, 30, 1170, data['health_data'])
