@@ -2,7 +2,7 @@ import datetime
 from PIL import Image, ImageOps
 from pathlib import Path
 
-from .fonts import font_massiv, fill_main
+from .fonts import font_massiv, font_normal, fill_main, spacing_massive, spacing_normal, fill_rain_graph
 from .helpers import draw_centered_text
 
 BASE_DIR = Path(__file__).resolve().parent.parent
@@ -12,8 +12,8 @@ moon_half_icon_path = BASE_DIR / "assets" / "moon_symbol" / "moon-phases_3.png"
 moon_1_4_icon_path = BASE_DIR / "assets" / "moon_symbol" / "moon-phases_4.png"
 
 def display_welcome(draw, image, x_start, y_start, moon_data):
-    x_end = 1200 - 2 * x_start
-    y_end = font_massiv.size + y_start
+    y = y_start
+    
     now = datetime.datetime.now()   
     now_hour = now.hour
     
@@ -27,10 +27,20 @@ def display_welcome(draw, image, x_start, y_start, moon_data):
     else:
         text = 'Good Night'
         # Display moon phase icon if it's night time
-        display_moon_phase(image, 790, y_start + 20, moon_data)
+        display_moon_phase(image, 600, y_start + 20, moon_data)
         
-    draw_centered_text(draw, text,(x_start, y_start, x_end, y_end), font_massiv, fill_main)
+    draw.text((x_start, y), text, font=font_massiv, fill=fill_main)
+    y += spacing_massive
     
+    weekday = datetime.now().strftime("%A")
+    datum = datetime.now().strftime("%d.%m.%Y")
+    date_string = weekday +  ', ' + datum
+    
+    draw.text((x_start, y), date_string, font=font_normal, fill=fill_main)
+    y += spacing_normal
+    
+    draw.line([(x_start, y), (1200-x_start, y)], fill= fill_rain_graph, width = 1)
+
     
 def display_moon_phase(image, x_start, y_start, moon_data):
     icon_size = 60
