@@ -15,7 +15,7 @@ def display_photo(draw, image, x_start, y_start, x_end):
     y_size = int(x_size / 1.5)
     
     # count number of photos
-    folder = BASE_DIR / "assets" / "photo"
+    folder = BASE_DIR / "assets" / "photo" / "resized"
     photo_count = sum(
         1 for file in folder.iterdir()
         if file.suffix.lower() in [".jpg", ".jpeg", ".png", ".webp"]
