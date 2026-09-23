@@ -15,7 +15,7 @@ moon_1_4_icon_path = BASE_DIR / "assets" / "moon_symbol" / "moon-phases_4.png"
 def display_welcome(draw, image, x_start, y_start, moon_data):
     y = y_start
     
-    now = datetime.datetime.now()   
+    now = datetime.now()   
     now_hour = now.hour
     
     # Determine the appropriate greeting based on the current hour
