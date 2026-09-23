@@ -13,7 +13,7 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 def display_weather_graph(draw, image, df_hourly, df_daily, x_start, y_start):
     y = y_start
     graph_height = 120
-    print_hour = 1
+    graph_width = 800
     x_day_start = []
     
     now = datetime.datetime.now()
@@ -24,10 +24,10 @@ def display_weather_graph(draw, image, df_hourly, df_daily, x_start, y_start):
     y += spacing_large + spacing_small + spacing_normal
     
     # calulate hour spacing on the graph
-    hour_spacing = (800 - x_start * 2) / 48
+    hour_spacing = graph_width / 48
     
     # draw top horizontal line of the graph
-    draw.line([(x_start, y), (1200-x_start, y)], fill= fill_main, width = 1)
+    draw.line([(x_start, y), (x_start + graph_width, y)], fill= fill_main, width = 1)
     
     #draw vertical line at beginning of graph
     draw.line([(x_start, y),(x_start, y + graph_height)], fill= fill_main, width = 1)
@@ -46,26 +46,25 @@ def display_weather_graph(draw, image, df_hourly, df_daily, x_start, y_start):
         
         # Add leading zero for hour smaller 10
         if hour < 10:
-            hour = '0' + str(hour)       
+            hour_str = '0' + str(hour)       
         else:
-            hour = str(hour)
+            hour_str = str(hour)
         
         # Draw vertical line where the day ends
         if int(hour) % 24 == 0:
             draw.line([(x_start + i * hour_spacing, y),(x_start + i * hour_spacing, y - graph_height)], fill= fill_main, width = 1)
             x_day_start.append(x_start + i * hour_spacing)
         
-        draw.line([(x_start + i * hour_spacing, y), (x_start + i * hour_spacing, y - 5)], fill= fill_main, width = 1)
+        if hour % 2 == 0:
+            draw.line([(x_start + i * hour_spacing, y), (x_start + i * hour_spacing, y - 5)], fill= fill_main, width = 1)
         
         # Draw text at every second hour    
-        if  print_hour == 1:
-            draw_centered_text(draw, hour + ':00',(x_start + i * hour_spacing - 20, y + 5, x_start + i * hour_spacing + 20, y + 15), font_very_small, fill_main)
-            print_hour = 0
-        else:
-            print_hour = 1
+        if  hour % 6 == 0:
+            draw_centered_text(draw, hour_str + ':00',(x_start + i * hour_spacing - 20, y + 5, x_start + i * hour_spacing + 20, y + 15), font_very_small, fill_main)
+
             
     # draw bottom horizontal line of the graph       
-    draw.line([(x_start, y), (1200-x_start, y)], fill= fill_main, width = 1)
+    draw.line([(x_start, y), (x_start + graph_width, y)], fill= fill_main, width = 1)
     
     y -= graph_height + spacing_small + spacing_normal
     
@@ -74,7 +73,7 @@ def display_weather_graph(draw, image, df_hourly, df_daily, x_start, y_start):
     draw_daily_wether_decription(draw, df_daily, x_day_start[0], y , x_day_start[1], 1)
     draw_daily_wether_decription(draw, df_daily, x_day_start[1], y , 1200 - x_start, 2)
     
-    y +=   spacing_small
+    y += spacing_small
     
     # get hourly data from now on
     index = df_hourly[df_hourly['date'].dt.hour == now_hour].index[0]
