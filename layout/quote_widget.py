@@ -1,7 +1,7 @@
 
 import random
 
-from .fonts import font_small, font_normal, font_medium, font_large, fill_main, spacing_small, spacing_normal, spacing_medium, spacing_large
+from .fonts import font_small, font_normal, font_small_italic, font_large, fill_main, spacing_small, spacing_normal, spacing_medium, spacing_large
 from .helpers import  wrap_text_to_width
 
 def display_quote_widget(draw, x_start, y_start, quote_data):
@@ -11,12 +11,10 @@ def display_quote_widget(draw, x_start, y_start, quote_data):
     y += spacing_large
     quote = quote_data.pop(0)
     
-
-    draw.text((x_start, y), quote['title'], font=font_normal, fill=fill_main)
-    y += spacing_normal
+    quote_text = '"' + quote['description'] + '"' 
     
     lines = wrap_text_to_width(
-        quote['description'],
+        quote_text,
         font_small,
         max_width=320,
         draw=draw,
@@ -24,7 +22,10 @@ def display_quote_widget(draw, x_start, y_start, quote_data):
     )
     
     for line in lines:
-        draw.text((x_start, y), line, font=font_small, fill=fill_main)
+        draw.text((x_start, y), line, font=font_small_italic, fill=fill_main)
         y += spacing_small
+    
+    draw.text((x_start, y), quote['title'], font=font_small, fill=fill_main)
+    
                 
     return quote_data    
