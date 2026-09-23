@@ -2,7 +2,7 @@ import datetime
 from PIL import Image, ImageOps
 from pathlib import Path
 
-from .fonts import font_massiv, font_normal, fill_main, spacing_massive, spacing_normal, fill_rain_graph
+from .fonts import font_massiv, font_normal, fill_main, spacing_massive, spacing_normal, fill_gray
 from .helpers import draw_centered_text
 
 BASE_DIR = Path(__file__).resolve().parent.parent
@@ -39,7 +39,7 @@ def display_welcome(draw, image, x_start, y_start, moon_data):
     draw.text((x_start, y), date_string, font=font_normal, fill=fill_main)
     y += spacing_normal
     
-    draw.line([(x_start, y), (1200-x_start, y)], fill= fill_rain_graph, width = 1)
+    draw.line([(x_start, y), (1200-x_start, y)], fill= fill_gray, width = 1)
 
     
 def display_moon_phase(image, x_start, y_start, moon_data):

@@ -42,7 +42,7 @@ font_very_small = ImageFont.truetype(
 
 fill_main = 'black'
 
-fill_rain_graph = 'gray'
+fill_gray = 'gray'
 
 fill_error = 'red'
 

@@ -34,7 +34,7 @@ from .wifi_widget import display_wifi_qr_code
 from .quote_widget import display_quote_widget
 from .software_status_widget import display_software_status
 from .room_climate_widget import display_room_climate_widget
-from .fonts import font_small, font_medium, font_large, fill_main
+from .fonts import font_small, font_medium, font_large, fill_main, fill_gray
 
 
 def make_dashbord(data):
@@ -66,14 +66,13 @@ def make_dashbord(data):
         # Draw weather curve
         display_weather_graph(draw, image, data['weather_hourly'], data['weather_daily'], 30, 120)
         
-        # Draw transport schedule
-        display_schedule_complet(draw, image, 'Seen', data['departures_seen'], 'Etzberg', data['departures_etzberg'], 30, 450)
+        # draw random picture
+        display_photo(draw, image, 30, 460, 800)
+        
+        draw.line([(30, 1090), (830, 1090)], fill= fill_gray, width = 1)
         
         # Draw next holidays
         display_holiday(draw, holidays, 30, 910)
-        
-        # draw random picture
-        display_photo(draw, image, 30, 460, 800)
         
         # draw health data
         display_health_widget(draw, image, 30, 1170, data['health_data'])
@@ -81,6 +80,11 @@ def make_dashbord(data):
         # draw news data
         display_news_widget(draw, image, 365, 1090, data['news_data'])
         
+        draw.line([(860, 165), (860, 1500)], fill= fill_gray, width = 1)
+        
+        # Draw transport schedule
+        display_schedule_complet(draw, image, 'Seen', data['departures_seen'], 'Etzberg', data['departures_etzberg'], 30, 450)
+                
         # draw birthday data
         display_birthday_widget(draw, image, 850, 450, data['birthday_data'])
         
