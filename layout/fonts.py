@@ -6,32 +6,32 @@ FONT_DIR = BASE_DIR / "display" / "fonts"
 
 font_massiv = ImageFont.truetype(
     FONT_DIR / "Inter_18pt-Bold.ttf",
-    80
+    60
 )
 
 font_large = ImageFont.truetype(
     FONT_DIR / "Inter_18pt-Bold.ttf",
-    60
+    40
 )
 
 font_medium = ImageFont.truetype(
     FONT_DIR / "Inter_18pt-Regular.ttf",
-    40
+    30
 )
 
 font_normal = ImageFont.truetype(
     FONT_DIR / "Inter_18pt-Regular.ttf",
-    30
+    25
 )
 
 font_small = ImageFont.truetype(
     FONT_DIR / "Inter_18pt-Regular.ttf",
-    20
+    15
 )
 
 font_very_small = ImageFont.truetype(
     FONT_DIR / "Inter_18pt-Thin.ttf",
-    15
+    10
 )
 
 
