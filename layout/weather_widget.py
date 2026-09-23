@@ -12,7 +12,7 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 # Plus daily maximum and minimum temperatur with a weather picture
 def display_weather_graph(draw, image, df_hourly, df_daily, x_start, y_start):
     y = y_start
-    graph_height = 150
+    graph_height = 120
     print_hour = 1
     x_day_start = []
     
@@ -24,7 +24,7 @@ def display_weather_graph(draw, image, df_hourly, df_daily, x_start, y_start):
     y += spacing_large + spacing_small + spacing_normal
     
     # calulate hour spacing on the graph
-    hour_spacing = (1200 - x_start * 2) / 48
+    hour_spacing = (800 - x_start * 2) / 48
     
     # draw top horizontal line of the graph
     draw.line([(x_start, y), (1200-x_start, y)], fill= fill_main, width = 1)
