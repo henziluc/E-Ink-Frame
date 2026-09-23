@@ -85,7 +85,7 @@ def make_dashbord(data):
         display_birthday_widget(draw, image, 850, 450, data['birthday_data'])
         
         # draw quote data
-        display_quote_widget(draw,  850, 680, data['quote_data'])
+        data['quote_data'] = display_quote_widget(draw,  850, 680, data['quote_data'])
         
         # draw room climate data
         #display_room_climate_widget(draw, 850, 870, room_climate_data)
@@ -108,4 +108,4 @@ def make_dashbord(data):
         epd.sleep()
         raise
     
-    return
+    return data

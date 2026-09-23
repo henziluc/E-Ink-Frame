@@ -72,7 +72,7 @@ def fetch_all_data(stop_times, calendar, calendar_dates, transport_info, data):
     
     print("Getting quote data...")
     try:
-        quote_data = get_quote()
+        quote_data = get_quote(data['quote_data'])
         quote_status = True   
     except:
         logger.exception("Quote request failed")

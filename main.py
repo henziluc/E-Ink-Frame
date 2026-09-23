@@ -38,7 +38,7 @@ def main():
         },
         "moon_data": None,
         "news_data": None,
-        "quote_data": None,
+        "quote_data": [],
         "birthday_data": None,
         "status" : {
             'weather' : None,
@@ -74,7 +74,7 @@ def main():
             logger.info("Data fetched successfully")
             
             # 2. Create and display dashboard
-            make_dashbord(data)
+            data = make_dashbord(data)
 
             logger.info("Dashboard displayed successfully")
 
