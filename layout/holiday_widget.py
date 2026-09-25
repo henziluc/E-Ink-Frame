@@ -19,9 +19,9 @@ def display_holiday(draw, df, x_start, y_start):
         
         # First element is printed bigger
         if next_holiday == 1:
-            draw_centered_text(draw, row['location'], (x_start , y, x_start + 280, y + 38), font_medium, fill_main)
+            draw_centered_text(draw, row['location'], (x_start , y, x_start + 250, y + 38), font_medium, fill_main)
             y += spacing_medium
-            draw_centered_text(draw, f"{days} days to go", (x_start, y, x_start + 280, y + 29), font_normal, fill_main)
+            draw_centered_text(draw, f"{days} days to go", (x_start, y, x_start + 250, y + 29), font_normal, fill_main)
             next_holiday = 0
             y += spacing_normal
         # Other elements are printed smaller    
