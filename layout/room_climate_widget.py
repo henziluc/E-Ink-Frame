@@ -21,7 +21,7 @@ def display_room_climate_widget(draw, image, x_start, y_start, df):
     graph_height = 100
     graph_width = 1200 - x_start - 30  # Adjust the width based on your layout
         
-    draw.text((x_start, y), "Room Climate", font=font_large, fill=fill_main)
+    draw.text((x, y), "Room Climate", font=font_large, fill=fill_main)
     y += spacing_large
     y_stored = y
     latest_values = df[-1]
@@ -30,12 +30,12 @@ def display_room_climate_widget(draw, image, x_start, y_start, df):
     # Draw temperature
     icon_temperature = Image.open(path_temperatur).convert("RGBA")
     icon_temperature = icon_temperature.resize((icon_size, icon_size))
-    x += icon_size + 5
+    y += icon_size + 5
     image.paste(icon_temperature, (x, y), icon_temperature)
     draw.text((x, y), str(latest_values["temperature"]) + '°C', font=font_normal, fill=fill_main)
-    x += spacing_normal
+    y += spacing_normal
     draw.text((x, y), "Temperature", font=font_small, fill=fill_main)
-    x += spacing_small
+    y += spacing_small
     #y += spacing_normal + graph_height
     #draw_room_climate_graph(draw, x_start, y, graph_width, graph_height, df, "temperature", fill_main)
     draw.line([(x + 90, y_stored), (x + 90, y)], fill= fill_gray, width = 1) 
@@ -46,10 +46,11 @@ def display_room_climate_widget(draw, image, x_start, y_start, df):
     icon_humidity = Image.open(path_humidity).convert("RGBA")
     icon_humidity = icon_humidity.resize((icon_size, icon_size))
     image.paste(icon_humidity, (x, y), icon_humidity)
-    x += icon_size + 5
+    y += icon_size + 5
     draw.text((x, y), str(latest_values["humidity"]) + '%', font=font_small, fill=fill_main)
-    x += spacing_normal
+    y += spacing_normal
     draw.text((x, y), "Humidity", font=font_small, fill=fill_main)
+    y += spacing_small
     #y += spacing_normal + graph_height
     #draw_room_climate_graph(draw, x_start, y, graph_width, graph_height, df, "humidity", fill_main)
     draw.line([(x + 90, y_stored), (x + 90, y)], fill= fill_gray, width = 1) 
@@ -111,12 +112,7 @@ def draw_room_climate_graph(draw, x_start, y_start, graph_width, graph_height, d
     
     # Draw the graph line
     draw_smooth_curve(draw, positions, fill_main, 2)
-    
-    
-    
-
-
-
+        
 
 def generate_test_data():
     """
