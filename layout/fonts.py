@@ -53,6 +53,6 @@ spacing_normal = font_normal.size + 10
 
 spacing_medium = font_medium.size + 10
 
-spacing_large = font_large.size + 10
+spacing_large = font_large.size + 13
 
-spacing_massive = font_massiv.size + 10
+spacing_massive = font_massiv.size + 13
