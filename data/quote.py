@@ -5,9 +5,10 @@ from datetime import datetime
 url = "https://fixquotes.com/feeds/qotd.rss"
 
 def get_quote(qoutes):
-    if qoutes:
+    if qoutes is not None:
         return qoutes
     
+    qoutes = []
     response = requests.get(url)
     response.raise_for_status()
     
