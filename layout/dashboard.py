@@ -120,13 +120,13 @@ def make_dashbord(data):
                     
         # draw quote data
         try:
-            data['quote_data'] = display_quote_widget(draw,  890, 830, data['quote_data'])
+            data['quote_data'] = display_quote_widget(draw,  890, 810, data['quote_data'])
         except:
             logger.exception("display_quote_widget failed")
                     
         # draw room climate data
         try:
-            display_room_climate_widget(draw, image, 890, 1020, [])
+            display_room_climate_widget(draw, image, 890, 990, [])
         except:
                     logger.exception("display_room_climate_widget failed")
                     
