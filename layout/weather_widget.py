@@ -21,10 +21,29 @@ def display_weather_graph(draw, image, df_hourly, df_daily, x_start, y_start):
         
     # Draw widget title
     draw.text((x_start, y), 'Weather Forecast', font=font_large, fill=fill_main)
-    y += spacing_large + spacing_small + spacing_normal + 5
+    y += spacing_large
     
     # calulate hour spacing on the graph
     hour_spacing = graph_width / 48
+    
+    # Draw daily weather overview
+    draw_daily_wether_decription(draw, df_daily, x_start, y , x_day_start[0], 0)
+    draw_daily_wether_decription(draw, df_daily, x_day_start[0], y , x_day_start[1], 1)
+    draw_daily_wether_decription(draw, df_daily, x_day_start[1], y , x_start + graph_width, 2)
+    
+    y += spacing_small
+    
+    # get hourly data from now on
+    index = df_hourly[df_hourly['date'].dt.hour == now_hour].index[0]
+    df_from_now = df_hourly.loc[index: index+48]
+    df_from_now = df_from_now.reset_index(drop=True) 
+        
+    sunrise = df_daily.loc[1,'sunrise'].hour
+    sunset = df_daily.loc[1,'sunset'].hour
+    
+    draw_weather_icons(image, df_from_now, x_start, y, sunrise, sunset, hour_spacing)
+    
+    y +=  spacing_normal + 5
     
     # draw top horizontal line of the graph
     draw.line([(x_start, y), (x_start + graph_width, y)], fill= fill_main, width = 1)
@@ -65,27 +84,6 @@ def display_weather_graph(draw, image, df_hourly, df_daily, x_start, y_start):
             
     # draw bottom horizontal line of the graph       
     draw.line([(x_start, y), (x_start + graph_width, y)], fill= fill_main, width = 1)
-    
-    y -= graph_height + spacing_small + spacing_normal - 5
-    
-    # Draw daily weather overview
-    draw_daily_wether_decription(draw, df_daily, x_start, y , x_day_start[0], 0)
-    draw_daily_wether_decription(draw, df_daily, x_day_start[0], y , x_day_start[1], 1)
-    draw_daily_wether_decription(draw, df_daily, x_day_start[1], y , x_start + graph_width, 2)
-    
-    y += spacing_small
-    
-    # get hourly data from now on
-    index = df_hourly[df_hourly['date'].dt.hour == now_hour].index[0]
-    df_from_now = df_hourly.loc[index: index+48]
-    df_from_now = df_from_now.reset_index(drop=True) 
-        
-    sunrise = df_daily.loc[1,'sunrise'].hour
-    sunset = df_daily.loc[1,'sunset'].hour
-    
-    draw_weather_icons(image, df_from_now, x_start, y, sunrise, sunset, hour_spacing)
-    
-    y +=  spacing_normal + 5
     
     draw_rain_graph(draw, df_from_now, x_start, y, graph_height, hour_spacing)
     
