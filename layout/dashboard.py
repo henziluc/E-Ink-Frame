@@ -78,7 +78,7 @@ def make_dashbord(data):
         
         # draw random picture
         try:
-            display_photo(draw, image, 30, 430, 810)
+            display_photo(draw, image, 30, 430, 800)
         except:
             logger.exception("display_photo failed")
         
@@ -86,13 +86,13 @@ def make_dashbord(data):
         
         # Draw next holidays
         try:
-            display_holiday(draw, holidays, 30, 1010)
+            display_holiday(draw, holidays, 30, 990)
         except:
             logger.exception("display_holiday failed")
                     
         # draw health data
         try:
-            display_health_widget(draw, image, 30, 1250, data['health_data'])
+            display_health_widget(draw, image, 30, 1150, data['health_data'])
         except:
             logger.exception("display_health_widget failed")
         
@@ -100,7 +100,7 @@ def make_dashbord(data):
                     
         # draw news data
         try:
-            display_news_widget(draw, image, 365, 1010, data['news_data'])
+            display_news_widget(draw, image, 365, 990, data['news_data'])
         except:
             logger.exception("display_news_widget failed")
         
@@ -125,7 +125,7 @@ def make_dashbord(data):
             logger.exception("display_quote_widget failed")
                     
         # draw room climate data
-        #display_room_climate_widget(draw, 890, 870, room_climate_data)
+        display_room_climate_widget(draw, 1100, 870, [])
         
         # draw software status
         display_software_status(draw, image, 1170, 1575, data['status'])

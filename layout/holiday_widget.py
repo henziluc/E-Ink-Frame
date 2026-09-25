@@ -11,7 +11,7 @@ def display_holiday(draw, df, x_start, y_start):
     
     y += spacing_large
     # loop trough the first four elements which are today or later of the holiday list
-    for _, row in df[df['start_date'] > now].head(4).iterrows():
+    for _, row in df[df['start_date'] > now].head(2).iterrows():
         
         # Calculate amount of days till holidays start
         delta = row['start_date'] - now

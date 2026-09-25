@@ -38,7 +38,7 @@ def display_photo(draw, image, x_start, y_start, x_end):
     # get random number between 1 and number of photos
     random_photo_number = random.randint(1, photo_count - 1)
     
-    photo_path = BASE_DIR / "assets" / "photo" / photo_list[random_photo_number]
+    photo_path = BASE_DIR / "assets" / "photo" / "resized" / photo_list[random_photo_number]
     
     # Get picture and rotate
     picture = Image.open(photo_path).convert("RGBA")

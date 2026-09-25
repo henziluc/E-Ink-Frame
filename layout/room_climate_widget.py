@@ -1,11 +1,13 @@
 import math
 import pandas as pd
-from datetime import datetime
+from datetime import datetime, timedelta
+import random
 
 from .helpers import draw_smooth_curve
 from .fonts import font_small, font_normal, font_medium, font_large, fill_main, spacing_small, spacing_normal, spacing_medium, spacing_large
 
 def display_room_climate_widget(draw, x_start, y_start, df):
+    df = generate_test_data()
     y = y_start
     graph_height = 100
     graph_width = 1200 - x_start - 30  # Adjust the width based on your layout
@@ -72,3 +74,86 @@ def draw_room_climate_graph(draw, x_start, y_start, graph_width, graph_height, d
     
     # Draw the graph line
     draw_smooth_curve(draw, positions, fill_main, 2)
+    
+    
+    
+
+
+
+
+def generate_test_data():
+    """
+    Generate 24 hours of test data at 30-minute intervals.
+
+    Returns:
+        list[dict]: Data in the same format as the real sensor data.
+    """
+
+    data = []
+
+    # Start 24 hours ago, rounded to the nearest 30 minutes
+    now = datetime.now()
+    now = now.replace(
+        minute=30 if now.minute >= 30 else 0,
+        second=0,
+        microsecond=0
+    )
+
+    start = now - timedelta(hours=24)
+
+    # Starting values
+    co2 = 500
+    humidity = 58.0
+    temperature = 21.5
+
+    for i in range(49):  # 24 hours = 48 intervals + current value
+        timestamp = start + timedelta(minutes=30 * i)
+
+        hour = timestamp.hour + timestamp.minute / 60
+
+        # -------------------------
+        # CO2
+        # -------------------------
+        # Higher during daytime/evening, lower during the night
+        if 7 <= hour < 18:
+            target_co2 = 700
+        elif 18 <= hour < 23:
+            target_co2 = 800
+        else:
+            target_co2 = 480
+
+        co2 += (target_co2 - co2) * 0.15
+        co2 += random.uniform(-15, 15)
+        co2 = max(400, min(1200, co2))
+
+        # -------------------------
+        # Humidity
+        # -------------------------
+        # Slightly higher at night
+        target_humidity = 60 if hour < 7 or hour >= 22 else 52
+
+        humidity += (target_humidity - humidity) * 0.08
+        humidity += random.uniform(-0.3, 0.3)
+        humidity = max(40, min(70, humidity))
+
+        # -------------------------
+        # Temperature
+        # -------------------------
+        # Cooler at night, warmer during the afternoon
+        temperature = (
+            22.5
+            + 2.5 * max(0, __import__("math").sin(
+                ((hour - 7) / 24) * 2 * __import__("math").pi
+            ))
+        )
+
+        temperature += random.uniform(-0.15, 0.15)
+
+        data.append({
+            "date": timestamp.strftime("%Y-%m-%d %H:%M"),
+            "co2": round(co2),
+            "humidity": round(humidity, 1),
+            "temperature": round(temperature, 1)
+        })
+
+    return data
