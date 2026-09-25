@@ -1,6 +1,7 @@
 import os
 from garminconnect import Garmin
 import datetime
+from datetime import datetime, date
 request_toggle = True
 garmin_luca = None
 garmin_jojo = None
@@ -33,7 +34,7 @@ def get_health_data(health_dict):
 def load_health_data(email=None, password=None, person=None):
     garmin_luca = None
     garmin_jojo = None
-    today = datetime.date.today()
+    today = date.today()
         
     if person == "Luca":
         if garmin_luca is None:

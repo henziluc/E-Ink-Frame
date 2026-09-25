@@ -1,5 +1,5 @@
 from pathlib import Path
-import datetime
+from datetime import datetime
 import pandas as pd
 
 from .delays import get_delays
@@ -128,7 +128,7 @@ def departure_schedule(
     # --------------------------------------------------------
 
     
-    now = datetime.datetime.now()
+    now = datetime.now()
 
     current_seconds = (
         now.hour * 3600
@@ -267,7 +267,7 @@ def get_transport(
     # Current date
     # --------------------------------------------------------
 
-    now = datetime.datetime.now()
+    now = datetime.now()
 
     today = pd.Timestamp(
         now.year,

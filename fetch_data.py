@@ -20,7 +20,7 @@ def fetch_all_data(stop_times, calendar, calendar_dates, transport_info, data):
     departures_etzberg = None
     transport_timestamp = None
     health_data = None
-    healt_timestamp = None
+    health_timestamp = None
     moon_data = None
     moon_timestamp = None
     news_data = None
