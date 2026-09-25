@@ -24,6 +24,9 @@ speed_icon_path = BASE_DIR / "assets" / "sport_symbol" / "gauge.png"
 
 
 def display_health_widget(draw, image, x_start, y_start, health_data):
+    if health_data is None:
+        return y_start
+    
     y = y_start
     icon_size = 25
     y_1 = 0
