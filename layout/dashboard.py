@@ -34,6 +34,7 @@ from assets.holiday_data import holidays
 from .wifi_widget import display_wifi_qr_code
 from .quote_widget import display_quote_widget
 from .software_status_widget import display_software_status
+from .pi_status_widget import display_pi_status
 from .room_climate_widget import display_room_climate_widget
 from .fonts import font_small, font_medium, font_large, fill_main, fill_gray
 
@@ -133,14 +134,20 @@ def make_dashbord(data):
         
         # draw health data
         try:
-            display_health_widget(draw, image, 890, y, data['health_data'])
+            y = display_health_widget(draw, image, 890, y, data['health_data'])
+            y += widget_spacing
         except:
             logger.exception("display_health_widget failed")            
         
-                    
+        
+        # draw pi status
+        try:
+            display_pi_status(draw, 890, y)
+        except:
+            logger.exception("display_pi_status failed")  
         # draw software status
         display_software_status(draw, image, 1170, 1575, data['status'])
-        
+            
         # Draw helper grid
         # draw = draw_grid(draw, 20, 1600, 1200)
         

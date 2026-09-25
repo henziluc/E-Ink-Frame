@@ -42,7 +42,7 @@ def display_health_widget(draw, image, x_start, y_start, health_data):
     y_max = max(y_1, y_2)
     
     draw.line([(x_start + 150, y), (x_start + 150, y_max)], fill= fill_gray, width = 1)  
-
+    return y_max
     
 def seconds_to_hours(seconds):
     
