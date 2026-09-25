@@ -71,6 +71,6 @@ def display_photo(draw, image, x_start, y_start, x_end):
     if len(text_parts) >= 3:
         location = str(text_parts[0])
         month = str(text_parts[1])
-        year = str(text_parts[2])
+        year = str(text_parts[2][:4])
         picture_description = location + '  ' + month + ' ' + year
         draw.text((x_start, y_start + y_size + 7), picture_description ,font=font_small, fill=fill_main)
