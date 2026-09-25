@@ -101,10 +101,10 @@ def sleep_until_next_update():
     now = datetime.now()
     process_time = 60
     # Find the next 15-minute boundary
-    minutes_to_next = 15 - (now.minute % 15) - process_time / 60
+    minutes_to_next = 15 - process_time / 60 - (now.minute % 15)
     if minutes_to_next < 5:
         minutes_to_next + 15
-
+    print(minutes_to_next)
     next_update = now.replace(
         second=0,
         microsecond=0
