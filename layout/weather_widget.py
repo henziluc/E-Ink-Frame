@@ -12,6 +12,7 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 # Plus daily maximum and minimum temperatur with a weather picture
 def display_weather_graph(draw, image, df_hourly, df_daily, x_start, y_start):
     y = y_start
+    x = x_start
     graph_height = 120
     graph_width = 800
     x_day_start = []
@@ -20,20 +21,20 @@ def display_weather_graph(draw, image, df_hourly, df_daily, x_start, y_start):
     now_hour = now.hour
         
     # Draw widget title
-    draw.text((x_start, y), 'Weather Forecast', font=font_large, fill=fill_main)
+    draw.text((x, y), 'Weather Forecast', font=font_large, fill=fill_main)
     y += spacing_large
-    
+    x += 20
     # calulate hour spacing on the graph
     hour_spacing = graph_width / 48
     for i in range(0, 49):
         hour = now_hour + i
         if int(hour) % 24 == 0:
-            x_day_start.append(x_start + i * hour_spacing)
+            x_day_start.append(x + i * hour_spacing)
     
     # Draw daily weather overview
-    draw_daily_wether_decription(draw, df_daily, x_start, y , x_day_start[0], 0)
+    draw_daily_wether_decription(draw, df_daily, x, y , x_day_start[0], 0)
     draw_daily_wether_decription(draw, df_daily, x_day_start[0], y , x_day_start[1], 1)
-    draw_daily_wether_decription(draw, df_daily, x_day_start[1], y , x_start + graph_width, 2)
+    draw_daily_wether_decription(draw, df_daily, x_day_start[1], y , x + graph_width, 2)
     
     y += spacing_small
     
@@ -45,15 +46,15 @@ def display_weather_graph(draw, image, df_hourly, df_daily, x_start, y_start):
     sunrise = df_daily.loc[1,'sunrise'].hour
     sunset = df_daily.loc[1,'sunset'].hour
     
-    draw_weather_icons(image, df_from_now, x_start, y, sunrise, sunset, hour_spacing)
+    draw_weather_icons(image, df_from_now, x, y, sunrise, sunset, hour_spacing)
     
     y +=  spacing_normal + 8
     
     # draw top horizontal line of the graph
-    draw.line([(x_start, y), (x_start + graph_width, y)], fill= fill_main, width = 1)
+    draw.line([(x, y), (x + graph_width, y)], fill= fill_main, width = 1)
     
     #draw vertical line at beginning of graph
-    draw.line([(x_start, y),(x_start, y + graph_height)], fill= fill_main, width = 1)
+    draw.line([(x, y),(x, y + graph_height)], fill= fill_main, width = 1)
     
     y += graph_height
     
@@ -75,24 +76,24 @@ def display_weather_graph(draw, image, df_hourly, df_daily, x_start, y_start):
         
         # Draw vertical line where the day ends
         if int(hour) % 24 == 0:
-            draw.line([(x_start + i * hour_spacing, y),(x_start + i * hour_spacing, y - graph_height)], fill= fill_main, width = 1)
+            draw.line([(x + i * hour_spacing, y),(x + i * hour_spacing, y - graph_height)], fill= fill_main, width = 1)
         
         if hour % 2 == 0:
-            draw.line([(x_start + i * hour_spacing, y), (x_start + i * hour_spacing, y - 5)], fill= fill_main, width = 1)
+            draw.line([(x + i * hour_spacing, y), (x + i * hour_spacing, y - 5)], fill= fill_main, width = 1)
         
         # Draw text at every second hour    
         if  hour % 6 == 0:
-            draw_centered_text(draw, hour_str + ':00',(x_start + i * hour_spacing - 20, y + 5, x_start + i * hour_spacing + 20, y + 15), font_small, fill_main)
+            draw_centered_text(draw, hour_str + ':00',(x + i * hour_spacing - 20, y + 5, x + i * hour_spacing + 20, y + 15), font_small, fill_main)
 
     
     # draw bottom horizontal line of the graph       
-    draw.line([(x_start, y), (x_start + graph_width, y)], fill= fill_main, width = 1)
+    draw.line([(x, y), (x + graph_width, y)], fill= fill_main, width = 1)
     
     y -= graph_height
     
-    draw_rain_graph(draw, df_from_now, x_start, y, graph_height, hour_spacing)
+    draw_rain_graph(draw, df_from_now, x, y, graph_height, hour_spacing)
     
-    draw_temperature_graph(draw, df_from_now, x_start, y, graph_height, hour_spacing)
+    draw_temperature_graph(draw, df_from_now, x, y, graph_height, hour_spacing)
     
 
 def draw_daily_wether_decription(draw, df_daily, x_start, y_start, x_end, day):

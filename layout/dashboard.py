@@ -85,14 +85,16 @@ def make_dashbord(data):
         draw.line([(30, 980), (830, 980)], fill= fill_main, width = 1)
         
         # Draw next holidays
+        y = 990
         try:
-            display_holiday(draw, holidays, 30, 990)
+            y = display_holiday(draw, holidays, 30, y)
+            y += widget_spacing
         except:
             logger.exception("display_holiday failed")
                     
         # draw health data
         try:
-            display_health_widget(draw, image, 30, 1180, data['health_data'])
+            display_health_widget(draw, image, 30, y, data['health_data'])
         except:
             logger.exception("display_health_widget failed")
         

@@ -29,4 +29,6 @@ def display_holiday(draw, df, x_start, y_start):
             draw.text((x_start, y), row['location'], font=font_small, fill=fill_main)
             draw.text((x_start + 120, y), f"{days} days to go", font=font_small, fill=fill_main)
             y += spacing_small
+            
+    return y
  
