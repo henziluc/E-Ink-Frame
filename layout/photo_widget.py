@@ -70,7 +70,7 @@ def display_photo(draw, image, x_start, y_start, x_end):
     # Add pciture description below picture
     icon = Image.open(icon_path).convert("RGBA")
     icon = icon.resize((20, 20))
-    image.paste(icon, (x_start, y_start + y_size + 7), icon)
+    image.paste(icon, (x_start, y_start + y_size + 10), icon)
     
     
     text_parts = random_photo.split("_")
