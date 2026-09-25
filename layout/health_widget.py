@@ -44,7 +44,7 @@ def display_health_widget(draw, image, x_start, y_start, health_data):
     
 def seconds_to_hours(seconds):
     
-    time_h = round(seconds / 3600)
+    time_h = math.floor(seconds / 3600)
     
     time_m = round((seconds / 3600 - time_h) * 60)
     

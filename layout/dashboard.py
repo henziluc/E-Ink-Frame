@@ -128,7 +128,7 @@ def make_dashbord(data):
         try:
             display_room_climate_widget(draw, image, 890, 970, [])
         except:
-                    logger.exception("display_room_climate_widget failed")
+            logger.exception("display_room_climate_widget failed")
                     
         # draw software status
         display_software_status(draw, image, 1170, 1575, data['status'])
