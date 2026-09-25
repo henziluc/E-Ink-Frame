@@ -1,5 +1,6 @@
 import config
 import os
+from pathlib import Path
 
 from data.weather import get_weather
 from data.transport.transport import get_transport
@@ -145,3 +146,6 @@ def fetch_all_data(stop_times, calendar, calendar_dates, transport_info, data):
             'birthday_timestamp' : birthday_timestamp,
         }
     }
+
+
+

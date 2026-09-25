@@ -4,6 +4,8 @@ from pathlib import Path
 
 from fetch_data import fetch_all_data
 from data.transport.transport import load_transport_data
+from data.holiday_photo import download_photo
+from assets.holiday_data import holidays
 from layout.dashboard import make_dashbord
 from logger import logger
 
@@ -25,7 +27,10 @@ def main():
         calendar_dates,
         transport_info
     ) = load_transport_data()
-
+    try:
+        download_photo(holidays)
+    except:
+        logger.exception("Getting holiday pictures failed")
     data = {
         "weather_hourly": None,
         "weather_daily": None,
