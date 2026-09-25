@@ -345,21 +345,13 @@ def prepare_holiday_photo(location):
 # Prepare all holiday photos
 # --------------------------------------------------
 
-def prepare_holiday_photos(holidays_data):
+def prepare_holiday_photos(holidays):
 
-    logger.info(
-        "Checking holiday photos..."
-    )
+    logger.info("Checking holiday photos...")
 
-    locations = set(
-        holiday[0]
-        for holiday in holidays_data
-    )
+    locations = holidays["location"].dropna().unique()
 
     for location in locations:
-
         prepare_holiday_photo(location)
 
-    logger.info(
-        "Holiday photo check finished"
-    )
+    logger.info("Holiday photo check finished")
