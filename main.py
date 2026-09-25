@@ -91,17 +91,7 @@ def main():
         except Exception as e:
             logger.exception("Update failed")
 
-        # Schedule next update
-        next_update += UPDATE_INTERVAL
-
-        # Calculate remaining time
-        wait_time = next_update - time.monotonic()
-
-        if wait_time > 0:
-            logger.info(f"Next update in {wait_time / 60:.1f} minutes")
-            time.sleep(wait_time)
-        else:
-            logger.info("Update took longer than the interval. Starting next update.")   
+        sleep_until_next_update()
 
 
 
