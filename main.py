@@ -15,7 +15,7 @@ UPDATE_INTERVAL = 15 * 60
 
 def main():
     logger.info("E-Ink Dashboard started")
-
+    counter = 0
     # --------------------------------------------------------
     # Prepare GTFS ONCE
     # --------------------------------------------------------
@@ -85,8 +85,8 @@ def main():
             
             # 2. Create and display dashboard
             data = make_dashbord(data)
-
-            logger.info("Dashboard displayed successfully")
+            counter += 1
+            logger.info(f"Dashboard updated successfully for the {counter} time")
 
         except Exception as e:
             logger.exception("Update failed")
