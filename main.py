@@ -41,13 +41,19 @@ def main():
         "birthday_data": None,
         "status" : {
             'weather' : None,
+            'weather_timestamp' : None,
             'transport' : None,
+            'transport_timestamp' : None,
             'health' : None,
+            'health_timestamp' : None,
             'moon' : None,
+            'moon_timestamp' : None,
             'news' : None,
+            'news_timestamp' : None,
             'quote' : None,
-            'birthday' : None
-        }
+            'quote_timestamp' : None,
+            'birthday' : None,
+            'birthday_timestamp' : None,
     }
         
         
