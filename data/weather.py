@@ -6,6 +6,7 @@ import openmeteo_requests
 import pandas as pd
 import requests_cache
 from retry_requests import retry
+from datetime import datetime
 
 def get_weather(location):
 
@@ -87,4 +88,7 @@ def get_weather(location):
 
     daily_dataframe = pd.DataFrame(data = daily_data)
     
-    return hourly_dataframe, daily_dataframe
+    now = datetime.now()
+    formatted_datetime = now.strftime("%Y-%m-%d %H:%M:%S")
+    
+    return hourly_dataframe, daily_dataframe, formatted_datetime

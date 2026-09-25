@@ -1,4 +1,5 @@
 import requests
+from datetime import datetime
 
 def get_moon_phase(icon_dir="assets/icons/moon"):
     """
@@ -18,13 +19,14 @@ def get_moon_phase(icon_dir="assets/icons/moon"):
             waxing = data["waxing"]
             illumination = data["illumination_percent"]
 
-
+            now = datetime.now()
+            formatted_datetime = now.strftime("%Y-%m-%d %H:%M:%S")
 
             return {
                 "phase": phase,
                 "waxing": waxing,
                 "illumination": illumination,
-            }
+            }, formatted_datetime
 
         except requests.RequestException as e:
             print(f"Moon API error: {e}")
@@ -32,11 +34,11 @@ def get_moon_phase(icon_dir="assets/icons/moon"):
                 "phase": 'unkown',
                 "waxing": False,
                 "illumination": 0,
-            }
+            }, None
         except (KeyError, ValueError) as e:
             print(f"Invalid moon API response: {e}")
         return {
                 "phase": 'unkown',
                 "waxing": False,
                 "illumination": 0,
-            }
+            }, None

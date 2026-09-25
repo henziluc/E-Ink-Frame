@@ -1,5 +1,6 @@
 import requests
 import xml.etree.ElementTree as ET
+from datetime import datetime
 
 NEWS_FEEDS = {
     "swiss": [
@@ -41,7 +42,10 @@ def get_news():
         )
     }
     
-    return news
+    now = datetime.now()
+    formatted_datetime = now.strftime("%Y-%m-%d %H:%M:%S")
+    
+    return news, formatted_datetime
 
 
 def get_feed(url):

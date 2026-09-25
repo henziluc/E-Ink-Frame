@@ -307,10 +307,12 @@ def get_transport(
         delays
     )
 
-    
+    now = datetime.now()
+    formatted_datetime = now.strftime("%Y-%m-%d %H:%M:%S")
     
     
     return (
         departures_seen,
-        departures_etzberg
+        departures_etzberg,
+        formatted_datetime
     )

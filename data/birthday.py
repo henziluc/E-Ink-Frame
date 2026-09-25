@@ -1,5 +1,5 @@
 import json
-from datetime import date
+from datetime import date, datetime
 from pathlib import Path
 
 
@@ -18,4 +18,7 @@ def get_birthday_data():
         for person in data["birthdays"]
     ]
 
-    return birthday_data
+    now = datetime.now()
+    formatted_datetime = now.strftime("%Y-%m-%d %H:%M:%S")
+    
+    return birthday_data, formatted_datetime

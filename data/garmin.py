@@ -25,7 +25,10 @@ def get_health_data(health_dict):
         "Jojo": jojo_data
     }
     
-    return health_dict
+    now = datetime.now()
+    formatted_datetime = now.strftime("%Y-%m-%d %H:%M:%S")
+    
+    return health_dict, formatted_datetime
 
 def load_health_data(email=None, password=None, person=None):
     garmin_luca = None

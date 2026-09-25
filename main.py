@@ -75,6 +75,7 @@ def main():
             for key, value in data.items():
                 print(f"{key}: {value} \n")
             
+            logger.info(f"Status: {data['status']}")
             
             # 2. Create and display dashboard
             data = make_dashbord(data)
