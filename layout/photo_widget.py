@@ -5,7 +5,7 @@ from PIL import Image, ImageOps, ImageEnhance
 from .fonts import font_small, font_normal, font_small_italic, font_large, fill_main, spacing_small, spacing_normal, spacing_medium, spacing_large
 
 BASE_DIR = Path(__file__).resolve().parent.parent
-
+icon_path = BASE_DIR / "assets" / "photo" / "resized" / "location.png"
 
 import os
 import psutil
@@ -27,12 +27,12 @@ def display_photo(draw, image, x_start, y_start, x_end):
     folder = BASE_DIR / "assets" / "photo" / "resized"
     photo_count = sum(
         1 for file in folder.iterdir()
-        if file.suffix.lower() in [".jpg", ".jpeg", ".png", ".webp"]
+        if file.suffix.lower() in [".jpg", ".jpeg", ".webp"]
     )
     
     # get a list of all photo in a list
     for file in folder.iterdir():
-        if file.suffix.lower() in [".jpg", ".jpeg", ".png", ".webp"]:
+        if file.suffix.lower() in [".jpg", ".jpeg", ".webp"]:
             photo_list.append(file.name)
     mem("after analizing photo folder")    
     # get random number between 1 and number of photos
@@ -66,6 +66,13 @@ def display_photo(draw, image, x_start, y_start, x_end):
     # Add frame around picture
     draw.rectangle([(x_start, y_start),(x_end, y_start + y_size)], outline ="black", width = 3)
     
+    
+    # Add pciture description below picture
+    icon = Image.open(icon_path).convert("RGBA")
+    icon = icon.resize((20, 20))
+    image.paste(icon, (x_start, y_start + y_size + 7), icon)
+    
+    
     text_parts = random_photo.split("_")
     
     if len(text_parts) >= 3:
@@ -73,4 +80,4 @@ def display_photo(draw, image, x_start, y_start, x_end):
         month = str(text_parts[1])
         year = str(text_parts[2][:4])
         picture_description = location + '  ' + month + ' ' + year
-        draw.text((x_start, y_start + y_size + 7), picture_description ,font=font_small, fill=fill_main)
+        draw.text((x_start + 23 , y_start + y_size + 7), picture_description ,font=font_small, fill=fill_main)
