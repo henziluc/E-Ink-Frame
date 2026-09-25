@@ -72,7 +72,7 @@ def main():
             )
 
             logger.info("Data fetched successfully")
-            
+            print(data)
             # 2. Create and display dashboard
             data = make_dashbord(data)
 
