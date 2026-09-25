@@ -38,7 +38,9 @@ def display_photo(draw, image, x_start, y_start, x_end):
     # get random number between 1 and number of photos
     random_photo_number = random.randint(1, photo_count - 1)
     
-    photo_path = BASE_DIR / "assets" / "photo" / "resized" / photo_list[random_photo_number]
+    random_photo = photo_list[random_photo_number]
+    
+    photo_path = BASE_DIR / "assets" / "photo" / "resized" / random_photo
     
     # Get picture and rotate
     picture = Image.open(photo_path).convert("RGBA")
@@ -64,4 +66,11 @@ def display_photo(draw, image, x_start, y_start, x_end):
     # Add frame around picture
     draw.rectangle([(x_start, y_start),(x_end, y_start + y_size)], outline ="black", width = 3)
     
-    draw.text((x_start, y_start + y_size + 10), "Location and Date",font=font_small, fill=fill_main)
+    text_parts = random_photo.split("_")
+    
+    if len(text_parts) >= 3:
+        location = str(text_parts[0])
+        month = str(text_parts[1])
+        year = str(text_parts[2])
+        picture_description = location + '  ' + month + ' ' + year
+        draw.text((x_start, y_start + y_size + 10), picture_description ,font=font_small, fill=fill_main)
