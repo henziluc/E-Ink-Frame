@@ -61,7 +61,7 @@ def display_room_climate_widget(draw, image, x_start, y_start, df):
     icon_CO2 = icon_CO2.resize((icon_size, icon_size))
     image.paste(icon_CO2, (x, y), icon_CO2)
     x += icon_size + 5
-    draw.text((x, y), str(latest_values["c02"]) + 'ppm', font=font_small, fill=fill_main)
+    draw.text((x, y), str(latest_values["co2"]) + 'ppm', font=font_small, fill=fill_main)
     x += spacing_normal
     draw.text((x, y), "CO2", font=font_small, fill=fill_main)
     x += spacing_small
