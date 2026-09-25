@@ -8,7 +8,7 @@ from .fonts import font_small, font_normal, font_small_italic, font_large, fill_
 def display_pi_status(draw, x_start, y_start):
     y = y_start
     
-    pi_status = get_pi_status
+    pi_status = get_pi_status()
     
     draw.text((x_start, y), "Pi Status", font=font_large, fill=fill_main)
     y += spacing_large
