@@ -11,7 +11,7 @@ from .fonts import font_small, font_normal, font_medium, font_large, fill_main, 
 BASE_DIR = Path(__file__).resolve().parent.parent
 path_temperatur = BASE_DIR / "assets" / "weather_symbol" / "thermometer.png"
 path_humidity = BASE_DIR / "assets" / "weather_symbol" / "waterdrop.png"
-path_CO2 = BASE_DIR / "assets" / "weather_symbol" / "co2.png"
+path_CO2 = BASE_DIR / "assets" / "weather_symbol" / "leaf.png"
 path_arrow_right = BASE_DIR / "assets" / "weather_symbol" / "arrow-right.png"
 path_arrow_right_up = BASE_DIR / "assets" / "weather_symbol" / "arrow-up-right.png"
 path_arrow_right_down = BASE_DIR / "assets" / "weather_symbol" / "arrow-down-right.png"
@@ -100,13 +100,13 @@ def display_room_climate_widget(draw, image, x_start, y_start, df):
     diff_co2 = round(latest_values["co2"] - compare_values ["co2"])
     if diff_co2 > 0:
         icon_co2_arrow = Image.open(path_arrow_right_up).convert("RGBA")
-        diff_co2 = '+' + str(diff_co2) + '°C'
+        diff_co2 = '+' + str(diff_co2) + 'ppm'
     elif diff_co2 < 0:
         icon_co2_arrow = Image.open(path_arrow_right_down).convert("RGBA")
-        diff_co2 = str(diff_co2) + '°C'
+        diff_co2 = str(diff_co2) + 'ppm'
     else:
         icon_co2_arrow = Image.open(path_arrow_right).convert("RGBA")
-        diff_co2 = str(diff_co2) + '°C'
+        diff_co2 = str(diff_co2) + 'ppm'
         
     icon_co2_arrow = icon_co2_arrow.resize((icon_size_small, icon_size_small))
     image.paste(icon_co2_arrow, (x, y), icon_co2_arrow)    
