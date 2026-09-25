@@ -11,8 +11,8 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 PHOTO_FOLDER = BASE_DIR / "assets" / "holiday_photos" 
 
 def display_holiday(draw, image, df, x_start, y_start):
-    picture_width = 100
-    picture_height = picture_width * 1.5
+    picture_width = 110
+    picture_height = picture_width * 1.3
     y = y_start
     next_holiday = 1
     now = datetime.datetime.now()
@@ -39,13 +39,14 @@ def display_holiday(draw, image, df, x_start, y_start):
             picture = ImageEnhance.Sharpness(picture).enhance(1.3)
             picture = ImageEnhance.Brightness(picture).enhance(1.1)
             
-            image.paste(picture, (x_start, y_start))
-            draw.text((x_start + picture_width, y), row['location'], font=font_medium, fill=fill_main)
+            image.paste(picture, (x_start, y))
+            draw.text((x_start + picture_width + 5, y), row['location'], font=font_medium, fill=fill_main)
+            y_end_photo = y + picture_height + 5
             y += spacing_medium
-            draw.text((picture_width, y), f"{days} days to go", font=font_normal, fill=fill_main)
+            draw.text((picture_width + picture_width + 5, y), f"{days} days to go", font=font_normal, fill=fill_main)
             y += spacing_normal
-            draw.text((picture_width, y), str(row['start_date']), font=font_normal, fill=fill_main)
-            y += spacing_normal
+            draw.text((picture_width + picture_width + 5, y), row['start_date'].strftime("%d.%m.%Y"), font=font_normal, fill=fill_main)
+            y += y_end_photo
             next_holiday = 0
         # Other elements are printed smaller    
         else:
