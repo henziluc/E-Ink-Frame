@@ -25,6 +25,10 @@ def display_weather_graph(draw, image, df_hourly, df_daily, x_start, y_start):
     
     # calulate hour spacing on the graph
     hour_spacing = graph_width / 48
+    for i in range(0, 49):
+        hour = now_hour + i
+        if int(hour) % 24 == 0:
+            x_day_start.append(x_start + i * hour_spacing)
     
     # Draw daily weather overview
     draw_daily_wether_decription(draw, df_daily, x_start, y , x_day_start[0], 0)
@@ -72,7 +76,6 @@ def display_weather_graph(draw, image, df_hourly, df_daily, x_start, y_start):
         # Draw vertical line where the day ends
         if int(hour) % 24 == 0:
             draw.line([(x_start + i * hour_spacing, y),(x_start + i * hour_spacing, y - graph_height)], fill= fill_main, width = 1)
-            x_day_start.append(x_start + i * hour_spacing)
         
         if hour % 2 == 0:
             draw.line([(x_start + i * hour_spacing, y), (x_start + i * hour_spacing, y - 5)], fill= fill_main, width = 1)
