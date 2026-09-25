@@ -26,20 +26,22 @@ speed_icon_path = BASE_DIR / "assets" / "sport_symbol" / "gauge.png"
 def display_health_widget(draw, image, x_start, y_start, health_data):
     y = y_start
     icon_size = 25
-   
+    y_1 = 0
+    y_2 = 0
     draw.text((x_start, y), 'Health', font = font_large, fill = fill_main)
     
     y += spacing_large
     if 'Luca' in health_data:
         if health_data['Luca'] is not None:
-            display_personal_health(draw, image, x_start, y, health_data['Luca'], "Luca")
-            
-    draw.line([(x_start + 150, y), (x_start + 150, y + 300)], fill= fill_gray, width = 1)  
+            y_1 = display_personal_health(draw, image, x_start, y, health_data['Luca'], "Luca")
           
     if 'Jojo' in health_data:
         if health_data['Jojo'] is not None:
-            display_personal_health(draw, image, x_start + 160, y, health_data['Jojo'], "Jojo")
-
+            y_2 = display_personal_health(draw, image, x_start + 160, y, health_data['Jojo'], "Jojo")
+            
+    y_max = max(y_1, y_2)
+    
+    draw.line([(x_start + 150, y), (x_start + 150, y_max)], fill= fill_gray, width = 1)  
 
     
 def seconds_to_hours(seconds):
@@ -172,4 +174,7 @@ def display_personal_health(draw, image, x_start, y_start, health_data, name):
         speed_icon = speed_icon.resize((icon_size, icon_size))
         image.paste(speed_icon, (x_start, y), speed_icon)   
         
-        draw.text((x_start + icon_size + 5, y), health_data['activity_pace'] + ' min/km', font = font_small, fill = fill_main)   
+        draw.text((x_start + icon_size + 5, y), health_data['activity_pace'] + ' min/km', font = font_small, fill = fill_main)
+        y += spacing_small
+        
+    return y   
