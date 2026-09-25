@@ -12,7 +12,7 @@ PHOTO_FOLDER = BASE_DIR / "assets" / "holiday_photos"
 
 def display_holiday(draw, image, df, x_start, y_start):
     picture_width = 110
-    picture_height = picture_width * 1.3
+    picture_height = round(picture_width * 1.3)
     y = y_start
     next_holiday = 1
     now = datetime.datetime.now()
