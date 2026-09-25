@@ -71,7 +71,7 @@ def display_weather_graph(draw, image, df_hourly, df_daily, x_start, y_start):
     # Draw daily weather overview
     draw_daily_wether_decription(draw, df_daily, x_start, y , x_day_start[0], 0)
     draw_daily_wether_decription(draw, df_daily, x_day_start[0], y , x_day_start[1], 1)
-    draw_daily_wether_decription(draw, df_daily, x_day_start[1], y , 1200 - x_start, 2)
+    draw_daily_wether_decription(draw, df_daily, x_day_start[1], y , x_start + graph_width, 2)
     
     y += spacing_small
     
@@ -85,7 +85,7 @@ def display_weather_graph(draw, image, df_hourly, df_daily, x_start, y_start):
     
     draw_weather_icons(image, df_from_now, x_start, y, sunrise, sunset, hour_spacing)
     
-    y +=  spacing_normal
+    y +=  spacing_normal + 5
     
     draw_rain_graph(draw, df_from_now, x_start, y, graph_height, hour_spacing)
     
@@ -137,7 +137,7 @@ def draw_temperature_graph(draw, df_from_now, x_start, y_start, graph_height, ho
         
         # draw every second temperature value
         temp = temp_max - i
-        if i % 2 == 0:
+        if i % 5 == 0:
             draw.text((x_start - 2, y), str(temp), font=font_small, fill=fill_main, anchor= 'rm')
             
         # draw dotted helper lines at every 5°C step

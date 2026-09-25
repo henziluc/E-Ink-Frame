@@ -31,7 +31,7 @@ def display_welcome(draw, image, x_start, y_start, moon_data):
         display_moon_phase(image, 600, y_start + 20, moon_data)
         
     draw.text((x_start, y), text, font=font_massiv, fill=fill_main)
-    y += spacing_massive
+    y += spacing_massive + 5
     
     weekday = datetime.now().strftime("%A")
     datum = datetime.now().strftime("%d.%m.%Y")

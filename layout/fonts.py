@@ -26,17 +26,17 @@ font_normal = ImageFont.truetype(
 
 font_small_italic = ImageFont.truetype(
     FONT_DIR / "Inter_18pt-Italic.ttf",
-    15
+    20
 )
 
 font_small = ImageFont.truetype(
     FONT_DIR / "Inter_18pt-Regular.ttf",
-    15
+    20
 )
 
 font_very_small = ImageFont.truetype(
     FONT_DIR / "Inter_18pt-Thin.ttf",
-    10
+    15
 )
 
 

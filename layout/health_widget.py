@@ -2,7 +2,7 @@ from PIL import Image
 from pathlib import Path
 import math
 
-from .fonts import font_small, font_normal, font_medium, font_large, fill_main, spacing_small, spacing_normal, spacing_medium, spacing_large
+from .fonts import font_small, font_normal, font_medium, font_large, fill_main, fill_gray, spacing_small, spacing_normal, spacing_medium, spacing_large
 
 BASE_DIR = Path(__file__).resolve().parent.parent
 # Define all icon paths
@@ -27,13 +27,15 @@ def display_health_widget(draw, image, x_start, y_start, health_data):
     y = y_start
     icon_size = 25
    
-    draw.text((x_start, y), 'Health Stats', font = font_large, fill = fill_main)
+    draw.text((x_start, y), 'Health', font = font_large, fill = fill_main)
     
     y += spacing_large
     if 'Luca' in health_data:
         if health_data['Luca'] is not None:
             display_personal_health(draw, image, x_start, y, health_data['Luca'], "Luca")
-        
+            
+    draw.line([(x_start + 150, y), (x_start + 150, y + 300)], fill= fill_gray, width = 1)  
+          
     if 'Jojo' in health_data:
         if health_data['Jojo'] is not None:
             display_personal_health(draw, image, x_start + 160, y, health_data['Jojo'], "Jojo")

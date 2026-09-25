@@ -2,7 +2,7 @@ import qrcode
 import os
 
 from .fonts import font_small, font_normal, font_medium, font_large, fill_main, spacing_small, spacing_normal, spacing_large
-
+from .helpers import draw_centered_text
 
 def display_wifi_qr_code(draw, image, x_start, y_start):
     wifi_string = os.getenv("wifi_string")
@@ -24,8 +24,8 @@ def display_wifi_qr_code(draw, image, x_start, y_start):
     qr_img = qr_img.resize((90, 90))
 
     # Paste the QR code onto the main image
-    draw.text((x_start, y), "Wi-Fi", font=font_normal, fill=fill_main)
     
+    draw_centered_text(draw, "Wi-Fi", (x_start, y,x_start + 90, y + spacing_normal),font_normal, fill_main)
     y += spacing_normal
     
     image.paste(qr_img, (x_start, y))
