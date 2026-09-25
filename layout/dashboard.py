@@ -96,7 +96,7 @@ def make_dashbord(data):
         except:
             logger.exception("display_health_widget failed")
         
-        draw.line([(335, 1100), (335, 1550)], fill= fill_gray, width = 1)
+        draw.line([(335, 1010), (335, 1550)], fill= fill_gray, width = 1)
                     
         # draw news data
         try:

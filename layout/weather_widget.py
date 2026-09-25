@@ -137,7 +137,7 @@ def draw_temperature_graph(draw, df_from_now, x_start, y_start, graph_height, ho
         
         # draw every second temperature value
         temp = temp_max - i
-        if i % 5 == 0:
+        if temp % 5 == 0:
             draw.text((x_start - 2, y), str(temp), font=font_small, fill=fill_main, anchor= 'rm')
             
         # draw dotted helper lines at every 5°C step
