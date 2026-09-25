@@ -4,7 +4,7 @@ from pathlib import Path
 
 from fetch_data import fetch_all_data
 from data.transport.transport import load_transport_data
-from data.holiday_photo import download_photo
+from data.holiday_photo import prepare_holiday_photos
 from assets.holiday_data import holidays
 from layout.dashboard import make_dashbord
 from logger import logger
@@ -28,7 +28,7 @@ def main():
         transport_info
     ) = load_transport_data()
     try:
-        download_photo(holidays)
+        prepare_holiday_photos(holidays)
     except:
         logger.exception("Getting holiday pictures failed")
     data = {
@@ -109,7 +109,7 @@ def sleep_until_next_update():
     minutes_to_next = 15 - process_time / 60 - (now.minute % 15)
     if minutes_to_next < 5:
         minutes_to_next += 15
-    print(minutes_to_next)
+    
     next_update = now.replace(
         second=0,
         microsecond=0
