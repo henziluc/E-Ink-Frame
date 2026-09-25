@@ -1,6 +1,5 @@
 import time
-from datetime import datetime
-
+from datetime import datetime, timedelta
 from pathlib import Path
 
 from fetch_data import fetch_all_data
@@ -96,6 +95,31 @@ def main():
             time.sleep(wait_time)
         else:
             logger.info("Update took longer than the interval. Starting next update.")   
-            
+
+
+
+
+
+def sleep_until_next_update():
+    now = datetime.now()
+    process_time = 60
+    # Find the next 15-minute boundary
+    minutes_to_next = 15 - (now.minute % 15) - process_time / 60
+    if minutes_to_next < 5:
+        minutes_to_next + 15
+
+    next_update = now.replace(
+        second=0,
+        microsecond=0
+    ) + timedelta(minutes=minutes_to_next)
+
+    sleep_seconds = (next_update - now).total_seconds()
+
+    logger.info(f"Next update: {next_update.strftime('%H:%M:%S')}")
+
+    time.sleep(sleep_seconds)
+
+
+
 if __name__ == "__main__":
     main()
