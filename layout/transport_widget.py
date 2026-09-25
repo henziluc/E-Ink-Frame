@@ -11,7 +11,7 @@ def display_schedule_complet(draw, image, station_name_1, df_1, station_name_2, 
     
     # Draw widget title    
     draw.text((x_start, y), "Next Trains", font=font_large, fill=fill_main)
-    y += spacing_large
+    y += spacing_large - 3
     # Draw schedule for station 1
     draw, y = display_schedule(draw, image, station_name_1, df_1, x_start, y)
     y += 10
@@ -38,9 +38,9 @@ def display_schedule(draw, image, station_name, df, x_start, y_start):
     icon = Image.open(icon_path).convert("RGBA")
     icon = icon.resize((25, 25))
             
-    image.paste(icon, (x_start + 1, y), icon)
+    image.paste(icon, (x_start + 1, y + 6), icon)
     
-    y += spacing_small + 5
+    y += spacing_small + 10
     
     # Looping through the schedule list
     for _, row in df.iterrows():
@@ -64,7 +64,7 @@ def display_schedule(draw, image, station_name, df, x_start, y_start):
             route_text = "white"
         #display route short name with a colored square around it
         draw.rounded_rectangle((x_start, y, x_start + sq_width, y + sq_height),radius=1,fill=route_bg)
-        draw.text((x_start + sq_width/2 , y + sq_height/2), route,font=font_small,fill=route_text, anchor="mm")
+        draw.text((x_start + sq_width/2 , y + sq_height/2), route,font=font_small - 2,fill=route_text, anchor="mm")
         #display trip headsign with out leading Winterthur
         headsign = row["trip_headsign"].replace("Winterthur, ", "")
         draw.text((x_start + 35, y),headsign ,font=font_small,fill=fill_main) 
