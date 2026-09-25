@@ -17,7 +17,7 @@ UNSPLASH_ACCESS_KEY = os.getenv("UNSPLASH_ACCESS_KEY")
 
 PHOTO_FOLDER = Path("assets/holiday_photos")
 
-PHOTO_SIZE = (600, 400)
+PHOTO_SIZE = (100, 150)
 
 
 # --------------------------------------------------
@@ -349,7 +349,7 @@ def prepare_holiday_photos(holidays):
 
     logger.info("Checking holiday photos...")
 
-    locations = holidays["location"].dropna().unique()
+    locations = holidays["location"].unique()
 
     for location in locations:
         prepare_holiday_photo(location)

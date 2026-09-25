@@ -87,16 +87,16 @@ def make_dashbord(data):
         # Draw next holidays
         y = 990
         try:
-            y = display_holiday(draw, holidays, 30, y)
+            y = display_holiday(draw, image, holidays, 30, y)
             y += widget_spacing
         except:
             logger.exception("display_holiday failed")
-                    
-        # draw health data
+                      
+        # draw room climate data
         try:
-            display_health_widget(draw, image, 30, y, data['health_data'])
+            display_room_climate_widget(draw, image, 30, y, [])
         except:
-            logger.exception("display_health_widget failed")
+            logger.exception("display_room_climate_widget failed")
         
         draw.line([(340, 1010), (340, 1550)], fill= fill_main, width = 1)
                     
@@ -129,12 +129,14 @@ def make_dashbord(data):
             y += widget_spacing
         except:
             logger.exception("display_quote_widget failed")
-                    
-        # draw room climate data
+        
+        
+        # draw health data
         try:
-            display_room_climate_widget(draw, image, 890, y, [])
+            display_health_widget(draw, image, 890, y, data['health_data'])
         except:
-            logger.exception("display_room_climate_widget failed")
+            logger.exception("display_health_widget failed")            
+        
                     
         # draw software status
         display_software_status(draw, image, 1170, 1575, data['status'])
