@@ -40,7 +40,7 @@ def display_welcome(draw, image, x_start, y_start, moon_data):
     draw.text((x_start, y), date_string, font=font_normal, fill=fill_main)
     y += spacing_normal
     
-    draw.line([(x_start, y), (1200-x_start, y)], fill= fill_gray, width = 1)
+    draw.line([(x_start, y), (1200-x_start, y)], fill= fill_main, width = 1)
 
     
 def display_moon_phase(image, x_start, y_start, moon_data):
