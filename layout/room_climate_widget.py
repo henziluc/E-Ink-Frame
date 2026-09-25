@@ -38,7 +38,7 @@ def display_room_climate_widget(draw, image, x_start, y_start, df):
     y += icon_size + 5
     draw.text((x, y), str(latest_values["temperature"]) + '°C', font=font_normal, fill=fill_main)
     y += spacing_normal
-    draw.text((x, y), "Temp.", font=font_very_small, fill=fill_main)
+    draw.text((x, y), "Temp.", font=font_small, fill=fill_main)
     y += spacing_small
     diff_temperature = round(latest_values["temperature"] - compare_values ["temperature"])
     if diff_temperature > 0:
@@ -66,7 +66,7 @@ def display_room_climate_widget(draw, image, x_start, y_start, df):
     y += icon_size + 5
     draw.text((x, y), str(latest_values["humidity"]) + '%', font=font_small, fill=fill_main)
     y += spacing_normal
-    draw.text((x, y), "Humidity", font=font_very_small, fill=fill_main)
+    draw.text((x, y), "Humidity", font=font_small, fill=fill_main)
     y += spacing_small
     diff_humidity = round(latest_values["humidity"] - compare_values ["humidity"])
     if diff_humidity > 0:
@@ -95,7 +95,7 @@ def display_room_climate_widget(draw, image, x_start, y_start, df):
     y += icon_size + 5
     draw.text((x, y), str(latest_values["co2"]) + 'ppm', font=font_small, fill=fill_main)
     y += spacing_normal
-    draw.text((x, y), "CO2", font=font_very_small, fill=fill_main)
+    draw.text((x, y), "CO2", font=font_small, fill=fill_main)
     y += spacing_small
     diff_co2 = round(latest_values["co2"] - compare_values ["co2"])
     if diff_co2 > 0:

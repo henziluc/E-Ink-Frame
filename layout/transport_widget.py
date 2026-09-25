@@ -25,11 +25,10 @@ def display_schedule(draw, image, station_name, df, x_start, y_start):
     y = y_start
     
     # Size of the squares around the route short name
-    sq_width = 31
+    sq_width = 35
     sq_height = 24
     name = "Station " + station_name
-    draw_centered_text(draw, name, (x_start,y ,x_start + 260 ,y + 29 ), font_normal, fill_main)
-    
+    draw.text((x_start + sq_width + 3, y),name ,font=font_normal,fill=fill_main)
     if station_name == 'Etzberg':
         icon_path = BASE_DIR / "assets" / "transport_symbol" / "bus-simple.png"
     else:
@@ -38,9 +37,9 @@ def display_schedule(draw, image, station_name, df, x_start, y_start):
     icon = Image.open(icon_path).convert("RGBA")
     icon = icon.resize((25, 25))
             
-    image.paste(icon, (x_start + 1, y + 6), icon)
+    image.paste(icon, (x_start + 3, y + 6), icon)
     
-    y += spacing_small + 10
+    y += spacing_normal + 5
     
     # Looping through the schedule list
     for _, row in df.iterrows():
@@ -64,16 +63,16 @@ def display_schedule(draw, image, station_name, df, x_start, y_start):
             route_text = "white"
         #display route short name with a colored square around it
         draw.rounded_rectangle((x_start, y, x_start + sq_width, y + sq_height),radius=1,fill=route_bg)
-        draw.text((x_start + sq_width/2 , y + sq_height/2), route,font=font_very_small,fill=route_text, anchor="mm")
+        draw.text((x_start + sq_width/2 , y + sq_height/2), route,font=font_small,fill=route_text, anchor="mm")
         #display trip headsign with out leading Winterthur
         headsign = row["trip_headsign"].replace("Winterthur, ", "")
-        draw.text((x_start + 35, y),headsign ,font=font_small,fill=fill_main) 
+        draw.text((x_start + sq_width + 3, y),headsign ,font=font_small,fill=fill_main) 
         #display delays in rounded minutes in a red font
         delay = round(int(row['delay'])/60)
         if delay > 1:
-            draw.text((x_start + 170, y),f"+{delay}min",font=font_small,fill="red") 
+            draw.text((x_start + 175, y),f"+{delay}min",font=font_small,fill="red") 
         #display departure time    
-        draw.text((x_start + 230, y),row['departure_time'][:-3],font=font_small,fill=fill_main)
+        draw.text((x_start + 235, y),row['departure_time'][:-3],font=font_small,fill=fill_main)
       
         y += spacing_small
         
