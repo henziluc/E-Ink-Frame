@@ -16,6 +16,7 @@ path_arrow_right = BASE_DIR / "assets" / "weather_symbol" / "arrow-right.png"
 path_arrow_right_up = BASE_DIR / "assets" / "weather_symbol" / "arrow-up-right.png"
 path_arrow_right_down = BASE_DIR / "assets" / "weather_symbol" / "arrow-down-right.png"
 
+
 def display_room_climate_widget(draw, image, x_start, y_start, df):
     df = generate_test_data()
     y = y_start
@@ -62,6 +63,9 @@ def display_room_climate_widget(draw, image, x_start, y_start, df):
     # Draw Humidity
     icon_humidity = Image.open(path_humidity).convert("RGBA")
     icon_humidity = icon_humidity.resize((icon_size, icon_size))
+    blue = Image.new("RGBA", icon_humidity.size, (0, 120, 255, 255))
+    blue.putalpha(icon_humidity.getchannel("A"))
+    icon_humidity = blue
     image.paste(icon_humidity, (x, y), icon_humidity)
     y += icon_size + 5
     draw.text((x, y), str(latest_values["humidity"]) + '%', font=font_small, fill=fill_main)
@@ -91,6 +95,9 @@ def display_room_climate_widget(draw, image, x_start, y_start, df):
     # Draw CO2
     icon_CO2 = Image.open(path_CO2).convert("RGBA")
     icon_CO2 = icon_CO2.resize((icon_size, icon_size))
+    green = Image.new("RGBA", icon_CO2.size, (50, 180, 80, 255))
+    green.putalpha(icon_CO2.getchannel("A"))
+    icon_CO2 = green
     image.paste(icon_CO2, (x, y), icon_CO2)
     y += icon_size + 5
     draw.text((x, y), str(latest_values["co2"]) + 'ppm', font=font_small, fill=fill_main)

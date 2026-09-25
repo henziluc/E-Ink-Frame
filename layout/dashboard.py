@@ -126,7 +126,7 @@ def make_dashbord(data):
                     
         # draw room climate data
         try:
-            display_room_climate_widget(draw, image, 890, 990, [])
+            display_room_climate_widget(draw, image, 890, 970, [])
         except:
                     logger.exception("display_room_climate_widget failed")
                     
