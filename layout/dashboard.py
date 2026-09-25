@@ -92,7 +92,7 @@ def make_dashbord(data):
                     
         # draw health data
         try:
-            display_health_widget(draw, image, 30, 1150, data['health_data'])
+            display_health_widget(draw, image, 30, 1170, data['health_data'])
         except:
             logger.exception("display_health_widget failed")
         
