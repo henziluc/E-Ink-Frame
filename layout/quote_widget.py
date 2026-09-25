@@ -28,4 +28,4 @@ def display_quote_widget(draw, x_start, y_start, quote_data):
     draw.text((x_start, y), '- ' + quote['title'], font=font_small, fill=fill_main)
     
                 
-    return quote_data    
+    return quote_data, y  

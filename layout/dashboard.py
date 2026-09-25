@@ -39,7 +39,7 @@ from .fonts import font_small, font_medium, font_large, fill_main, fill_gray
 
 
 def make_dashbord(data):
-
+    widget_spacing = 10
     epd = epd13in3E.EPD()
     try:
         
@@ -107,26 +107,30 @@ def make_dashbord(data):
         draw.line([(860, 165), (860, 1550)], fill= fill_main, width = 1)
         
         # Draw transport schedule
+        y = 150
         try:
-            display_schedule_complet(draw, image, 'Seen', data['departures_seen'], 'Etzberg', data['departures_etzberg'], 890, 150)
+            y = display_schedule_complet(draw, image, 'Seen', data['departures_seen'], 'Etzberg', data['departures_etzberg'], 890, y)
+            y += widget_spacing
         except:
             logger.exception("display_schedule_complete failed")
                             
         # draw birthday data
         try:
-            display_birthday_widget(draw, image, 890, 600, data['birthday_data'])
+            y = display_birthday_widget(draw, image, 890, y, data['birthday_data'])
+            y += widget_spacing
         except:
             logger.exception("display_birthday_widget failed")
                     
         # draw quote data
         try:
-            data['quote_data'] = display_quote_widget(draw,  890, 810, data['quote_data'])
+            data['quote_data'], y = display_quote_widget(draw,  890, y, data['quote_data'])
+            y += widget_spacing
         except:
             logger.exception("display_quote_widget failed")
                     
         # draw room climate data
         try:
-            display_room_climate_widget(draw, image, 890, 970, [])
+            display_room_climate_widget(draw, image, 890, y, [])
         except:
             logger.exception("display_room_climate_widget failed")
                     

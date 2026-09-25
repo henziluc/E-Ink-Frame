@@ -36,6 +36,8 @@ def display_birthday_widget(draw, image, x_start, y_start, birthday_data):
   
     
     
+    return y    
+    
     
 def get_upcoming_birthdays(birthdays, amount=5):
     today = date.today()
