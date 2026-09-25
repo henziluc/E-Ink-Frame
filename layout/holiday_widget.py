@@ -42,11 +42,11 @@ def display_holiday(draw, image, df, x_start, y_start):
             image.paste(picture, (x_start, y))
             draw.text((x_start + picture_width + 5, y), row['location'], font=font_medium, fill=fill_main)
             y_end_photo = y + picture_height + 5
-            y += spacing_medium
-            draw.text((picture_width + picture_width + 5, y), f"{days} days to go", font=font_normal, fill=fill_main)
-            y += spacing_normal
-            draw.text((picture_width + picture_width + 5, y), row['start_date'].strftime("%d.%m.%Y"), font=font_normal, fill=fill_main)
-            y += y_end_photo
+            y += spacing_medium + 5
+            draw.text((x_start + picture_width + 5, y), f"{days} days to go", font=font_normal, fill=fill_main)
+            y += spacing_normal + 5
+            draw.text((x_start + picture_width + 5, y), row['start_date'].strftime("%d.%m.%Y"), font=font_normal, fill=fill_main)
+            y = y_end_photo
             next_holiday = 0
         # Other elements are printed smaller    
         else:
