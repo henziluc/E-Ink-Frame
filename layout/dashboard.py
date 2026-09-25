@@ -120,7 +120,7 @@ def make_dashbord(data):
                     
         # draw quote data
         try:
-            data['quote_data'] = display_quote_widget(draw,  890, 860, data['quote_data'])
+            data['quote_data'] = display_quote_widget(draw,  890, 830, data['quote_data'])
         except:
             logger.exception("display_quote_widget failed")
                     
