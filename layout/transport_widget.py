@@ -1,7 +1,7 @@
 from PIL import Image
 from pathlib import Path
 
-from .fonts import font_small, font_normal, font_medium, font_large, fill_main, spacing_small, spacing_normal, spacing_large
+from .fonts import font_very_small, font_small, font_normal, font_medium, font_large, fill_main, spacing_small, spacing_normal, spacing_large
 from .helpers import draw_centered_text
 
 BASE_DIR = Path(__file__).resolve().parent.parent
@@ -64,7 +64,7 @@ def display_schedule(draw, image, station_name, df, x_start, y_start):
             route_text = "white"
         #display route short name with a colored square around it
         draw.rounded_rectangle((x_start, y, x_start + sq_width, y + sq_height),radius=1,fill=route_bg)
-        draw.text((x_start + sq_width/2 , y + sq_height/2), route,font=font_small - 2,fill=route_text, anchor="mm")
+        draw.text((x_start + sq_width/2 , y + sq_height/2), route,font=font_very_small,fill=route_text, anchor="mm")
         #display trip headsign with out leading Winterthur
         headsign = row["trip_headsign"].replace("Winterthur, ", "")
         draw.text((x_start + 35, y),headsign ,font=font_small,fill=fill_main) 
