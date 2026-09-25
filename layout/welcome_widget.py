@@ -28,7 +28,7 @@ def display_welcome(draw, image, x_start, y_start, moon_data):
     else:
         text = 'Good Night'
         # Display moon phase icon if it's night time
-        display_moon_phase(image, 360, y_start + 10, moon_data)
+        display_moon_phase(image, 370, y_start + 10, moon_data)
         
     draw.text((x_start, y), text, font=font_massiv, fill=fill_main)
     y += spacing_massive + 5
@@ -44,7 +44,7 @@ def display_welcome(draw, image, x_start, y_start, moon_data):
 
     
 def display_moon_phase(image, x_start, y_start, moon_data):
-    icon_size = 60
+    icon_size = 50
     illumination = moon_data['illumination']
     
     if moon_data['phase'] == 'unkown':
