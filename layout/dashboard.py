@@ -114,7 +114,7 @@ def make_dashbord(data):
                             
         # draw birthday data
         try:
-            display_birthday_widget(draw, image, 890, 560, data['birthday_data'])
+            display_birthday_widget(draw, image, 890, 600, data['birthday_data'])
         except:
             logger.exception("display_birthday_widget failed")
                     
