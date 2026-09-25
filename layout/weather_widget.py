@@ -14,7 +14,7 @@ def display_weather_graph(draw, image, df_hourly, df_daily, x_start, y_start):
     y = y_start
     x = x_start
     graph_height = 120
-    graph_width = 800
+    graph_width = 760
     x_day_start = []
     
     now = datetime.datetime.now()
