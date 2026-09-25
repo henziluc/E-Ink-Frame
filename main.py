@@ -73,7 +73,7 @@ def main():
             logger.info("Data fetched successfully")
             
             for key, value in data.items():
-                print(f"{key}: {value}")
+                print(f"{key}: {value} \n")
             
             
             # 2. Create and display dashboard
