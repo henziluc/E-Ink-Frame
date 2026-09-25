@@ -47,7 +47,7 @@ def display_weather_graph(draw, image, df_hourly, df_daily, x_start, y_start):
     
     draw_weather_icons(image, df_from_now, x_start, y, sunrise, sunset, hour_spacing)
     
-    y +=  spacing_normal + 5
+    y +=  spacing_normal + 8
     
     # draw top horizontal line of the graph
     draw.line([(x_start, y), (x_start + graph_width, y)], fill= fill_main, width = 1)
@@ -84,9 +84,11 @@ def display_weather_graph(draw, image, df_hourly, df_daily, x_start, y_start):
         if  hour % 6 == 0:
             draw_centered_text(draw, hour_str + ':00',(x_start + i * hour_spacing - 20, y + 5, x_start + i * hour_spacing + 20, y + 15), font_small, fill_main)
 
-            
+    
     # draw bottom horizontal line of the graph       
     draw.line([(x_start, y), (x_start + graph_width, y)], fill= fill_main, width = 1)
+    
+    y -= graph_height
     
     draw_rain_graph(draw, df_from_now, x_start, y, graph_height, hour_spacing)
     
@@ -149,7 +151,7 @@ def draw_temperature_graph(draw, df_from_now, x_start, y_start, graph_height, ho
 def draw_weather_icons(image, df_from_now, x_start, y_start, sunrise, sunset, hour_spacing):
     
     # loop through the next 48h in 4h steps
-    for i in range(0, 49, 4):
+    for i in range(1, 49, 6):
          
         # define if day or night symbol  
         hour = df_from_now.loc[i, 'date'].hour
