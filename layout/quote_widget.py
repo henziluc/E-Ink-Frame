@@ -16,7 +16,7 @@ def display_quote_widget(draw, x_start, y_start, quote_data):
     lines = wrap_text_to_width(
         quote_text,
         font_small,
-        max_width=320,
+        max_width=300,
         draw=draw,
         max_lines=3
     )
@@ -25,7 +25,7 @@ def display_quote_widget(draw, x_start, y_start, quote_data):
         draw.text((x_start, y), line, font=font_small_italic, fill=fill_main)
         y += spacing_small
     
-    draw.text((x_start, y), quote['title'], font=font_small, fill=fill_main)
+    draw.text((x_start, y), '- ' + quote['title'], font=font_small, fill=fill_main)
     
                 
     return quote_data    
