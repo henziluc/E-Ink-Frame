@@ -36,7 +36,7 @@ font_small = ImageFont.truetype(
 
 font_very_small = ImageFont.truetype(
     FONT_DIR / "Inter_18pt-Thin.ttf",
-    18
+    19
 )
 
 

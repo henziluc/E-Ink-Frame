@@ -3,7 +3,7 @@ import math
 from PIL import Image
 from pathlib import Path
 
-from .fonts import font_very_small, font_small, font_medium, font_large, fill_main, fill_gray, spacing_small, spacing_normal, spacing_large
+from .fonts import font_small, font_medium, font_large, fill_main, fill_gray, spacing_small, spacing_normal, spacing_large
 from .helpers import draw_centered_text, draw_smooth_curve, draw_dotted_line
 
 BASE_DIR = Path(__file__).resolve().parent.parent

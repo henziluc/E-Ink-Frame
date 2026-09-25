@@ -38,7 +38,7 @@ def display_room_climate_widget(draw, image, x_start, y_start, df):
     y += icon_size + 5
     draw.text((x, y), str(latest_values["temperature"]) + '°C', font=font_normal, fill=fill_main)
     y += spacing_normal
-    draw.text((x, y), "Temperature", font=font_very_small, fill=fill_main)
+    draw.text((x, y), "Temp.", font=font_very_small, fill=fill_main)
     y += spacing_small
     diff_temperature = round(latest_values["temperature"] - compare_values ["temperature"])
     if diff_temperature > 0:
