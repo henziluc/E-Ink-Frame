@@ -2,35 +2,72 @@ import math
 import pandas as pd
 from datetime import datetime, timedelta
 import random
+from pathlib import Path
+from PIL import Image
 
 from .helpers import draw_smooth_curve
-from .fonts import font_small, font_normal, font_medium, font_large, fill_main, spacing_small, spacing_normal, spacing_medium, spacing_large
+from .fonts import font_small, font_normal, font_medium, font_large, fill_main, fill_gray, spacing_small, spacing_normal, spacing_medium, spacing_large
 
-def display_room_climate_widget(draw, x_start, y_start, df):
+BASE_DIR = Path(__file__).resolve().parent.parent
+path_temperatur = BASE_DIR / "assets" / "weather_symbol" / "thermometer.png"
+path_humidity = BASE_DIR / "assets" / "weather_symbol" / "waterdrop.png"
+path_CO2 = BASE_DIR / "assets" / "weather_symbol" / "co2.png"
+
+def display_room_climate_widget(draw, image, x_start, y_start, df):
     df = generate_test_data()
     y = y_start
+    x = x_start
+    icon_size = 40
     graph_height = 100
     graph_width = 1200 - x_start - 30  # Adjust the width based on your layout
         
     draw.text((x_start, y), "Room Climate", font=font_large, fill=fill_main)
     y += spacing_large
+    y_stored = y
+    latest_values = df[-1]
+    compare_values = df[-5]
     
     # Draw temperature
-    draw.text((x_start, y), "Temperature", font=font_normal, fill=fill_main)
-    y += spacing_normal + graph_height
-    draw_room_climate_graph(draw, x_start, y, graph_width, graph_height, df, "temperature", fill_main) 
-    y += spacing_small
+    icon_temperature = Image.open(path_temperatur).convert("RGBA")
+    icon_temperature = icon_temperature.resize((icon_size, icon_size))
+    x += icon_size + 5
+    image.paste(icon_temperature, (x, y), icon_temperature)
+    draw.text((x, y), str(latest_values["temperature"]) + '°C', font=font_normal, fill=fill_main)
+    x += spacing_normal
+    draw.text((x, y), "Temperature", font=font_small, fill=fill_main)
+    x += spacing_small
+    #y += spacing_normal + graph_height
+    #draw_room_climate_graph(draw, x_start, y, graph_width, graph_height, df, "temperature", fill_main)
+    draw.line([(x + 90, y_stored), (x + 90, y)], fill= fill_gray, width = 1) 
+    x += 100
+    y = y_stored
     
     # Draw Humidity
-    draw.text((x_start, y), "Humidity", font=font_normal, fill=fill_main)
-    y += spacing_normal + graph_height
-    draw_room_climate_graph(draw, x_start, y, graph_width, graph_height, df, "humidity", fill_main)
-    y += spacing_small
+    icon_humidity = Image.open(path_humidity).convert("RGBA")
+    icon_humidity = icon_humidity.resize((icon_size, icon_size))
+    image.paste(icon_humidity, (x, y), icon_humidity)
+    x += icon_size + 5
+    draw.text((x, y), str(latest_values["humidity"]) + '%', font=font_small, fill=fill_main)
+    x += spacing_normal
+    draw.text((x, y), "Humidity", font=font_small, fill=fill_main)
+    #y += spacing_normal + graph_height
+    #draw_room_climate_graph(draw, x_start, y, graph_width, graph_height, df, "humidity", fill_main)
+    draw.line([(x + 90, y_stored), (x + 90, y)], fill= fill_gray, width = 1) 
+    x += 100
+    y = y_stored
         
     # Draw CO2
-    draw.text((x_start, y), "CO2", font=font_normal, fill=fill_main)
-    y += spacing_normal + graph_height
-    draw_room_climate_graph(draw, x_start, y, graph_width, graph_height, df, "co2", fill_main)
+    icon_CO2 = Image.open(path_CO2).convert("RGBA")
+    icon_CO2 = icon_CO2.resize((icon_size, icon_size))
+    image.paste(icon_CO2, (x, y), icon_CO2)
+    x += icon_size + 5
+    draw.text((x, y), str(latest_values["c02"]) + 'ppm', font=font_small, fill=fill_main)
+    x += spacing_normal
+    draw.text((x, y), "CO2", font=font_small, fill=fill_main)
+    x += spacing_small
+
+    #y += spacing_normal + graph_height
+    #draw_room_climate_graph(draw, x_start, y, graph_width, graph_height, df, "co2", fill_main)
     
     
     
@@ -39,7 +76,7 @@ def draw_room_climate_graph(draw, x_start, y_start, graph_width, graph_height, d
     offset = 3
     positions = []
     datapoints = 12
-    data = data.tail(datapoints + 1)  # Get the last 12 data points
+    data = data[-(datapoints + 1):]  # Get the last 12 data points
 
     if len(data) < 2:
         return  # Not enough data to draw a graph

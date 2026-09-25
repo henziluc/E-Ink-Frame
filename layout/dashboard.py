@@ -96,11 +96,11 @@ def make_dashbord(data):
         except:
             logger.exception("display_health_widget failed")
         
-        draw.line([(335, 1010), (335, 1550)], fill= fill_gray, width = 1)
+        draw.line([(340, 1010), (340, 1550)], fill= fill_gray, width = 1)
                     
         # draw news data
         try:
-            display_news_widget(draw, image, 365, 990, data['news_data'])
+            display_news_widget(draw, image, 370, 990, data['news_data'])
         except:
             logger.exception("display_news_widget failed")
         
@@ -125,7 +125,7 @@ def make_dashbord(data):
             logger.exception("display_quote_widget failed")
                     
         # draw room climate data
-        #display_room_climate_widget(draw, 1100, 870, [])
+        display_room_climate_widget(draw, image, 1100, 870, [])
         
         # draw software status
         display_software_status(draw, image, 1170, 1575, data['status'])
