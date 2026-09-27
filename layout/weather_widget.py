@@ -205,7 +205,7 @@ def draw_rain_graph(draw, df_from_now, x_start, y_start, graph_height, hour_spac
             y = y_start + graph_height - i * y_spacing
             
             # draw every second rain value
-            rain = round(rain_max / (number_of_y_values - 1 * i, 1))
+            rain = round(rain_max / (number_of_y_values - 1) * i, 1)
             print(rain)
             if  rain > 0:
                 draw.text((x_start + hour_spacing * 48 + 2, y), str(rain), font=font_small, fill=fill_main, anchor= 'lm')
