@@ -85,7 +85,7 @@ def display_weather_graph(draw, image, df_hourly, df_daily, x_start, y_start):
         if  hour % 6 == 0:
             draw_centered_text(draw, hour_str + ':00',(x + i * hour_spacing - 20, y + 5, x + i * hour_spacing + 20, y + 15), font_small, fill_main)
 
-
+    y -= graph_height
     number_of_y_values = draw_temperature_graph(draw, df_from_now, x, y, graph_height, hour_spacing)
     
     draw_rain_graph(draw, df_from_now, x, y, graph_height, hour_spacing, number_of_y_values)
