@@ -185,8 +185,7 @@ def draw_rain_graph(draw, df_from_now, x_start, y_start, graph_height, hour_spac
     rain_max = max(math.ceil(df_from_now['precipitation'].max()), 10)
     rain_spacing = (graph_height - offset) / rain_max
     y_spacing = graph_height / (number_of_y_values - 1)
-    print(rain_max)
-    print(number_of_y_values)
+
     
     # draw rain bargraph
     for i in range(0, 49):
@@ -205,7 +204,7 @@ def draw_rain_graph(draw, df_from_now, x_start, y_start, graph_height, hour_spac
             
             # draw every second rain value
             rain = round(rain_max / (number_of_y_values - 1) * i, 1)
-            print(rain)
+
             if  rain > 0:
                 draw.text((x_start + hour_spacing * 48 + 2, y), str(rain), font=font_small, fill=fill_main, anchor= 'lm')
             
