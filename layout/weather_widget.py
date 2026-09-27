@@ -91,7 +91,7 @@ def display_weather_graph(draw, image, df_hourly, df_daily, x_start, y_start):
     
     y -= graph_height
     
-    number_of_y_values = draw_temperature_graph(draw, df_from_now, x, y, graph_height, hour_spacing)
+    #number_of_y_values = draw_temperature_graph(draw, df_from_now, x, y, graph_height, hour_spacing)
     
     #draw_rain_graph(draw, df_from_now, x, y, graph_height, hour_spacing, number_of_y_values)
     
