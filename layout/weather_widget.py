@@ -156,9 +156,9 @@ def draw_temperature_graph(draw, df_from_now, x_start, y_start, graph_height, ho
         
 
 def draw_weather_icons(image, df_from_now, x_start, y_start, sunrise, sunset, hour_spacing):
-    
+    icon_size = 40
     # loop through the next 48h in 4h steps
-    for i in range(1, 49, 6):
+    for i in range(1, 49):
          
         # define if day or night symbol  
         hour = df_from_now.loc[i, 'date'].hour
@@ -167,15 +167,16 @@ def draw_weather_icons(image, df_from_now, x_start, y_start, sunrise, sunset, ho
         else:
             day = False
         
-        # get icon path and print it    
-        icon_path = get_weather_icon(df_from_now.loc[i,'weather_code'], day)
-        icon = Image.open(icon_path).convert("RGBA")
-        icon = icon.resize((40, 40))
+        # get icon path and print it  
+        if hour % 6 == 0:  
+            icon_path = get_weather_icon(df_from_now.loc[i,'weather_code'], day)
+            icon = Image.open(icon_path).convert("RGBA")
+            icon = icon.resize((icon_size, icon_size))
 
-        x = int((x_start + i * hour_spacing) - icon.width / 2)
-        y = int(y_start)
-        
-        image.paste(icon, (x, y), icon)
+            x = int((x_start + i * hour_spacing) - icon_size / 2)
+            y = int(y_start)
+            
+            image.paste(icon, (x, y), icon)
 
 
 def draw_rain_graph(draw, df_from_now, x_start, y_start, graph_height, hour_spacing, number_of_y_values):
@@ -184,7 +185,7 @@ def draw_rain_graph(draw, df_from_now, x_start, y_start, graph_height, hour_spac
     # calculate spacing per mm precipitation
     rain_max = max(math.ceil(df_from_now['precipitation'].max()), 10)
     rain_spacing = (graph_height - offset) / rain_max
-    y_spacing = graph_height / number_of_y_values
+    y_spacing = graph_height / (number_of_y_values - 1)
     print(rain_max)
     print(number_of_y_values)
     
@@ -204,7 +205,7 @@ def draw_rain_graph(draw, df_from_now, x_start, y_start, graph_height, hour_spac
             y = y_start + graph_height - i * y_spacing
             
             # draw every second rain value
-            rain = round(rain_max / number_of_y_values * i, 1)
+            rain = round(rain_max / (number_of_y_values - 1 * i, 1))
             print(rain)
             if  rain > 0:
                 draw.text((x_start + hour_spacing * 48 + 2, y), str(rain), font=font_small, fill=fill_main, anchor= 'lm')
