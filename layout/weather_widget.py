@@ -115,12 +115,13 @@ def draw_temperature_graph(draw, df_from_now, x_start, y_start, graph_height, ho
     
     # calculate spacing per degree
     temp_min = math.floor(df_from_now['temperature_2m'].min())
-    temp_min = temp_min - temp_min % 5
+    temp_min = math.floor(temp_min / 5) * 5
+
     temp_max = math.ceil(df_from_now['temperature_2m'].max())
-    temp_max = temp_max + 5 - temp_max % 5
+    temp_max = math.ceil(temp_max / 5) * 5
     temp_delta = math.ceil(temp_max - temp_min)
     degrees_spacing = (graph_height - offset * 2) / temp_delta
-    
+    print(degrees_spacing)
     # calculate x and y position of every hourly temperature value
     for i in range(0, 49):
         # define X positions of curve
@@ -142,6 +143,7 @@ def draw_temperature_graph(draw, df_from_now, x_start, y_start, graph_height, ho
                 
         # draw every fifth temperature value
         temp = temp_max - i
+        print(temp)
         if temp % 5 == 0:
             draw.text((x_start - 2, y), str(temp), font=font_small, fill=fill_main, anchor= 'rm')
             
