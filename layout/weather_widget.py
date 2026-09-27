@@ -121,10 +121,6 @@ def draw_temperature_graph(draw, df_from_now, x_start, y_start, graph_height, ho
     temp_max = math.ceil(temp_max / 5) * 5
     temp_delta = math.ceil(temp_max - temp_min)
     degrees_spacing = (graph_height - offset * 2) / temp_delta
-    print(temp_min)
-    print(temp_max)
-    print(temp_delta)
-    print(degrees_spacing)
     # calculate x and y position of every hourly temperature value
     for i in range(0, 49):
         # define X positions of curve
@@ -154,7 +150,7 @@ def draw_temperature_graph(draw, df_from_now, x_start, y_start, graph_height, ho
         if temp % 5 == 0:
             draw_dotted_line(draw,(x_start, y ),(x_start + hour_spacing * 48, y), dot_length=2, gap=8, fill=fill_main, width=1)
         
-        return degrees_spacing
+    return graph_height / degrees_spacing / 5
         
 
 def draw_weather_icons(image, df_from_now, x_start, y_start, sunrise, sunset, hour_spacing):
