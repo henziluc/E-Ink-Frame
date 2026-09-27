@@ -3,7 +3,7 @@ import re
 from pathlib import Path
 
 import requests
-from PIL import Image
+from PIL import Image, ImageOps 
 from io import BytesIO
 
 from logger import logger
@@ -17,7 +17,10 @@ UNSPLASH_ACCESS_KEY = os.getenv("UNSPLASH_ACCESS_KEY")
 
 PHOTO_FOLDER = Path("assets/holiday_photos")
 
-PHOTO_SIZE = (100, 150)
+photo_width = 110
+photo_height = round(photo_width * 1.3)
+
+PHOTO_SIZE = (photo_width, photo_height)
 
 
 # --------------------------------------------------
@@ -127,9 +130,11 @@ def download_photo(photo):
         image = image.convert("RGB")
 
         # Crop/resize to exactly 800x533
-        image = image.resize(
+        image = ImageOps.fit(
+            image,
             PHOTO_SIZE,
-            Image.Resampling.LANCZOS
+            method=Image.Resampling.LANCZOS,
+            centering=(0.5, 0.5)
         )
 
         return image
