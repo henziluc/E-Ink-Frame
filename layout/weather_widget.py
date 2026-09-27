@@ -91,9 +91,9 @@ def display_weather_graph(draw, image, df_hourly, df_daily, x_start, y_start):
     
     y -= graph_height
     
-    y_spacing = draw_temperature_graph(draw, df_from_now, x, y, graph_height, hour_spacing)
+    number_of_y_values = draw_temperature_graph(draw, df_from_now, x, y, graph_height, hour_spacing)
     
-    draw_rain_graph(draw, df_from_now, x, y, graph_height, hour_spacing, y_spacing)
+    draw_rain_graph(draw, df_from_now, x, y, graph_height, hour_spacing, number_of_y_values)
     
 
 def draw_daily_wether_decription(draw, df_daily, x_start, y_start, x_end, day):
@@ -136,6 +136,7 @@ def draw_temperature_graph(draw, df_from_now, x_start, y_start, graph_height, ho
     # draw temperature curve    
     draw_smooth_curve(draw, positions_rain, fill_main, 2)
     
+    number_of_y_values = 0
     # draw temperature scale
     for i in range(0, temp_delta + 1):
         y = y_start + offset + i * degrees_spacing
@@ -144,12 +145,14 @@ def draw_temperature_graph(draw, df_from_now, x_start, y_start, graph_height, ho
         temp = temp_max - i
         if temp % 5 == 0:
             draw.text((x_start - 2, y), str(temp), font=font_small, fill=fill_main, anchor= 'rm')
+            number_of_y_values += 1
             
         # draw dotted helper lines at every 5°C step
         if temp % 5 == 0 and i != 0 and i != temp_delta:
             draw_dotted_line(draw,(x_start, y ),(x_start + hour_spacing * 48, y), dot_length=2, gap=8, fill=fill_main, width=1)
+            
         
-    return graph_height / degrees_spacing * 5
+    return number_of_y_values
         
 
 def draw_weather_icons(image, df_from_now, x_start, y_start, sunrise, sunset, hour_spacing):
@@ -175,14 +178,15 @@ def draw_weather_icons(image, df_from_now, x_start, y_start, sunrise, sunset, ho
         image.paste(icon, (x, y), icon)
 
 
-def draw_rain_graph(draw, df_from_now, x_start, y_start, graph_height, hour_spacing, y_spacing):
+def draw_rain_graph(draw, df_from_now, x_start, y_start, graph_height, hour_spacing, number_of_y_values):
     offset = 0
     
     # calculate spacing per mm precipitation
     rain_max = max(math.ceil(df_from_now['precipitation'].max()), 10)
     rain_spacing = (graph_height - offset) / rain_max
-    number_of_y_values = (graph_height / y_spacing) + 1
-    
+    y_spacing = graph_height / number_of_y_values
+    print(rain_max)
+    print(number_of_y_values)
     
     # draw rain bargraph
     for i in range(0, 49):
@@ -200,7 +204,8 @@ def draw_rain_graph(draw, df_from_now, x_start, y_start, graph_height, hour_spac
             y = y_start + graph_height - i * y_spacing
             
             # draw every second rain value
-            rain = round(rain_max /number_of_y_values * i, 1)
+            rain = round(rain_max / number_of_y_values * i, 1)
+            print(rain)
             if  rain > 0:
                 draw.text((x_start + hour_spacing * 48 + 2, y), str(rain), font=font_small, fill=fill_main, anchor= 'lm')
             
