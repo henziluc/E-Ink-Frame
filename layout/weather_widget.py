@@ -144,7 +144,7 @@ def draw_temperature_graph(draw, df_from_now, x_start, y_start, graph_height, ho
         # draw every fifth temperature value
         temp = temp_max - i
         if temp % 5 == 0:
-            draw.text((x_start - 2, y), str(temp), font=font_small, fill=fill_main, anchor= 'rm')
+            draw.text((x_start - 5, y), str(temp) + '°', font=font_small, fill=fill_main, anchor= 'rm')
             number_of_y_values += 1
             
         # draw dotted helper lines at every 5°C step
@@ -206,7 +206,7 @@ def draw_rain_graph(draw, df_from_now, x_start, y_start, graph_height, hour_spac
             rain = round(rain_max / (number_of_y_values - 1) * i, 1)
 
             if  rain > 0:
-                draw.text((x_start + hour_spacing * 48 + 2, y), str(rain), font=font_small, fill=fill_main, anchor= 'lm')
+                draw.text((x_start + hour_spacing * 48 + 5, y), str(rain), font=font_small, fill=fill_main, anchor= 'lm')
             
     draw.line([(x_start + hour_spacing * 48, y_start),(x_start + hour_spacing * 48, y_start + graph_height)], fill= fill_main, width = 1)
 
