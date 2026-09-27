@@ -121,6 +121,9 @@ def draw_temperature_graph(draw, df_from_now, x_start, y_start, graph_height, ho
     temp_max = math.ceil(temp_max / 5) * 5
     temp_delta = math.ceil(temp_max - temp_min)
     degrees_spacing = (graph_height - offset * 2) / temp_delta
+    print(temp_min)
+    print(temp_max)
+    print(temp_delta)
     print(degrees_spacing)
     # calculate x and y position of every hourly temperature value
     for i in range(0, 49):
@@ -198,7 +201,7 @@ def draw_rain_graph(draw, df_from_now, x_start, y_start, graph_height, hour_spac
     
     # draw rain scale
     if rain_max > 0:
-        for i in range(0, number_of_y_values + 1):
+        for i in range(0, int(number_of_y_values) + 1):
             y = y_start + graph_height - i * y_spacing
             
             # draw every second rain value
