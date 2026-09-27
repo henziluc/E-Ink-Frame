@@ -201,7 +201,7 @@ def draw_rain_graph(draw, df_from_now, x_start, y_start, graph_height, hour_spac
     
     # draw rain scale
     if rain_max > 0:
-        for i in range(0, int(number_of_y_values) + 1):
+        for i in range(0, int(number_of_y_values)):
             y = y_start + graph_height - i * y_spacing
             
             # draw every second rain value
