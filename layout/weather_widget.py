@@ -93,7 +93,7 @@ def display_weather_graph(draw, image, df_hourly, df_daily, x_start, y_start):
     
     number_of_y_values = draw_temperature_graph(draw, df_from_now, x, y, graph_height, hour_spacing)
     
-    draw_rain_graph(draw, df_from_now, x, y, graph_height, hour_spacing, number_of_y_values)
+    #draw_rain_graph(draw, df_from_now, x, y, graph_height, hour_spacing, number_of_y_values)
     
 
 def draw_daily_wether_decription(draw, df_daily, x_start, y_start, x_end, day):
@@ -149,8 +149,8 @@ def draw_temperature_graph(draw, df_from_now, x_start, y_start, graph_height, ho
             
         # draw dotted helper lines at every 5°C step
         if temp % 5 == 0 and i != 0 and i != temp_delta:
-            #draw_dotted_line(draw,(x_start + 5, y ),(x_start + hour_spacing * 48, y), dot_length=2, gap=8, fill=fill_main, width=1)
-            print(temp)       
+            draw_dotted_line(draw,(x_start + 5, y ),(x_start + hour_spacing * 48, y), dot_length=2, gap=8, fill=fill_main, width=1)
+    
     return number_of_y_values
         
 
