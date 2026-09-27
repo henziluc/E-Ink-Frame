@@ -142,7 +142,6 @@ def draw_temperature_graph(draw, df_from_now, x_start, y_start, graph_height, ho
                 
         # draw every fifth temperature value
         temp = temp_max - i
-        print(temp)
         if temp % 5 == 0:
             draw.text((x_start - 2, y), str(temp), font=font_small, fill=fill_main, anchor= 'rm')
             
@@ -150,7 +149,7 @@ def draw_temperature_graph(draw, df_from_now, x_start, y_start, graph_height, ho
         if temp % 5 == 0:
             draw_dotted_line(draw,(x_start, y ),(x_start + hour_spacing * 48, y), dot_length=2, gap=8, fill=fill_main, width=1)
         
-    return graph_height / degrees_spacing / 5
+    return graph_height / degrees_spacing * 5
         
 
 def draw_weather_icons(image, df_from_now, x_start, y_start, sunrise, sunset, hour_spacing):
@@ -201,7 +200,7 @@ def draw_rain_graph(draw, df_from_now, x_start, y_start, graph_height, hour_spac
             y = y_start + graph_height - i * y_spacing
             
             # draw every second rain value
-            rain = rain_max /number_of_y_values * i
+            rain = round(rain_max /number_of_y_values * i)
             if  rain > 0:
                 draw.text((x_start + hour_spacing * 48 + 2, y), str(rain), font=font_small, fill=fill_main, anchor= 'lm')
             
