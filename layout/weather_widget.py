@@ -91,9 +91,9 @@ def display_weather_graph(draw, image, df_hourly, df_daily, x_start, y_start):
     
     y -= graph_height
     
-    #number_of_y_values = draw_temperature_graph(draw, df_from_now, x, y, graph_height, hour_spacing)
+    number_of_y_values = draw_temperature_graph(draw, df_from_now, x, y, graph_height, hour_spacing)
     
-    #draw_rain_graph(draw, df_from_now, x, y, graph_height, hour_spacing, number_of_y_values)
+    draw_rain_graph(draw, df_from_now, x, y, graph_height, hour_spacing, number_of_y_values)
     
 
 def draw_daily_wether_decription(draw, df_daily, x_start, y_start, x_end, day):
@@ -134,7 +134,7 @@ def draw_temperature_graph(draw, df_from_now, x_start, y_start, graph_height, ho
         
 
     # draw temperature curve    
-    draw_smooth_curve(draw, positions_rain, fill_main, 2)
+    #draw_smooth_curve(draw, positions_rain, fill_main, 2)
     
     number_of_y_values = 0
     # draw temperature scale
