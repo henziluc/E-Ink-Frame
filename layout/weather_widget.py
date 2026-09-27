@@ -85,15 +85,14 @@ def display_weather_graph(draw, image, df_hourly, df_daily, x_start, y_start):
         if  hour % 6 == 0:
             draw_centered_text(draw, hour_str + ':00',(x + i * hour_spacing - 20, y + 5, x + i * hour_spacing + 20, y + 15), font_small, fill_main)
 
-    
-    # draw bottom horizontal line of the graph       
-    draw.line([(x, y), (x + graph_width, y)], fill= fill_main, width = 1)
-    
-    y -= graph_height
-    
+
     number_of_y_values = draw_temperature_graph(draw, df_from_now, x, y, graph_height, hour_spacing)
     
     draw_rain_graph(draw, df_from_now, x, y, graph_height, hour_spacing, number_of_y_values)
+    
+    y += graph_height
+    # draw bottom horizontal line of the graph       
+    draw.line([(x, y), (x + graph_width, y)], fill= fill_main, width = 1)
     
 
 def draw_daily_wether_decription(draw, df_daily, x_start, y_start, x_end, day):
@@ -137,7 +136,7 @@ def draw_temperature_graph(draw, df_from_now, x_start, y_start, graph_height, ho
     draw_smooth_curve(draw, positions_rain, fill_main, 2)
     
     number_of_y_values = 0
-    """
+    
     # draw temperature scale
     for i in range(0, temp_delta + 1):
         y = y_start + offset + i * degrees_spacing
@@ -151,7 +150,7 @@ def draw_temperature_graph(draw, df_from_now, x_start, y_start, graph_height, ho
         # draw dotted helper lines at every 5°C step
         if temp % 5 == 0 and i != 0 and i != temp_delta:
             draw_dotted_line(draw,(x_start + 5, y ),(x_start + hour_spacing * 48, y), dot_length=2, gap=8, fill=fill_main, width=1)
-    """
+
     return number_of_y_values
         
 
