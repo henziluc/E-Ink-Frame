@@ -1,0 +1,14 @@
+Pillow
+pandas
+psutil
+qrcode
+requests
+requests-cache
+retry-requests
+python-dotenv
+openmeteo-requests
+garminconnect
+gtfs-realtime-bindings
+sensirion-i2c-driver
+sensirion-i2c-scd4x
+sensirion-driver-adapters
