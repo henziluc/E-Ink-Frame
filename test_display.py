@@ -13,7 +13,7 @@ from display.e_ink_lib import epd13in3E
 epd = epd13in3E.EPD()
 
 print("Initializing display...")
-epd.init()
+epd.Init()
 
 print(f"Display size: {epd.width} x {epd.height}")
 
