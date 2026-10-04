@@ -8,17 +8,17 @@ NEWS_FEEDS = {
     ],
 
     "world": [
-        "https://feeds.bbci.co.uk/news/world/rss.xml",
+        "https://www.srf.ch/news/bnf/rss/1922",
     ],
 
     "random": [
-        "https://feeds.bbci.co.uk/news/science_and_environment/rss.xml",
-        "https://feeds.bbci.co.uk/news/technology/rss.xml",
-        "https://feeds.bbci.co.uk/news/business/rss.xml",
-        "https://feeds.bbci.co.uk/news/entertainment_and_arts/rss.xml",
+        "https://www.srf.ch/news/bnf/rss/630",
     ],
     "sport": [
-        "https://feeds.bbci.co.uk/sport/rss.xml",
+        "https://www.srf.ch/news/bnf/rss/718",
+    ],
+    "economie": [
+        "https://www.srf.ch/news/bnf/rss/1026",
     ]
 }
 
@@ -39,6 +39,9 @@ def get_news():
         ),
         "sport": parse_feed(
             get_feed(NEWS_FEEDS["sport"][0])
+        ),
+        "economie": parse_feed(
+            get_feed(NEWS_FEEDS["economie"][0])
         )
     }
     
