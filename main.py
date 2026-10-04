@@ -88,7 +88,22 @@ def main():
             logger.info("Data fetched successfully")
             
             for key, value in data.items():
-                print(f"{key}: {value} \n")
+                print(f"{key}:")
+
+                if isinstance(value, dict):
+                    for subkey, subvalue in value.items():
+                        print(f"  {subkey}: {subvalue}")
+
+                elif isinstance(value, list):
+                    for element in value:
+                        if isinstance(element, dict):
+                            for subkey, subvalue in element.items():
+                                print(f"  {subkey}: {subvalue}")
+                        else:
+                            print(f"  {element}")
+
+                else:
+                    print(f"  {value}")
             
             logger.info(f"Status: {data['status']}")
             
