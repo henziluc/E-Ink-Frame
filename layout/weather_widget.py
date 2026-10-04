@@ -14,7 +14,7 @@ def display_weather_graph(draw, image, df_hourly, df_daily, x_start, y_start):
     y = y_start
     x = x_start
     graph_height = 120
-    graph_width = 720
+    graph_width = 710
     x_day_start = []
     
     now = datetime.datetime.now()
@@ -23,7 +23,7 @@ def display_weather_graph(draw, image, df_hourly, df_daily, x_start, y_start):
     # Draw widget title
     draw.text((x, y), 'Weather Forecast', font=font_large, fill=fill_main)
     y += spacing_large
-    x += 30
+    x += 35
     # calulate hour spacing on the graph
     hour_spacing = graph_width / 48
     for i in range(0, 49):
@@ -82,7 +82,7 @@ def display_weather_graph(draw, image, df_hourly, df_daily, x_start, y_start):
             #draw.line([(x + i * hour_spacing, y), (x + i * hour_spacing, y - 5)], fill= fill_main, width = 1)
         
         # Draw text at every second hour    
-        if  hour % 6 == 0:
+        if  hour % 6 == 0 and i != 0:
             draw_centered_text(draw, hour_str + ':00',(x + i * hour_spacing - 20, y + 8, x + i * hour_spacing + 20, y + 18), font_small, fill_main)
 
     y -= graph_height
