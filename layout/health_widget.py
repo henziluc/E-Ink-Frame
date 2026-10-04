@@ -37,11 +37,11 @@ def display_health_widget(draw, image, x_start, y_start, health_data):
     
     y += spacing_large
     if 'Luca' in health_data:
-        if health_data['Luca'] is not None and health_data['Luca']['last updated'] != 0:
+        if health_data['Luca'] is not None and len(health_data['Luca']) > 1:
             y_1 = display_personal_health(draw, image, x_start, y, health_data['Luca'], "Luca")
           
     if 'Jojo' in health_data:
-        if health_data['Jojo'] is not None and health_data['Jojo']['last updated'] != 0:
+        if health_data['Jojo'] is not None and len(health_data['Jojo']) > 1:
             y_2 = display_personal_health(draw, image, x_start + 160, y, health_data['Jojo'], "Jojo")
             
     y_max = max(y_1, y_2)
