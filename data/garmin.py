@@ -110,7 +110,7 @@ def load_health_data(email=None, password=None, person=None):
     formatted_datetime = now.strftime("%Y-%m-%d %H:%M:%S")
     
     healt_dict = {
-        "last_updated": formatted_datetime,
+        "last updated": formatted_datetime,
         "steps": steps,
         "step_goal": step_goal,
         "body_battery": body_battery,
