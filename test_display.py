@@ -39,8 +39,9 @@ print("7 - about to display")
 
 epd.display(epd.getbuffer(image))
 
-print("8 - display done")
 
+print("8 - display done")
+epd.Clear()
 epd.sleep()
 
 print("9 - finished")
