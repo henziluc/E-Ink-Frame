@@ -43,7 +43,7 @@ def display_news_widget(draw, image, x_start, y_start, news_data):
             line_counter -= 1
         
         line_counter += 3    
-        y += 17 + (line_counter * spacing_small)  # Add extra space after each news item
+        y += 15 + (line_counter * spacing_small)  # Add extra space after each news item
         
         
         
