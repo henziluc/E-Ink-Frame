@@ -7,6 +7,19 @@ garmin_luca = None
 garmin_jojo = None
 
 
+
+'''
+Data to add:
+- Intensity minutes     get_weekly_intensity_minutes(start, end)
+- Weekly stress         get_weekly_stress(end, weeks)
+- Training readiness    get_training_readiness(date)
+- Training status       get_training_status(date)
+- Training load         get_training_load_data(date)
+- VO₂ Max               get_max_metrics(date)
+'''
+
+
+
 def get_health_data(health_dict):
     global request_toggle
     
