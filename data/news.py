@@ -18,7 +18,7 @@ NEWS_FEEDS = {
         "https://www.srf.ch/news/bnf/rss/718",
     ],
     "economie": [
-        "https://www.srf.ch/news/bnf/rss/1026",
+        "https://www.srf.ch/news/bnf/rss/1926",
     ]
 }
 
