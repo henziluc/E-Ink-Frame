@@ -97,14 +97,11 @@ def load_health_data(email=None, password=None, person=None):
      
     intensity_minutes = client.get_weekly_intensity_minutes(today.isoformat(), today.isoformat())
     print(f"Intensity minutes for {person}: {intensity_minutes}")
+    intensity_minutes = intensity_minutes['moderateValue'] + intensity_minutes['vigorousValue'] * 2
     stress_data = client.get_all_day_stress(today.isoformat())
+    stress_data = stress_data['avgStressLevel']
     print(f"All-day stress for {person}: {stress_data}")
-    training_readiness_data = client.get_training_readiness(today.isoformat())
-    print(f"Training readiness for {person}: {training_readiness_data}")
-    training_status_data = client.get_training_status(today.isoformat())
-    print(f"Training status for {person}: {training_status_data}")
-    vo2_max_data = client.get_max_metrics(today.isoformat())
-    print(f"VO₂ Max for {person}: {vo2_max_data}")
+
 
     now = datetime.now()
     formatted_datetime = now.strftime("%Y-%m-%d %H:%M:%S")
@@ -117,6 +114,8 @@ def load_health_data(email=None, password=None, person=None):
         "sleep_hours": sleep_hours,
         "resting_hr": resting_hr,
         "sleep_score": sleep_score,
+        "intensity_minutes": intensity_minutes,
+        "stress": stress_data,
         "activity_type": activity_type,
         "activity_distance": activity_distance,
         "activity_duration": activity_duration,
