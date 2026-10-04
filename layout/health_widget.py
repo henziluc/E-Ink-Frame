@@ -20,6 +20,8 @@ fire_icon_path = BASE_DIR / "assets" / "sport_symbol" / "fire.png"
 arrows_icon_path = BASE_DIR / "assets" / "sport_symbol" / "arrows.png"
 hourglass_icon_path = BASE_DIR / "assets" / "sport_symbol" / "hourglass.png"
 speed_icon_path = BASE_DIR / "assets" / "sport_symbol" / "gauge.png"
+stress_icon_path = BASE_DIR / "assets" / "sport_symbol" / "stress.png"
+intensity_icon_path = BASE_DIR / "assets" / "sport_symbol" / "intensity.png"
 
 
 
@@ -122,6 +124,23 @@ def display_personal_health(draw, image, x_start, y_start, health_data, name):
 
     y += spacing_small
     
+    
+    # Draw intensity minutes
+    intensity_icon = Image.open(intensity_icon_path).convert("RGBA")
+    intensity_icon = intensity_icon.resize((icon_size, icon_size))
+    image.paste(intensity_icon, (x_start, y), intensity_icon)
+    draw.text((x_start + icon_size + 5, y), str(health_data['intensity_minutes']) + ' / ' + str(health_data['intensity_minutes_goal']) + 'min', font = font_small, fill = fill_main )
+    
+    y += spacing_small
+    
+    # Draw stress
+    stress_icon = Image.open(stress_icon_path).convert("RGBA")
+    stress_icon = stress_icon.resize((icon_size, icon_size))
+    image.paste(stress_icon, (x_start, y), stress_icon)
+    draw.text((x_start + icon_size + 5, y), str(health_data['stress']) + ' / 100', font = font_small, fill = fill_main )
+
+    y += spacing_small
+
     # Draw Activity
     activity_type = health_data['activity_type']
     
