@@ -48,7 +48,7 @@ def display_weather_graph(draw, image, df_hourly, df_daily, x_start, y_start):
     
     draw_weather_icons(image, df_from_now, x, y, sunrise, sunset, hour_spacing)
     
-    y +=  spacing_normal + 8
+    y +=  spacing_normal + 10
     
     # draw top horizontal line of the graph
     draw.line([(x, y), (x + graph_width, y)], fill= fill_main, width = 1)
@@ -83,7 +83,7 @@ def display_weather_graph(draw, image, df_hourly, df_daily, x_start, y_start):
         
         # Draw text at every second hour    
         if  hour % 6 == 0:
-            draw_centered_text(draw, hour_str + ':00',(x + i * hour_spacing - 20, y + 5, x + i * hour_spacing + 20, y + 15), font_small, fill_main)
+            draw_centered_text(draw, hour_str + ':00',(x + i * hour_spacing - 20, y + 8, x + i * hour_spacing + 20, y + 18), font_small, fill_main)
 
     y -= graph_height
     number_of_y_values = draw_temperature_graph(draw, df_from_now, x, y, graph_height, hour_spacing)
