@@ -38,10 +38,10 @@ def main():
         "departures_etzberg": None,
         "health_data": {
             "Luca": {
-                "last updated": 0
+                "last updated": datetime.now()
                 },
             "Jojo": {
-                "last updated": 0
+                "last updated": datetime.now()
                 }
         },
         "moon_data": None,

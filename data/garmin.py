@@ -12,9 +12,9 @@ garmin_jojo = None
 
 
 def get_health_data(health_dict):
-    if health_dict['Luca'] is None:
+    if len(health_dict['Luca']) == 1:
         request_luca = True
-    elif health_dict['Jojo'] is None:
+    elif len(health_dict['Jojo']) == 1:
         request_luca = False
     if health_dict['Luca']['last updated'] <= health_dict['Jojo']['last updated']:
         request_luca = True
@@ -105,10 +105,10 @@ def load_health_data(email=None, password=None, person=None):
 
 
     now = datetime.now()
-    formatted_datetime = now.strftime("%Y-%m-%d %H:%M:%S")
+    
     
     healt_dict = {
-        "last updated": formatted_datetime,
+        "last updated": now,
         "steps": steps,
         "step_goal": step_goal,
         "body_battery": body_battery,
