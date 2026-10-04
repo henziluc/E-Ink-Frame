@@ -29,7 +29,7 @@ def display_birthday_widget(draw, image, x_start, y_start, birthday_data):
         draw.text((x_start + icon_size + 5, y), name , font = font_small, fill = fill_main )
         draw.text((x_start + icon_size + 100, y), birthday_date , font = font_small, fill = fill_main )
         if int(days_until) < 2:
-            draw.text((x_start + icon_size + 170, y), 'in' + days_until + ' days' , font = font_small, fill = fill_main )
+            draw.text((x_start + icon_size + 170, y), 'in ' + days_until + ' day' , font = font_small, fill = fill_main )
         else:
             draw.text((x_start + icon_size + 170, y), 'in ' + days_until + ' days' , font = font_small, fill = fill_main )
         y += spacing_small
