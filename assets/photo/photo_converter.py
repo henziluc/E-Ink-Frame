@@ -6,7 +6,7 @@ output_folder = input_folder / "resized"
 
 output_folder.mkdir(exist_ok=True)
 
-MAX_SIZE = (800, 533)
+MAX_SIZE = (792, 513)
 
 for file in input_folder.iterdir():
 
@@ -20,7 +20,7 @@ for file in input_folder.iterdir():
             img = ImageOps.exif_transpose(img)
 
             # Seitenverhältnis beibehalten
-            img.thumbnail(MAX_SIZE, Image.Resampling.LANCZOS)
+            img = ImageOps.fit(img, MAX_SIZE, method=Image.Resampling.LANCZOS)
 
             # JPEG benötigt RGB
             img = img.convert("RGB")
