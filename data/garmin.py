@@ -8,15 +8,7 @@ garmin_jojo = None
 
 
 
-'''
-Data to add:
-- Intensity minutes     get_weekly_intensity_minutes(start, end)
-- Weekly stress         get_weekly_stress(end, weeks)
-- Training readiness    get_training_readiness(date)
-- Training status       get_training_status(date)
-- Training load         get_training_load_data(date)
-- VO₂ Max               get_max_metrics(date)
-'''
+
 
 
 
@@ -96,7 +88,21 @@ def load_health_data(email=None, password=None, person=None):
 
     activity_pace = speed_to_pace(activity_speed) if activity_speed else None
      
-        
+    intensity_minutes = client.get_weekly_intensity_minutes(today.isoformat(), today.isoformat())
+    print(f"Intensity minutes for {person}: {intensity_minutes}")
+    stress_data = client.get_weekly_stress(today.isoformat(), 1)
+    print(f"Weekly stress for {person}: {stress_data}")
+    training_readiness_data = client.get_training_readiness(today.isoformat())
+    print(f"Training readiness for {person}: {training_readiness_data}")
+    training_status_data = client.get_training_status(today.isoformat())
+    print(f"Training status for {person}: {training_status_data}")
+    training_load_data = client.get_training_load_data(today.isoformat())
+    print(f"Training load for {person}: {training_load_data}")
+    vo2_max_data = client.get_max_metrics(today.isoformat())
+    print(f"VO₂ Max for {person}: {vo2_max_data}")
+
+
+    
     healt_dict = {
         "steps": steps,
         "step_goal": step_goal,
