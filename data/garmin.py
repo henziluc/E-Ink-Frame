@@ -16,7 +16,7 @@ def get_health_data(health_dict):
         request_luca = True
     elif health_dict['Jojo'] is None:
         request_luca = False
-    if health_dict['Luca']['last_updated'] < health_dict['Jojo']['last_updated']:
+    if health_dict['Luca']['last updated'] <= health_dict['Jojo']['last updated']:
         request_luca = True
     else:
         request_luca = False
