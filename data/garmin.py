@@ -2,7 +2,6 @@ import os
 from garminconnect import Garmin
 import datetime
 from datetime import datetime, date
-request_toggle = True
 garmin_luca = None
 garmin_jojo = None
 
@@ -13,16 +12,24 @@ garmin_jojo = None
 
 
 def get_health_data(health_dict):
-    global request_toggle
+    if health_dict['Luca'] is None:
+        request_luca = True
+    elif health_dict['Jojo'] is None:
+        request_luca = False
+    if health_dict['Luca']['last_updated'] < health_dict['Jojo']['last_updated']:
+        request_luca = True
+    else:
+        request_luca = False
     
-    if request_toggle:
+    
+    if request_luca:
+        print("Fetching health data for Luca")
         luca_data = load_health_data(os.getenv("garmin_mail"), os.getenv("garmin_password"), 'Luca')
         jojo_data = health_dict['Jojo']
-        request_toggle = False
     else:
+        print("Fetching health data for Jojo")
         luca_data = health_dict['Luca']
         jojo_data = load_health_data(os.getenv("garmin_mail_jojo"), os.getenv("garmin_password_jojo"), 'Jojo')
-        request_toggle = True
 
         
     
