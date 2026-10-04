@@ -37,8 +37,12 @@ def main():
         "departures_seen": None,
         "departures_etzberg": None,
         "health_data": {
-            "Luca": None,
-            "Jojo": None
+            "Luca": {
+                "last_updated": 0
+                },
+            "Jojo": {
+                "last_updated": 0
+                }
         },
         "moon_data": None,
         "news_data": None,
