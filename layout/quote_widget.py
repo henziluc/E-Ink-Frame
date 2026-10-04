@@ -9,7 +9,11 @@ def display_quote_widget(draw, x_start, y_start, quote_data):
     # Draw quote data
     draw.text((x_start, y), "Quote", font=font_large, fill=fill_main)
     y += spacing_large
-    quote = quote_data.pop(0)
+    if len(quote_data) == 0:
+        quote = quote_data.pop(0)
+        quote_data = []
+    else:
+        quote = quote_data.pop(0)
     
     quote_text = '"' + quote['description'] + '"' 
     
