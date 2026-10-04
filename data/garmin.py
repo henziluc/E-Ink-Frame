@@ -97,12 +97,11 @@ def load_health_data(email=None, password=None, person=None):
      
     intensity_minutes = client.get_weekly_intensity_minutes(today.isoformat(), today.isoformat())
     intensity_minutes = intensity_minutes[0]
-    print(f"Intensity minutes for {person}: {intensity_minutes}")
     intensity_minutes_goal = intensity_minutes['weeklyGoal']
     intensity_minutes = intensity_minutes['moderateValue'] + intensity_minutes['vigorousValue'] * 2
+    
     stress_data = client.get_all_day_stress(today.isoformat())
     stress_data = stress_data['avgStressLevel']
-    print(f"All-day stress for {person}: {stress_data}")
 
 
     now = datetime.now()
