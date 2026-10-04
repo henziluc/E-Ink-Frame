@@ -16,12 +16,12 @@ def mem(label):
     print(f"{label}: {process.memory_info().rss / 1024 / 1024:.1f} MB")
 
 
-def display_photo(draw, image, x_start, y_start, x_end):
+def display_photo(draw, image, x_start, y_start, x_end, y_end):
     photo_list = []
     
     # define photo size
     x_size = x_end - x_start
-    y_size = int(x_size / 1.5)
+    y_size = y_end - y_start
     mem("before photo")
     # count number of photos
     folder = BASE_DIR / "assets" / "photo" / "resized"

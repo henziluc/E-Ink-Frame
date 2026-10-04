@@ -79,7 +79,7 @@ def make_dashbord(data):
         
         # draw random picture
         try:
-            display_photo(draw, image, 30, 430, 800)
+            display_photo(draw, image, 30, 430, 822, 943)
         except:
             logger.exception("display_photo failed")
         
