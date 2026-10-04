@@ -29,11 +29,9 @@ def get_news():
         "swiss": parse_feed(
             get_feed(NEWS_FEEDS["swiss"][0])
         ),
-
         "world": parse_feed(
             get_feed(NEWS_FEEDS["world"][0])
         ),
-
         "random": parse_feed(
             get_feed(NEWS_FEEDS["random"][0])
         ),
