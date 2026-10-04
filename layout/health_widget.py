@@ -128,7 +128,7 @@ def display_personal_health(draw, image, x_start, y_start, health_data, name):
     # Change icon depening on activity
     if activity_type == 'running':
         activity_icon = Image.open(running_icon_path).convert("RGBA")
-    elif activity_type == 'strength_training':
+    elif activity_type == 'strength_training' or activity_type == 'hiit' or activity_type == 'weightlifting':
         activity_icon = Image.open(gym_icon_path).convert("RGBA")
     elif activity_type == 'swimming':
         activity_icon = Image.open(swimming_icon_path).convert("RGBA")
@@ -151,7 +151,7 @@ def display_personal_health(draw, image, x_start, y_start, health_data, name):
     y += spacing_small
     
     # Draw activity distance if value is not None
-    if health_data['activity_distance'] != None:    
+    if health_data['activity_distance'] != None or health_data['activity_distance'] != 0:    
         distance_icon = Image.open(arrows_icon_path).convert("RGBA")
         distance_icon = distance_icon.resize((icon_size, icon_size))
         image.paste(distance_icon, (x_start, y), distance_icon)   
