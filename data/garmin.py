@@ -101,9 +101,11 @@ def load_health_data(email=None, password=None, person=None):
     vo2_max_data = client.get_max_metrics(today.isoformat())
     print(f"VO₂ Max for {person}: {vo2_max_data}")
 
-
+    now = datetime.now()
+    formatted_datetime = now.strftime("%Y-%m-%d %H:%M:%S")
     
     healt_dict = {
+        "last_updated": formatted_datetime,
         "steps": steps,
         "step_goal": step_goal,
         "body_battery": body_battery,
