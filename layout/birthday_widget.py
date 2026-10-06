@@ -14,23 +14,24 @@ def display_birthday_widget(draw, image, x_start, y_start, birthday_data):
     icon_size = 25
     frame_offset = 10
     y = y_start + frame_offset
+    x = x_start + frame_offset
     upcoming_birthdays = get_upcoming_birthdays(birthday_data, 5)
 
-    draw.text((x_start, y_start), 'Birthdays', font=font_large, fill=fill_main)
+    draw.text((x, y_start), 'Birthdays', font=font_large, fill=fill_main)
     
     y += spacing_large
     
     for person in upcoming_birthdays:
         icon = Image.open(cake_icon_path).convert("RGBA")
         icon = icon.resize((icon_size, icon_size))
-        image.paste(icon, (x_start, y), icon)
+        image.paste(icon, (x, y), icon)
         name = person["name"]
         birthday_date =  person["next_birthday"].strftime("%d.%m.")
         days_until = str((person["next_birthday"] - date.today()).days)
-        draw.text((x_start + icon_size + 5, y), name , font = font_small, fill = fill_main )
-        draw.text((x_start + icon_size + 100, y), birthday_date , font = font_small, fill = fill_main )
+        draw.text((x + icon_size + 5, y), name , font = font_small, fill = fill_main )
+        draw.text((x + icon_size + 150, y), birthday_date , font = font_small, fill = fill_main )
         if int(days_until) == 0:
-            draw.text((1200 - 30 - frame_offset, y), 'today' , font = font_small, fill = fill_main, anchor="ra" )    
+            draw.text((1200 - 30 - frame_offset, y), 'today' , font = font_small, fill = 'red', anchor="ra" )    
         elif int(days_until) == 1:
             draw.text((1200 - 30 - frame_offset, y), 'in ' + days_until + ' day' , font = font_small, fill = fill_main, anchor="ra" )
         else:
