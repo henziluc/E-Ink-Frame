@@ -90,6 +90,8 @@ def load_health_data(email=None, password=None, person=None):
 
     activity_type = activity.get("activityType", {}).get("typeKey")
     activity_distance = activity.get("distance")
+    if activity_distance == 0:
+        activity_distance = None
     activity_duration = activity.get("duration")
     activity_aerobic_effect = activity.get("aerobicTrainingEffect")
     activity_anaerobic_effect = activity.get("anaerobicTrainingEffect")
