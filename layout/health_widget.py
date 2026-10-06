@@ -70,16 +70,20 @@ def seconds_to_hours(seconds):
     return time
 
 def display_health_titles(draw, x_start, y_start):
+    graph_height = 15
     y = y_start + spacing_medium
     draw.text((x_start, y), 'Steps', font = font_small, fill = fill_main)
-    y += spacing_small + 15
+    y += spacing_small + graph_height
     draw.text((x_start, y), 'Battery', font = font_small, fill = fill_main)
     y += spacing_small
     draw.text((x_start, y), 'Sleep', font = font_small, fill = fill_main)
     y += spacing_small
     draw.text((x_start, y), 'Intensity', font = font_small, fill = fill_main)
-    y += spacing_small
+    y += spacing_small + graph_height
     draw.text((x_start, y), 'Stress', font = font_small, fill = fill_main)
+    y += spacing_small
+    draw.text((x_start, y), 'Last Activity', font = font_large, fill = fill_main)
+    y += spacing_large
     
     
     
@@ -130,10 +134,8 @@ def display_personal_health(draw, image, x_start, y_start, health_data, name):
 
     y += spacing_small
 
-    # Draw Activity
-    draw.text((x_start + icon_size + 5, y), 'Last Activity', font = font_small, fill = fill_main)    
-
-    y += spacing_small
+    # Added spacing before last activity section
+    y += spacing_large
     
     # Draw activity duration  
     draw.text((x_start + icon_size + 5, y), seconds_to_hours(health_data['activity_duration']) + ' h', font = font_small, fill = fill_main)
