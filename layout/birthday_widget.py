@@ -38,12 +38,12 @@ def display_birthday_widget(draw, image, x_start, y_start, birthday_data):
         y += spacing_small
   
     
-        y += frame_offset
-        draw.rounded_rectangle(
-                    (x_start, y_start, 1200 - 30, y),
-                    radius=20,
-                    outline=fill_main,
-                )
+    y += frame_offset
+    draw.rounded_rectangle(
+                (x_start, y_start, 1200 - 30, y),
+                radius=20,
+                outline=fill_main,
+            )
     
     return y    
     
