@@ -92,6 +92,7 @@ def display_health_titles(draw, x_start, y_start):
 
 def display_personal_health(draw, image, x_start, y_start, health_data, name):
     graph_height = 15
+    graph_length = 100
     y = y_start
     draw.text((x_start, y), name, font = font_medium, fill = fill_main)
     y += spacing_medium
@@ -99,16 +100,19 @@ def display_personal_health(draw, image, x_start, y_start, health_data, name):
     # Draw actual steps / target steps    
     actual_steps = str(health_data['steps'])
     target_steps = str(health_data['step_goal'])
-    draw.text((x_start + 5, y), actual_steps + ' / ' + target_steps, font = font_small, fill = fill_main )
+    draw.text((x_start, y), actual_steps + ' / ' + target_steps, font = font_small, fill = fill_main )
     
     y += spacing_small
     
-    
+    draw.rounded_rectangle((x_start, y, x_start + graph_length, y + 10),radius=5,outline=fill_main,) 
+    progress = int(health_data['steps'] / health_data['step_goal'] * graph_length)
+    draw.rounded_rectangle((x_start, y, x_start + progress, y + 10),radius=5,fill=fill_main,)
+      
     y += graph_height
     
     # Draw body battery
     body_battery = health_data['body_battery']
-    draw.text((x_start + 5, y), str(body_battery) + '%', font = font_small, fill = fill_main )
+    draw.text((x_start, y), str(body_battery) + '%', font = font_small, fill = fill_main )
     
     y += spacing_small
     
@@ -122,22 +126,24 @@ def display_personal_health(draw, image, x_start, y_start, health_data, name):
     
     sleep_score = str(health_data['sleep_score'])
     
-    draw.text((x_start + 5, y), sleep_hours + ':' + sleep_minutes + 'h->' + sleep_score + 'P' , font = font_small, fill = fill_main )
+    draw.text((x_start, y), sleep_hours + ':' + sleep_minutes + 'h->' + sleep_score + 'P' , font = font_small, fill = fill_main )
 
     y += spacing_small
     
     
     # Draw intensity minutes
-    draw.text((x_start + 5, y), str(health_data['intensity_minutes']) + ' / ' + str(health_data['intensity_minutes_goal']) + 'min', font = font_small, fill = fill_main )
+    draw.text((x_start, y), str(health_data['intensity_minutes']) + ' / ' + str(health_data['intensity_minutes_goal']) + 'min', font = font_small, fill = fill_main )
     
     y += spacing_small
     
-    
+    draw.rounded_rectangle((x_start, y, x_start + graph_length, y + 10),radius=5,outline=fill_main,) 
+    progress = int(health_data['intensity_minutes'] / health_data['intensity_minutes_goal'] * graph_length)
+    draw.rounded_rectangle((x_start, y, x_start + progress, y + 10),radius=5,fill=fill_main,)
     
     y += graph_height
     
     # Draw stress
-    draw.text((x_start + 5, y), str(health_data['stress']) + ' / 100', font = font_small, fill = fill_main )
+    draw.text((x_start, y), str(health_data['stress']) + ' / 100', font = font_small, fill = fill_main )
 
     y += spacing_small
 
@@ -145,26 +151,26 @@ def display_personal_health(draw, image, x_start, y_start, health_data, name):
     y += spacing_large
     
     # Draw activity duration  
-    draw.text((x_start + 5, y), seconds_to_hours(health_data['activity_duration']) + ' h', font = font_small, fill = fill_main)
+    draw.text((x_start, y), seconds_to_hours(health_data['activity_duration']) + ' h', font = font_small, fill = fill_main)
     
     y += spacing_small
     
     # Draw activity distance if value is not None
     if health_data['activity_distance'] != None or health_data['activity_distance'] != 0:    
         activity_distance = str(round(health_data['activity_distance'] / 1000, 1))
-        draw.text((x_start + 5, y), activity_distance + ' km', font = font_small, fill = fill_main)    
+        draw.text((x_start, y), activity_distance + ' km', font = font_small, fill = fill_main)    
         
         y += spacing_small
     
     # Draw activity calorie
     activity_calories = str(round(health_data['activity_calories'],))
-    draw.text((x_start + 5, y), activity_calories + ' cal', font = font_small, fill = fill_main)    
+    draw.text((x_start, y), activity_calories + ' cal', font = font_small, fill = fill_main)    
 
     y += spacing_small
     
     # Draw activity pace if value is not None
     if health_data['activity_pace'] != None:
-        draw.text((x_start + 5, y), health_data['activity_pace'] + ' min/km', font = font_small, fill = fill_main)
+        draw.text((x_start, y), health_data['activity_pace'] + ' min/km', font = font_small, fill = fill_main)
         y += spacing_small
         
     return y   
