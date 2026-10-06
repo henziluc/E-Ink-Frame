@@ -64,15 +64,7 @@ def display_photo(draw, image, x_start, y_start, x_end, y_end):
     
     image.paste(picture, (x_start, y_start))
     mem("after pasting")
-    # Add frame around picture
-    draw.rectangle([(x_start, y_start),(x_end, y_start + y_size)], outline ="black", width = 3)
-    
-    
-    # Add pciture description below picture
-    icon = Image.open(icon_path).convert("RGBA")
-    icon = icon.resize((20, 20))
-    image.paste(icon, (x_start, y_start + y_size + 10), icon)
-    
+       
     
     text_parts = random_photo.split("_")
     
@@ -81,7 +73,44 @@ def display_photo(draw, image, x_start, y_start, x_end, y_end):
         month = str(text_parts[1])
         year = str(text_parts[2][:4])
         picture_description = location + ', ' + month + ' ' + year
-        draw.text((x_start + 23 , y_start + y_size + 7), picture_description ,font=font_small, fill=fill_main)
+        padding_x = 20
+        padding_y = 10
+        bbox = draw.textbbox((0, 0), picture_description, font=font_small)
+
+        text_width = bbox[2] - bbox[0]
+        text_height = bbox[3] - bbox[1]
+
+        boxheight = text_height + 2 * padding_y
+        boxwidth = text_width + 2 * padding_x    
+        
+        x_position = x_start + 20
+        y_position = y_start + y_size - boxheight - 20
+        
+        box = (
+            x_position,
+            y_position,
+            x_position + boxwidth,
+            y_position + boxheight
+        )
+
+        draw.rounded_rectangle(
+            box,
+            radius=20,
+            fill="white"
+        )
+
+        draw.text(
+            (50 + padding_x, 50 + padding_y),
+            picture_description,
+            font=font_small,
+            fill="fill_main"
+        )
+        
+        
+        
+        
+        
+        
         
         
         
