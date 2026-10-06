@@ -112,21 +112,21 @@ def make_dashbord(data):
         # Draw transport schedule
         y = 150
         try:
-            y = display_schedule_complet(draw, image, 'Seen', data['departures_seen'], 'Etzberg', data['departures_etzberg'], 890, y)
+            y = display_schedule_complet(draw, image, 'Seen', data['departures_seen'], 'Etzberg', data['departures_etzberg'], 714, y)
             y += widget_spacing
         except:
             logger.exception("display_schedule_complete failed")
                             
         # draw birthday data
         try:
-            y = display_birthday_widget(draw, image, 890, y, data['birthday_data'])
+            y = display_birthday_widget(draw, image, 714, y, data['birthday_data'])
             y += widget_spacing
         except:
             logger.exception("display_birthday_widget failed")
                     
         # draw quote data
         try:
-            data['quote_data'], y = display_quote_widget(draw,  890, y, data['quote_data'])
+            data['quote_data'], y = display_quote_widget(draw,  714, y, data['quote_data'])
             y += widget_spacing
         except:
             logger.exception("display_quote_widget failed")
@@ -134,7 +134,7 @@ def make_dashbord(data):
         
         # draw health data
         try:
-            y = display_health_widget(draw, image, 890, y, data['health_data'])
+            y = display_health_widget(draw, image, 714, y, data['health_data'])
             y += widget_spacing
         except:
             logger.exception("display_health_widget failed")            
@@ -142,7 +142,8 @@ def make_dashbord(data):
         
         # draw pi status
         try:
-            display_pi_status(draw, 890, y)
+            #display_pi_status(draw, 714, y)
+            print("display_pi_status not implemented yet")
         except:
             logger.exception("display_pi_status failed")  
         # draw software status
