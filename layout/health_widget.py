@@ -97,7 +97,7 @@ def display_health_titles(draw, x_start, y_start, distance, pace):
     draw.text((x_start, y), 'Stress', font = font_small, fill = fill_main)
     y += spacing_small
     
-    draw.line((x_start, y - 5, 1160, y - 5), fill=fill_main, width=1)
+    draw.line((x_start, y - 2, 1160, y - 2), fill=fill_main, width=1)
     
     draw.text((x_start, y), 'Last Activity', font = font_large, fill = fill_main)
     y += spacing_large
