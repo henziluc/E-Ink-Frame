@@ -48,12 +48,12 @@ def display_health_widget(draw, image, x_start, y_start, health_data):
     display_health_titles(draw, x, y,distance, pace)
     x += 100
     if 'Luca' in health_data:
-        if health_data['Luca'] is not None and len(health_data['Luca']) > 1:
+        if health_data['Luca'] is not None and len(health_data['Luca']) > 5:
             y_1 = display_personal_health(draw, image, x, y, health_data['Luca'], "Luca")
             x += 150
           
     if 'Jojo' in health_data:
-        if health_data['Jojo'] is not None and len(health_data['Jojo']) > 1:
+        if health_data['Jojo'] is not None and len(health_data['Jojo']) > 5:
             y_2 = display_personal_health(draw, image, x, y, health_data['Jojo'], "Jojo")
             
     y_max = max(y_1, y_2)
@@ -192,6 +192,8 @@ def display_personal_health(draw, image, x_start, y_start, health_data, name):
         activity_type = activity_type.capitalize()
     draw.text((x_start, y), activity_type, font = font_small, fill = fill_main)
     
+    y += spacing_small
+    
     # Draw activity duration  
     draw.text((x_start, y), seconds_to_hours(health_data['activity_duration']) + ' h', font = font_small, fill = fill_main)
     
@@ -204,7 +206,7 @@ def display_personal_health(draw, image, x_start, y_start, health_data, name):
     y += spacing_small
         
     # Draw activity distance if value is not None
-    if health_data['activity_distance'] != None or health_data['activity_distance'] != 0:    
+    if health_data['activity_distance'] != None:    
         activity_distance = str(round(health_data['activity_distance'] / 1000, 1))
         draw.text((x_start, y), activity_distance + ' km', font = font_small, fill = fill_main)    
         
