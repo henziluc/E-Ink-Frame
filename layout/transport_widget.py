@@ -79,7 +79,7 @@ def display_schedule(draw, image, station_name, df, x_start, y_start):
         if delay > 1:
             draw.text((x_start + 215, y),f"+{delay}min",font=font_small,fill="red", anchor="ra") 
         #display departure time    
-        draw.text((x_start + 235, 1200 - 30 - 10),row['departure_time'][:-3],font=font_small,fill=fill_main, anchor="ra")
+        draw.text((1200 - 30, y),row['departure_time'][:-3],font=font_small,fill=fill_main, anchor="ra")
       
         y += spacing_small
         
