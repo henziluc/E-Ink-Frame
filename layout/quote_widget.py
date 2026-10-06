@@ -8,7 +8,7 @@ def display_quote_widget(draw, x_start, y_start, quote_data):
     frame_offset = 10
     y = y_start + frame_offset
     # Draw quote data
-    draw.text((x_start, y), "Quote", font=font_large, fill=fill_main)
+    draw.text((x_start + frame_offset, y), "Quote", font=font_large, fill=fill_main)
     y += spacing_large
     if len(quote_data) == 0:
         quote = quote_data.pop(0)
@@ -21,16 +21,16 @@ def display_quote_widget(draw, x_start, y_start, quote_data):
     lines = wrap_text_to_width(
         quote_text,
         font_small,
-        max_width= 1200 - 30 - x_start - frame_offset,
+        max_width= 1200 - 30 - x_start - 2 *frame_offset,
         draw=draw,
         max_lines=3
     )
     
     for line in lines:
-        draw.text((x_start, y), line, font=font_small_italic, fill=fill_main)
+        draw.text((x_start + frame_offset, y), line, font=font_small_italic, fill=fill_main)
         y += spacing_small
     
-    draw.text((x_start, y), '- ' + quote['title'], font=font_small, fill=fill_main)
+    draw.text((x_start + frame_offset, y), '- ' + quote['title'], font=font_small, fill=fill_main)
     
     y += spacing_small
     
