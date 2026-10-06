@@ -15,7 +15,9 @@ def display_schedule_complet(draw, image, station_name_1, df_1, station_name_2, 
     y += spacing_large - 3
     # Draw schedule for station 1
     draw, y = display_schedule(draw, image, station_name_1, df_1, x_start + frame_offset , y)
-    y += 10
+    y += 5
+    draw.line((x_start + frame_offset, y, 1170 - frame_offset, y), fill=fill_main, width=1)
+    y += 5
     # Draw schedule for station 2
     draw, y = display_schedule(draw, image, station_name_2, df_2, x_start + frame_offset , y)
     y += frame_offset
