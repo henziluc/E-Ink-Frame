@@ -96,10 +96,13 @@ def display_health_titles(draw, x_start, y_start, distance, pace):
     y += spacing_small + graph_height
     draw.text((x_start, y), 'Stress', font = font_small, fill = fill_main)
     y += spacing_small
+    
     draw.line((x_start, y - 5, 1160, y - 5), fill=fill_main, width=1)
     
     draw.text((x_start, y), 'Last Activity', font = font_large, fill = fill_main)
     y += spacing_large
+    draw.text((x_start, y), 'Type', font = font_small, fill = fill_main)
+    y += spacing_small
     draw.text((x_start, y), 'Time', font = font_small, fill = fill_main)
     y += spacing_small
     draw.text((x_start, y), 'Burned', font = font_small, fill = fill_main)
@@ -180,6 +183,14 @@ def display_personal_health(draw, image, x_start, y_start, health_data, name):
 
     # Added spacing before last activity section
     y += spacing_large
+    
+    # Draw activity type
+    activity_type = health_data['activity_type']
+    if activity_type == 'hiit':
+        activity_type = activity_type.upper()
+    else:
+        activity_type = activity_type.capitalize()
+    draw.text((x_start, y), activity_type, font = font_small, fill = fill_main)
     
     # Draw activity duration  
     draw.text((x_start, y), seconds_to_hours(health_data['activity_duration']) + ' h', font = font_small, fill = fill_main)
