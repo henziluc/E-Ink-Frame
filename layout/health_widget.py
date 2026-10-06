@@ -105,7 +105,7 @@ def display_personal_health(draw, image, x_start, y_start, health_data, name):
     y += spacing_small
     
     draw.rounded_rectangle((x_start, y, x_start + graph_length, y + 10),radius=5,outline=fill_main,) 
-    progress = int(health_data['steps'] / health_data['step_goal'] * graph_length)
+    progress = min(int(health_data['steps'] / health_data['step_goal'] * graph_length), graph_length)
     draw.rounded_rectangle((x_start, y, x_start + progress, y + 10),radius=5,fill=fill_main,)
       
     y += graph_height
@@ -137,7 +137,7 @@ def display_personal_health(draw, image, x_start, y_start, health_data, name):
     y += spacing_small
     
     draw.rounded_rectangle((x_start, y, x_start + graph_length, y + 10),radius=5,outline=fill_main,) 
-    progress = int(health_data['intensity_minutes'] / health_data['intensity_minutes_goal'] * graph_length)
+    progress = min(int(health_data['intensity_minutes'] / health_data['intensity_minutes_goal'] * graph_length), graph_length)
     draw.rounded_rectangle((x_start, y, x_start + progress, y + 10),radius=5,fill=fill_main,)
     
     y += graph_height
