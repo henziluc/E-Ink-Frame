@@ -5,7 +5,8 @@ from .fonts import font_small, font_normal, font_small_italic, font_large, fill_
 from .helpers import  wrap_text_to_width
 
 def display_quote_widget(draw, x_start, y_start, quote_data):
-    y = y_start
+    frame_offset = 10
+    y = y_start + frame_offset
     # Draw quote data
     draw.text((x_start, y), "Quote", font=font_large, fill=fill_main)
     y += spacing_large
@@ -20,7 +21,7 @@ def display_quote_widget(draw, x_start, y_start, quote_data):
     lines = wrap_text_to_width(
         quote_text,
         font_small,
-        max_width=300,
+        max_width= 1200 - 30 - x_start - frame_offset,
         draw=draw,
         max_lines=3
     )
@@ -32,5 +33,13 @@ def display_quote_widget(draw, x_start, y_start, quote_data):
     draw.text((x_start, y), '- ' + quote['title'], font=font_small, fill=fill_main)
     
     y += spacing_small
+    
+    
+    y += frame_offset
+    draw.rounded_rectangle(
+                (x_start, y_start, 1200 - 30, y),
+                radius=20,
+                outline=fill_main,
+            )
                 
     return quote_data, y  
