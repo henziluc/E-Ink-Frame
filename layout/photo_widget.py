@@ -100,7 +100,7 @@ def display_photo(draw, image, x_start, y_start, x_end, y_end):
         )
 
         draw.text(
-            (50 + padding_x, 50 + padding_y),
+            (x_position + padding_x, y_position + padding_y),
             picture_description,
             font=font_small,
             fill=fill_main
