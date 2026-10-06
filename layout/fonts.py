@@ -10,8 +10,8 @@ font_massiv = ImageFont.truetype(
 )
 
 font_large = ImageFont.truetype(
-    FONT_DIR / "Inter_18pt-Bold.ttf",
-    40
+    FONT_DIR / "Inter_18pt-Regular.ttf",
+    35
 )
 
 font_medium = ImageFont.truetype(
