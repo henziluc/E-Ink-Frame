@@ -83,7 +83,7 @@ def make_dashbord(data):
         except:
             logger.exception("display_photo failed")
         
-        draw.line([(30, 980), (830, 980)], fill= fill_main, width = 1)
+        
         
         # Draw next holidays
         y = 990
@@ -99,7 +99,7 @@ def make_dashbord(data):
         except:
             logger.exception("display_room_climate_widget failed")
         
-        draw.line([(340, 1010), (340, 1550)], fill= fill_main, width = 1)
+        
                     
         # draw news data
         try:
@@ -107,7 +107,7 @@ def make_dashbord(data):
         except:
             logger.exception("display_news_widget failed")
         
-        draw.line([(860, 165), (860, 1550)], fill= fill_main, width = 1)
+        
         
         # Draw transport schedule
         y = 150
