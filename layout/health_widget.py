@@ -34,15 +34,15 @@ def display_health_widget(draw, image, x_start, y_start, health_data):
     y_1 = 0
     y_2 = 0
     draw.text((x_start + frame_offset, y), 'Health', font = font_large, fill = fill_main)
-    
+    display_health_titles(draw, x_start + frame_offset, y)
     y += spacing_large
     if 'Luca' in health_data:
         if health_data['Luca'] is not None and len(health_data['Luca']) > 1:
-            y_1 = display_personal_health(draw, image, x_start + frame_offset, y, health_data['Luca'], "Luca")
+            y_1 = display_personal_health(draw, image, x_start + 100 + frame_offset, y, health_data['Luca'], "Luca")
           
     if 'Jojo' in health_data:
         if health_data['Jojo'] is not None and len(health_data['Jojo']) > 1:
-            y_2 = display_personal_health(draw, image, x_start + 160 + frame_offset, y, health_data['Jojo'], "Jojo")
+            y_2 = display_personal_health(draw, image, x_start + 200 + frame_offset, y, health_data['Jojo'], "Jojo")
             
     y_max = max(y_1, y_2)
     
@@ -69,7 +69,22 @@ def seconds_to_hours(seconds):
     
     return time
 
-
+def display_health_titles(draw, x_start, y_start):
+    y = y_start + spacing_medium
+    draw.text((x_start, y), 'Steps', font = font_small, fill = fill_main)
+    y += spacing_small + 15
+    draw.text((x_start, y), 'Battery', font = font_small, fill = fill_main)
+    y += spacing_small
+    draw.text((x_start, y), 'Sleep', font = font_small, fill = fill_main)
+    y += spacing_small
+    draw.text((x_start, y), 'Intensity', font = font_small, fill = fill_main)
+    y += spacing_small
+    draw.text((x_start, y), 'Stress', font = font_small, fill = fill_main)
+    
+    
+    
+    
+    
 
 def display_personal_health(draw, image, x_start, y_start, health_data, name):
     icon_size = 25
@@ -78,10 +93,6 @@ def display_personal_health(draw, image, x_start, y_start, health_data, name):
     y += spacing_medium
     
     # Draw actual steps / target steps    
-    step_icon = Image.open(step_icon_path).convert("RGBA")
-    step_icon = step_icon.resize((icon_size, icon_size))
-    image.paste(step_icon, (x_start, y), step_icon)
-    
     actual_steps = str(health_data['steps'])
     target_steps = str(health_data['step_goal'])
     draw.text((x_start + icon_size + 5, y), actual_steps + ' / ' + target_steps, font = font_small, fill = fill_main )
@@ -90,32 +101,11 @@ def display_personal_health(draw, image, x_start, y_start, health_data, name):
     
     # Draw body battery
     body_battery = health_data['body_battery']
-    
-        # Choose which battery icon depening on body battery
-    if body_battery >= 90:
-        battery_icon = Image.open(battery_full_icon_path).convert("RGBA")
-    elif body_battery >= 60:
-        battery_icon = Image.open(battery_three_quarters_icon_path).convert("RGBA")
-    elif body_battery >= 40:
-        battery_icon = Image.open(battery_half_icon_path).convert("RGBA")
-    elif body_battery >= 10:
-        battery_icon = Image.open(battery_quarter_icon_path).convert("RGBA")
-    else:       
-        battery_icon = Image.open(battery_empty_icon_path).convert("RGBA")
-    
-    battery_icon = battery_icon.resize((icon_size, icon_size))
-    image.paste(battery_icon, (x_start, y), battery_icon)    
-    
     draw.text((x_start + icon_size + 5, y), str(body_battery) + '%', font = font_small, fill = fill_main )
     
     y += spacing_small
     
     # Draw sleep
-    sleep_icon = Image.open(sleep_icon_path).convert("RGBA")
-    
-    sleep_icon = sleep_icon.resize((icon_size, icon_size))
-    image.paste(sleep_icon, (x_start, y), sleep_icon)
-    
     sleep_hours = str(int(health_data['sleep_hours']))
     sleep_minutes = int(health_data['sleep_hours'] % 1 * 60)
     if sleep_minutes < 10:
@@ -131,65 +121,33 @@ def display_personal_health(draw, image, x_start, y_start, health_data, name):
     
     
     # Draw intensity minutes
-    intensity_icon = Image.open(intensity_icon_path).convert("RGBA")
-    intensity_icon = intensity_icon.resize((icon_size, icon_size))
-    image.paste(intensity_icon, (x_start, y), intensity_icon)
     draw.text((x_start + icon_size + 5, y), str(health_data['intensity_minutes']) + ' / ' + str(health_data['intensity_minutes_goal']) + 'min', font = font_small, fill = fill_main )
     
     y += spacing_small
     
     # Draw stress
-    stress_icon = Image.open(stress_icon_path).convert("RGBA")
-    stress_icon = stress_icon.resize((icon_size, icon_size))
-    image.paste(stress_icon, (x_start, y), stress_icon)
     draw.text((x_start + icon_size + 5, y), str(health_data['stress']) + ' / 100', font = font_small, fill = fill_main )
 
     y += spacing_small
 
     # Draw Activity
-    activity_type = health_data['activity_type']
-    
-    # Change icon depening on activity
-    if activity_type == 'running':
-        activity_icon = Image.open(running_icon_path).convert("RGBA")
-    elif activity_type == 'strength_training' or activity_type == 'hiit' or activity_type == 'weightlifting':
-        activity_icon = Image.open(gym_icon_path).convert("RGBA")
-    elif activity_type == 'swimming':
-        activity_icon = Image.open(swimming_icon_path).convert("RGBA")
-    else:
-        activity_icon = Image.open(running_icon_path).convert("RGBA")
-        
-    activity_icon = activity_icon.resize((icon_size, icon_size))
-    image.paste(activity_icon, (x_start, y), activity_icon)
     draw.text((x_start + icon_size + 5, y), 'Last Activity', font = font_small, fill = fill_main)    
 
     y += spacing_small
     
     # Draw activity duration  
-    duration_icon = Image.open(hourglass_icon_path).convert("RGBA")
-    duration_icon = duration_icon.resize((icon_size, icon_size))
-    image.paste(duration_icon, (x_start, y), duration_icon)
-    
     draw.text((x_start + icon_size + 5, y), seconds_to_hours(health_data['activity_duration']) + ' h', font = font_small, fill = fill_main)
     
     y += spacing_small
     
     # Draw activity distance if value is not None
     if health_data['activity_distance'] != None or health_data['activity_distance'] != 0:    
-        distance_icon = Image.open(arrows_icon_path).convert("RGBA")
-        distance_icon = distance_icon.resize((icon_size, icon_size))
-        image.paste(distance_icon, (x_start, y), distance_icon)   
-        
         activity_distance = str(round(health_data['activity_distance'] / 1000, 1))
         draw.text((x_start + icon_size + 5, y), activity_distance + ' km', font = font_small, fill = fill_main)    
         
         y += spacing_small
     
     # Draw activity calorie
-    calories_icon = Image.open(fire_icon_path).convert("RGBA")
-    calories_icon = calories_icon.resize((icon_size, icon_size))
-    image.paste(calories_icon, (x_start, y), calories_icon)   
-    
     activity_calories = str(round(health_data['activity_calories'],))
     draw.text((x_start + icon_size + 5, y), activity_calories + ' cal', font = font_small, fill = fill_main)    
 
@@ -197,10 +155,6 @@ def display_personal_health(draw, image, x_start, y_start, health_data, name):
     
     # Draw activity pace if value is not None
     if health_data['activity_pace'] != None:
-        speed_icon = Image.open(speed_icon_path).convert("RGBA")
-        speed_icon = speed_icon.resize((icon_size, icon_size))
-        image.paste(speed_icon, (x_start, y), speed_icon)   
-        
         draw.text((x_start + icon_size + 5, y), health_data['activity_pace'] + ' min/km', font = font_small, fill = fill_main)
         y += spacing_small
         
