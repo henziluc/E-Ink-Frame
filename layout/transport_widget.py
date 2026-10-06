@@ -56,7 +56,7 @@ def display_schedule(draw, image, station_name, df, x_start, y_start):
 
         # Choose background and text color depending on route number
         if route == "3":
-            route_bg = (180, 220, 180)
+            route_bg = "green"
             route_text = "white"
 
         elif route == "S11":
