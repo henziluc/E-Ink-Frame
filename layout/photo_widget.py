@@ -95,7 +95,7 @@ def display_photo(draw, image, x_start, y_start, x_end, y_end):
 
         draw.rounded_rectangle(
             box,
-            radius=20,
+            radius=15,
             fill="white"
         )
 
