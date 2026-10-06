@@ -35,7 +35,17 @@ def display_health_widget(draw, image, x_start, y_start, health_data):
     y_2 = 0
     draw.text((x, y), 'Health', font = font_large, fill = fill_main)
     y += spacing_large
-    display_health_titles(draw, x, y)
+    if health_data['Luca']['activity_distance'] is None and health_data['Jojo']['activity_distance'] is None:
+        distance = False
+    else:
+        distance = True
+
+    if health_data['Luca']['activity_pace'] is None and health_data['Jojo']['activity_pace'] is None:
+        pace = False
+    else:
+        pace = True
+
+    display_health_titles(draw, x, y,distance, pace)
     x += 100
     if 'Luca' in health_data:
         if health_data['Luca'] is not None and len(health_data['Luca']) > 1:
@@ -73,7 +83,7 @@ def seconds_to_hours(seconds):
     return time
 
 
-def display_health_titles(draw, x_start, y_start):
+def display_health_titles(draw, x_start, y_start, distance, pace):
     graph_height = 15
     y = y_start + spacing_medium
     draw.text((x_start, y), 'Steps', font = font_small, fill = fill_main)
@@ -86,8 +96,21 @@ def display_health_titles(draw, x_start, y_start):
     y += spacing_small + graph_height
     draw.text((x_start, y), 'Stress', font = font_small, fill = fill_main)
     y += spacing_small
+    draw.line((x_start, y - 5, 1160, y - 5), fill=fill_main, width=1)
+    
     draw.text((x_start, y), 'Last Activity', font = font_large, fill = fill_main)
     y += spacing_large
+    draw.text((x_start, y), 'Time', font = font_small, fill = fill_main)
+    y += spacing_small
+    draw.text((x_start, y), 'Burned', font = font_small, fill = fill_main)
+    y += spacing_small
+    if distance:
+        draw.text((x_start, y), 'Distance', font = font_small, fill = fill_main)
+        y += spacing_small
+    if pace:
+        draw.text((x_start, y), 'Pace', font = font_small, fill = fill_main)
+        y += spacing_small
+
      
 
 def display_personal_health(draw, image, x_start, y_start, health_data, name):
@@ -163,18 +186,18 @@ def display_personal_health(draw, image, x_start, y_start, health_data, name):
     
     y += spacing_small
     
+    # Draw activity calorie
+    activity_calories = str(round(health_data['activity_calories'],))
+    draw.text((x_start, y), activity_calories + ' cal', font = font_small, fill = fill_main)    
+
+    y += spacing_small
+        
     # Draw activity distance if value is not None
     if health_data['activity_distance'] != None or health_data['activity_distance'] != 0:    
         activity_distance = str(round(health_data['activity_distance'] / 1000, 1))
         draw.text((x_start, y), activity_distance + ' km', font = font_small, fill = fill_main)    
         
         y += spacing_small
-    
-    # Draw activity calorie
-    activity_calories = str(round(health_data['activity_calories'],))
-    draw.text((x_start, y), activity_calories + ' cal', font = font_small, fill = fill_main)    
-
-    y += spacing_small
     
     # Draw activity pace if value is not None
     if health_data['activity_pace'] != None:
