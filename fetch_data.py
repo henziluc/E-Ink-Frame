@@ -40,6 +40,8 @@ def fetch_all_data(stop_times, calendar, calendar_dates, transport_info, data):
         weather_status = True
     except:
         logger.exception("Weather data request failed")
+        weather_hourly = data['weather_hourly']
+        weather_daily = data['weather_daily']
         weather_status = False
 
     if weather_timestamp is None:
@@ -52,6 +54,8 @@ def fetch_all_data(stop_times, calendar, calendar_dates, transport_info, data):
         transport_status = True
     except:
         logger.exception("Transport request failed")
+        departures_seen = data['departures_seen']
+        departures_etzberg = data['departures_etzberg']
         transport_status = False
         
     if transport_timestamp is None:
@@ -64,6 +68,7 @@ def fetch_all_data(stop_times, calendar, calendar_dates, transport_info, data):
         health_status = True
     except:
         logger.exception("Health request failed")
+        health_data = data['health_data']
         health_status = False
 
     if health_timestamp is None:
@@ -76,6 +81,7 @@ def fetch_all_data(stop_times, calendar, calendar_dates, transport_info, data):
         moon_status = True
     except:
         logger.exception("Moon request failed")
+        moon_data = data['moon_data']
         moon_status = False
 
     if moon_timestamp is None:
@@ -88,6 +94,7 @@ def fetch_all_data(stop_times, calendar, calendar_dates, transport_info, data):
         news_status = True        
     except:
         logger.exception("News request failed")
+        news_data = data['news_data']
         news_status = False        
     
     if news_timestamp is None:
@@ -100,6 +107,7 @@ def fetch_all_data(stop_times, calendar, calendar_dates, transport_info, data):
         quote_status = True   
     except:
         logger.exception("Quote request failed")
+        quote_data = data['quote_data']
         quote_status = False         
 
     if quote_timestamp is None:
@@ -112,6 +120,7 @@ def fetch_all_data(stop_times, calendar, calendar_dates, transport_info, data):
         birthday_status = True            
     except:
         logger.exception("Birthday request failed")
+        birthday_data = data['birthday_data']
         birthday_status = False            
    
     if birthday_timestamp is None:
