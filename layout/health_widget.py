@@ -46,13 +46,13 @@ def display_health_widget(draw, image, x_start, y_start, health_data):
             
     y_max = max(y_1, y_2)
     
-    y += frame_offset
+    y = y_max + frame_offset
     draw.rounded_rectangle(
                 (x_start, y_start, 1200 - 30, y),
                 radius=20,
                 outline=fill_main,
             ) 
-    return y_max
+    return y
     
 def seconds_to_hours(seconds):
     
