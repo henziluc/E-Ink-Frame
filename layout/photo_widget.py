@@ -103,7 +103,7 @@ def display_photo(draw, image, x_start, y_start, x_end, y_end):
             (50 + padding_x, 50 + padding_y),
             picture_description,
             font=font_small,
-            fill="fill_main"
+            fill=fill_main
         )
         
         
