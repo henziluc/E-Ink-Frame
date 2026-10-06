@@ -1,7 +1,7 @@
 import os
 from garminconnect import Garmin
 import datetime
-from datetime import datetime, date
+from datetime import datetime, date, timedelta
 garmin_luca = None
 garmin_jojo = None
 
@@ -12,21 +12,24 @@ garmin_jojo = None
 
 
 def get_health_data(health_dict):
+    last_updated_luca = health_dict['Luca']['last updated']
+    last_updated_jojo = health_dict['Jojo']['last updated']
+    
     if len(health_dict['Luca']) == 1:
         request_luca = True
     elif len(health_dict['Jojo']) == 1:
         request_luca = False
-    if health_dict['Luca']['last updated'] <= health_dict['Jojo']['last updated']:
+    if last_updated_luca <= last_updated_jojo:
         request_luca = True
     else:
         request_luca = False
     
     
-    if request_luca:
+    if request_luca and datetime.now() - last_updated_luca >= timedelta(minutes=55):
         print("Fetching health data for Luca")
         luca_data = load_health_data(os.getenv("garmin_mail"), os.getenv("garmin_password"), 'Luca')
         jojo_data = health_dict['Jojo']
-    else:
+    elif not request_luca and datetime.now() - last_updated_jojo >= timedelta(minutes=55):
         print("Fetching health data for Jojo")
         luca_data = health_dict['Luca']
         jojo_data = load_health_data(os.getenv("garmin_mail_jojo"), os.getenv("garmin_password_jojo"), 'Jojo')
