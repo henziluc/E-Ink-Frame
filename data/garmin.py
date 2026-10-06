@@ -15,9 +15,9 @@ def get_health_data(health_dict):
     last_updated_luca = health_dict['Luca']['last updated']
     last_updated_jojo = health_dict['Jojo']['last updated']
     
-    if len(health_dict['Luca']) == 1:
+    if len(health_dict['Luca']) < 5:
         request_luca = True
-    elif len(health_dict['Jojo']) == 1:
+    elif len(health_dict['Jojo']) < 5:
         request_luca = False
     if last_updated_luca <= last_updated_jojo:
         request_luca = True
