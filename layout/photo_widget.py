@@ -1,6 +1,6 @@
 import random
 from pathlib import Path
-from PIL import Image, ImageOps, ImageEnhance
+from PIL import Image, ImageOps, ImageEnhance, ImageDraw
 
 from .fonts import font_small, font_normal, font_small_italic, font_large, fill_main, spacing_small, spacing_normal, spacing_medium, spacing_large
 
@@ -59,7 +59,8 @@ def display_photo(draw, image, x_start, y_start, x_end, y_end):
     picture = ImageEnhance.Sharpness(picture).enhance(1.3)
     picture = ImageEnhance.Brightness(picture).enhance(1.1)
     mem("after color improvment")    
-    
+    picture = rounded_image(picture, (x_size, y_size), radius=20)
+    mem("after rounded_image")
     
     image.paste(picture, (x_start, y_start))
     mem("after pasting")
@@ -81,3 +82,22 @@ def display_photo(draw, image, x_start, y_start, x_end, y_end):
         year = str(text_parts[2][:4])
         picture_description = location + ', ' + month + ' ' + year
         draw.text((x_start + 23 , y_start + y_size + 7), picture_description ,font=font_small, fill=fill_main)
+        
+        
+        
+        
+def rounded_image(image, size, radius):
+    image = image.resize(size)
+
+    mask = Image.new("L", size, 0)
+    draw = ImageDraw.Draw(mask)
+    draw.rounded_rectangle(
+        (0, 0, size[0], size[1]),
+        radius=radius,
+        fill=255
+    )
+
+    result = Image.new("RGBA", size, (255, 255, 255, 0))
+    result.paste(image, (0, 0), mask)
+
+    return result
