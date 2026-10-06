@@ -7,17 +7,24 @@ from .helpers import draw_centered_text
 BASE_DIR = Path(__file__).resolve().parent.parent
 
 def display_schedule_complet(draw, image, station_name_1, df_1, station_name_2, df_2, x_start, y_start):
-    y = y_start
+    frame_offset = 10
+    y = y_start + frame_offset 
     
     # Draw widget title    
-    draw.text((x_start, y), "Next Trains", font=font_large, fill=fill_main)
+    draw.text((x_start + frame_offset, y), "Next Trains", font=font_large, fill=fill_main)
     y += spacing_large - 3
     # Draw schedule for station 1
-    draw, y = display_schedule(draw, image, station_name_1, df_1, x_start, y)
+    draw, y = display_schedule(draw, image, station_name_1, df_1, x_start + frame_offset , y)
     y += 10
     # Draw schedule for station 2
-    draw, y = display_schedule(draw, image, station_name_2, df_2, x_start , y)
+    draw, y = display_schedule(draw, image, station_name_2, df_2, x_start + frame_offset , y)
 
+    draw.rounded_rectangle(
+                (x_start, y_start, 1200 - 30, y - spacing_small + frame_offset),
+                radius=20,
+                fill="transparent"
+            )
+    
     return y
 
 
@@ -70,9 +77,9 @@ def display_schedule(draw, image, station_name, df, x_start, y_start):
         #display delays in rounded minutes in a red font
         delay = round(int(row['delay'])/60)
         if delay > 1:
-            draw.text((x_start + 175, y),f"+{delay}min",font=font_small,fill="red") 
+            draw.text((x_start + 215, y),f"+{delay}min",font=font_small,fill="red", anchor="ra") 
         #display departure time    
-        draw.text((x_start + 235, y),row['departure_time'][:-3],font=font_small,fill=fill_main)
+        draw.text((x_start + 235, 1200 - 30 - 10),row['departure_time'][:-3],font=font_small,fill=fill_main, anchor="ra")
       
         y += spacing_small
         
