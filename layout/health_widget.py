@@ -28,25 +28,30 @@ intensity_icon_path = BASE_DIR / "assets" / "sport_symbol" / "intensity.png"
 def display_health_widget(draw, image, x_start, y_start, health_data):
     if health_data is None:
         return y_start
-    
-    y = y_start
+    frame_offset = 10
+    y = y_start + frame_offset
     icon_size = 25
     y_1 = 0
     y_2 = 0
-    draw.text((x_start, y), 'Health', font = font_large, fill = fill_main)
+    draw.text((x_start + frame_offset, y), 'Health', font = font_large, fill = fill_main)
     
     y += spacing_large
     if 'Luca' in health_data:
         if health_data['Luca'] is not None and len(health_data['Luca']) > 1:
-            y_1 = display_personal_health(draw, image, x_start, y, health_data['Luca'], "Luca")
+            y_1 = display_personal_health(draw, image, x_start + frame_offset, y, health_data['Luca'], "Luca")
           
     if 'Jojo' in health_data:
         if health_data['Jojo'] is not None and len(health_data['Jojo']) > 1:
-            y_2 = display_personal_health(draw, image, x_start + 160, y, health_data['Jojo'], "Jojo")
+            y_2 = display_personal_health(draw, image, x_start + 160 + frame_offset, y, health_data['Jojo'], "Jojo")
             
     y_max = max(y_1, y_2)
     
-    draw.line([(x_start + 150, y), (x_start + 150, y_max)], fill= fill_gray, width = 1)  
+    y += frame_offset
+    draw.rounded_rectangle(
+                (x_start, y_start, 1200 - 30, y),
+                radius=20,
+                outline=fill_main,
+            ) 
     return y_max
     
 def seconds_to_hours(seconds):
