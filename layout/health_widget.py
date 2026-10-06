@@ -34,8 +34,8 @@ def display_health_widget(draw, image, x_start, y_start, health_data):
     y_1 = 0
     y_2 = 0
     draw.text((x_start + frame_offset, y), 'Health', font = font_large, fill = fill_main)
-    display_health_titles(draw, x_start + frame_offset, y)
     y += spacing_large
+    display_health_titles(draw, x_start + frame_offset, y)
     if 'Luca' in health_data:
         if health_data['Luca'] is not None and len(health_data['Luca']) > 1:
             y_1 = display_personal_health(draw, image, x_start + 100 + frame_offset, y, health_data['Luca'], "Luca")
