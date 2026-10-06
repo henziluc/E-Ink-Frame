@@ -12,7 +12,8 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 def display_birthday_widget(draw, image, x_start, y_start, birthday_data):
     cake_icon_path = BASE_DIR / "assets" / "symbol" / "cake.png"
     icon_size = 25
-    y = y_start
+    frame_offset = 10
+    y = y_start + frame_offset
     upcoming_birthdays = get_upcoming_birthdays(birthday_data, 5)
 
     draw.text((x_start, y_start), 'Birthdays', font=font_large, fill=fill_main)
@@ -29,14 +30,20 @@ def display_birthday_widget(draw, image, x_start, y_start, birthday_data):
         draw.text((x_start + icon_size + 5, y), name , font = font_small, fill = fill_main )
         draw.text((x_start + icon_size + 100, y), birthday_date , font = font_small, fill = fill_main )
         if int(days_until) == 0:
-            draw.text((x_start + icon_size + 170, y), 'today' , font = font_small, fill = fill_main )    
+            draw.text((1200 - 30 - frame_offset, y), 'today' , font = font_small, fill = fill_main, anchor="ra" )    
         elif int(days_until) == 1:
-            draw.text((x_start + icon_size + 170, y), 'in ' + days_until + ' day' , font = font_small, fill = fill_main )
+            draw.text((1200 - 30 - frame_offset, y), 'in ' + days_until + ' day' , font = font_small, fill = fill_main, anchor="ra" )
         else:
-            draw.text((x_start + icon_size + 170, y), 'in ' + days_until + ' days' , font = font_small, fill = fill_main )
+            draw.text((1200 - 30 - frame_offset, y), 'in ' + days_until + ' days' , font = font_small, fill = fill_main, anchor="ra" )
         y += spacing_small
   
     
+        y += frame_offset
+        draw.rounded_rectangle(
+                    (x_start, y_start, 1200 - 30, y),
+                    radius=20,
+                    outline=fill_main,
+                )
     
     return y    
     
