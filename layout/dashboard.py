@@ -40,7 +40,7 @@ from .fonts import font_small, font_medium, font_large, fill_main, fill_gray
 
 
 def make_dashbord(data):
-    widget_spacing = 10
+    widget_spacing = 24
     epd = epd13in3E.EPD()
     try:
         

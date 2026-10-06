@@ -18,11 +18,11 @@ def display_schedule_complet(draw, image, station_name_1, df_1, station_name_2, 
     y += 10
     # Draw schedule for station 2
     draw, y = display_schedule(draw, image, station_name_2, df_2, x_start + frame_offset , y)
-
+    y += frame_offset
     draw.rounded_rectangle(
-                (x_start, y_start, 1200 - 30, y - spacing_small + frame_offset),
+                (x_start, y_start, 1200 - 30, y - spacing_small),
                 radius=20,
-                fill="transparent"
+                outline=fill_main,
             )
     
     return y
