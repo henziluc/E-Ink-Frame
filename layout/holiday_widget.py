@@ -27,7 +27,7 @@ def display_holiday(draw, image, df, x_start, y_start):
         
         # Calculate amount of days till holidays start
         delta = row['start_date'] - now
-        days = delta.days
+        days = str(delta.days)
         
         # First element is printed bigger
         if next_holiday == 1:
@@ -44,16 +44,19 @@ def display_holiday(draw, image, df, x_start, y_start):
             image.paste(picture, (x, y))
             draw.text((x + picture_width + 5, y), row['location'], font=font_medium, fill=fill_main)
             y_end_photo = y + picture_height + 10
-            y += spacing_medium + 5
-            draw.text((x + picture_width + 5, y), f"{days} days to go", font=font_normal, fill=fill_main)
-            y += spacing_normal + 5
+            y += spacing_medium
+            draw.text((x + picture_width + 5, y), days, font=font_medium, fill='red')
+            bbox = draw.textbbox((0, 0), days, font=font_medium)
+            width = bbox[2] - bbox[0]
+            draw.text((x + picture_width + 10 + width, y + font_medium.size), " days to go", font=font_normal, fill=fill_main, anchor="lb")
+            y += spacing_medium
             draw.text((x + picture_width + 5, y), row['start_date'].strftime("%d.%m.%Y"), font=font_normal, fill=fill_main)
             y = y_end_photo
             next_holiday = 0
         # Other elements are printed smaller    
         else:
             draw.text((x, y), row['location'], font=font_small, fill=fill_main)
-            draw.text((x + 130, y), f"{days} days to go", font=font_small, fill=fill_main)
+            draw.text((x + 130, y), days +" days to go", font=font_small, fill=fill_main)
             y += spacing_small
     
     draw.rounded_rectangle(
