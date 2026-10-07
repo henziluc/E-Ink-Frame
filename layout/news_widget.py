@@ -56,10 +56,6 @@ def display_news_widget(draw, image, x_start, y_start, news_data):
                         outline=fill_main,
                     )
         
-        
-        
-    
-
 
 def generate_qr(url):
     qr = qrcode.QRCode(
