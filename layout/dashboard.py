@@ -86,24 +86,24 @@ def make_dashbord(data):
         
         
         # Draw next holidays
-        y = 990
+        y = 870 + widget_spacing
         try:
-            y = display_holiday(draw, image, holidays, 30, y)
-            y += widget_spacing
+            y_1 = display_holiday(draw, image, holidays, 30, y)
         except:
             logger.exception("display_holiday failed")
+            y_1 = y
                       
         # draw room climate data
         try:
-            display_room_climate_widget(draw, image, 30, y, [])
+            y_2 =display_room_climate_widget(draw, image, 434, y, [])
         except:
             logger.exception("display_room_climate_widget failed")
+            y_2 = y
         
-        
-                    
+        y = max(y_1, y_2) + widget_spacing            
         # draw news data
         try:
-            #display_news_widget(draw, image, 370, 990, data['news_data'])
+            display_news_widget(draw, image, 30, y, data['news_data'])
             print("display_news_widget not implemented yet")
         except:
             logger.exception("display_news_widget failed")
