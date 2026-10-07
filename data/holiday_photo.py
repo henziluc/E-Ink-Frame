@@ -18,7 +18,7 @@ UNSPLASH_ACCESS_KEY = os.getenv("UNSPLASH_ACCESS_KEY")
 PHOTO_FOLDER = Path("assets/holiday_photos")
 
 photo_width = 110
-photo_height = round(photo_width * 1.3)
+photo_height = 110
 
 PHOTO_SIZE = (photo_width, photo_height)
 
