@@ -33,6 +33,9 @@ def get_health_data(health_dict):
         print("Fetching health data for Jojo")
         luca_data = health_dict['Luca']
         jojo_data = load_health_data(os.getenv("garmin_mail_jojo"), os.getenv("garmin_password_jojo"), 'Jojo')
+    else:
+        luca_data = health_dict['Luca']
+        jojo_data = health_dict['Jojo']
 
         
     
