@@ -19,9 +19,9 @@ path_arrow_right_down = BASE_DIR / "assets" / "weather_symbol" / "arrow-down-rig
 
 def display_room_climate_widget(draw, image, x_start, y_start, df):
     df = generate_test_data()
-    y = y_start
-    x = x_start
-    icon_size = 40
+    frame_offset = 10
+    y = y_start + frame_offset
+    x = x_start + frame_offset
     icon_size_small = 20
     graph_height = 100
     graph_width = 1200 - x_start - 30  # Adjust the width based on your layout
@@ -33,14 +33,10 @@ def display_room_climate_widget(draw, image, x_start, y_start, df):
     compare_values = df[-5]
     
     # Draw temperature
-    icon_temperature = Image.open(path_temperatur).convert("RGBA")
-    icon_temperature = icon_temperature.resize((icon_size, icon_size))
-    image.paste(icon_temperature, (x, y), icon_temperature)
-    y += icon_size + 5
-    draw.text((x, y), str(latest_values["temperature"]) + '°C', font=font_normal, fill=fill_main)
-    y += spacing_normal
-    draw.text((x, y), "Temp.", font=font_small, fill=fill_main)
+    draw.text((x, y), "Temperature", font=font_small, fill=fill_main)
     y += spacing_small
+    draw.text((x, y), str(latest_values["temperature"]) + '°C', font=font_normal, fill=fill_main)
+    
     diff_temperature = round(latest_values["temperature"] - compare_values ["temperature"])
     if diff_temperature > 0:
         icon_temperature_arrow = Image.open(path_arrow_right_up).convert("RGBA")
@@ -53,25 +49,15 @@ def display_room_climate_widget(draw, image, x_start, y_start, df):
         diff_temperature = str(diff_temperature) + '°C'
         
     icon_temperature_arrow = icon_temperature_arrow.resize((icon_size_small, icon_size_small))
-    image.paste(icon_temperature_arrow, (x, y + 2), icon_temperature_arrow)    
-    draw.text((x + icon_size_small, y), diff_temperature, font=font_small, fill=fill_main)
-    y += spacing_small
-    draw.line([(x + 90, y_stored), (x + 90, y)], fill= fill_gray, width = 1) 
-    x += 100
-    y = y_stored
+    image.paste(icon_temperature_arrow, (x + 200, y + 2), icon_temperature_arrow)    
+    draw.text((x + 250 - frame_offset, y), diff_temperature, font=font_small, fill=fill_main)
+    y += spacing_normal
     
     # Draw Humidity
-    icon_humidity = Image.open(path_humidity).convert("RGBA")
-    icon_humidity = icon_humidity.resize((icon_size, icon_size))
-    blue = Image.new("RGBA", icon_humidity.size, (0, 120, 255, 255))
-    blue.putalpha(icon_humidity.getchannel("A"))
-    icon_humidity = blue
-    image.paste(icon_humidity, (x, y), icon_humidity)
-    y += icon_size + 5
-    draw.text((x, y), str(latest_values["humidity"]) + '%', font=font_small, fill=fill_main)
-    y += spacing_normal
     draw.text((x, y), "Humidity", font=font_small, fill=fill_main)
     y += spacing_small
+    draw.text((x, y), str(latest_values["humidity"]) + '%', font=font_normal, fill=fill_main)
+    
     diff_humidity = round(latest_values["humidity"] - compare_values ["humidity"])
     if diff_humidity > 0:
         icon_humidity_arrow = Image.open(path_arrow_right_up).convert("RGBA")
@@ -85,25 +71,15 @@ def display_room_climate_widget(draw, image, x_start, y_start, df):
         
     icon_humidity_arrow = icon_humidity_arrow.resize((icon_size_small, icon_size_small))
     image.paste(icon_humidity_arrow, (x, y + 2), icon_humidity_arrow)    
-    draw.text((x + icon_size_small, y), diff_humidity, font=font_small, fill=fill_main)
-    y += spacing_small
-    draw.line([(x + 90, y_stored), (x + 90, y)], fill= fill_gray, width = 1) 
-    x += 100
-    y = y_stored
+    draw.text((x + 250 - frame_offset, y), diff_humidity, font=font_small, fill=fill_main)
+    y += spacing_normal
    
         
     # Draw CO2
-    icon_CO2 = Image.open(path_CO2).convert("RGBA")
-    icon_CO2 = icon_CO2.resize((icon_size, icon_size))
-    green = Image.new("RGBA", icon_CO2.size, (50, 180, 80, 255))
-    green.putalpha(icon_CO2.getchannel("A"))
-    icon_CO2 = green
-    image.paste(icon_CO2, (x, y), icon_CO2)
-    y += icon_size + 5
-    draw.text((x, y), str(latest_values["co2"]) + 'ppm', font=font_small, fill=fill_main)
-    y += spacing_normal
     draw.text((x, y), "CO2", font=font_small, fill=fill_main)
     y += spacing_small
+    draw.text((x, y), str(latest_values["co2"]) + 'ppm', font=font_normal, fill=fill_main)
+    
     diff_co2 = round(latest_values["co2"] - compare_values ["co2"])
     if diff_co2 > 0:
         icon_co2_arrow = Image.open(path_arrow_right_up).convert("RGBA")
@@ -116,9 +92,9 @@ def display_room_climate_widget(draw, image, x_start, y_start, df):
         diff_co2 = str(diff_co2) + 'ppm'
         
     icon_co2_arrow = icon_co2_arrow.resize((icon_size_small, icon_size_small))
-    image.paste(icon_co2_arrow, (x, y + 2), icon_co2_arrow)    
-    draw.text((x + icon_size_small, y), diff_co2, font=font_small, fill=fill_main)
-    y += spacing_small
+    image.paste(icon_co2_arrow, (x + 200, y + 2), icon_co2_arrow)    
+    draw.text((x + 250 - frame_offset, y), diff_co2, font=font_small, fill=fill_main, anchor = "ra")
+    y += spacing_normal
     
     
     draw.rounded_rectangle(
