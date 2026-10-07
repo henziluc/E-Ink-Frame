@@ -6,11 +6,16 @@ from .helpers import wrap_text_to_width
 
 
 def display_news_widget(draw, image, x_start, y_start, news_data):
-    y = y_start
+    frame_offset = 10
+    y = y_start + frame_offset
+    x = x_start + frame_offset
+    qr_code_size = 76  # Size of the QR code
+    widget_width = 660
+    widget_height = 486
     
     
     # Draw news title
-    draw.text((x_start, y), "News", font=font_large, fill=fill_main)
+    draw.text((x, y), "News", font=font_large, fill=fill_main)
     y += spacing_large
     
     
@@ -25,20 +30,20 @@ def display_news_widget(draw, image, x_start, y_start, news_data):
     for item in random_news.values():
         # Draw QR code for the news item
         qr_code_image = generate_qr(item['link'])
-        qr_code_image = qr_code_image.resize((80, 80))  # Resize QR code to fit in the widget
-        image.paste(qr_code_image, (x_start + 380, y))
+        qr_code_image = qr_code_image.resize((qr_code_size, qr_code_size))  # Resize QR code to fit in the widget
+        image.paste(qr_code_image, (x + widget_width - qr_code_size - frame_offset, y - 5))
         
         
         lines = wrap_text_to_width(
         item["title"],
         font_small,
-        max_width=370,
+        max_width= widget_width - qr_code_size - 3 *frame_offset,
         draw=draw,
-        max_lines=3
+        max_lines=2
 )       
         line_counter = 0
         for line in lines:
-            draw.text((x_start, y), line, font=font_small, fill=fill_main)
+            draw.text((x, y), line, font=font_small, fill=fill_main)
             y += spacing_small
             line_counter -= 1
         
@@ -46,7 +51,7 @@ def display_news_widget(draw, image, x_start, y_start, news_data):
         y += 15 + (line_counter * spacing_small)  # Add extra space after each news item
         
     draw.rounded_rectangle(
-                        (x_start, y_start, x_start + 660, y_start + 486),
+                        (x_start, y_start, x_start + widget_width, y_start + widget_height),
                         radius=20,
                         outline=fill_main,
                     )
