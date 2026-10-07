@@ -13,11 +13,13 @@ PHOTO_FOLDER = BASE_DIR / "assets" / "holiday_photos"
 def display_holiday(draw, image, df, x_start, y_start):
     picture_width = 110
     picture_height = round(picture_width * 1.3)
-    y = y_start
+    frame_offset = 10
+    x = x_start + frame_offset
+    y = y_start + frame_offset
     next_holiday = 1
     now = datetime.datetime.now()
     # Draw widget title
-    draw.text((x_start, y_start), 'Next Holiday', font=font_large, fill=fill_main)
+    draw.text((x, y), 'Next Holiday', font=font_large, fill=fill_main)
     
     y += spacing_large
     # loop trough the first four elements which are today or later of the holiday list
@@ -39,19 +41,19 @@ def display_holiday(draw, image, df, x_start, y_start):
             picture = ImageEnhance.Sharpness(picture).enhance(1.3)
             picture = ImageEnhance.Brightness(picture).enhance(1.1)
             
-            image.paste(picture, (x_start, y))
-            draw.text((x_start + picture_width + 5, y), row['location'], font=font_medium, fill=fill_main)
+            image.paste(picture, (x, y))
+            draw.text((x + picture_width + 5, y), row['location'], font=font_medium, fill=fill_main)
             y_end_photo = y + picture_height + 10
             y += spacing_medium + 5
-            draw.text((x_start + picture_width + 5, y), f"{days} days to go", font=font_normal, fill=fill_main)
+            draw.text((x + picture_width + 5, y), f"{days} days to go", font=font_normal, fill=fill_main)
             y += spacing_normal + 5
-            draw.text((x_start + picture_width + 5, y), row['start_date'].strftime("%d.%m.%Y"), font=font_normal, fill=fill_main)
+            draw.text((x + picture_width + 5, y), row['start_date'].strftime("%d.%m.%Y"), font=font_normal, fill=fill_main)
             y = y_end_photo
             next_holiday = 0
         # Other elements are printed smaller    
         else:
-            draw.text((x_start, y), row['location'], font=font_small, fill=fill_main)
-            draw.text((x_start + 130, y), f"{days} days to go", font=font_small, fill=fill_main)
+            draw.text((x, y), row['location'], font=font_small, fill=fill_main)
+            draw.text((x + 130, y), f"{days} days to go", font=font_small, fill=fill_main)
             y += spacing_small
     
     draw.rounded_rectangle(
