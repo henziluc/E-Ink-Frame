@@ -53,6 +53,13 @@ def display_holiday(draw, image, df, x_start, y_start):
             draw.text((x_start, y), row['location'], font=font_small, fill=fill_main)
             draw.text((x_start + 130, y), f"{days} days to go", font=font_small, fill=fill_main)
             y += spacing_small
+    
+    draw.rounded_rectangle(
+        (x_start, y_start, x_start + 380, y_start + 250),
+        radius=20,
+        outline=fill_main,
+    )
+    
             
     return y
  

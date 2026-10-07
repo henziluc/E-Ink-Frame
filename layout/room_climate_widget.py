@@ -120,6 +120,14 @@ def display_room_climate_widget(draw, image, x_start, y_start, df):
     draw.text((x + icon_size_small, y), diff_co2, font=font_small, fill=fill_main)
     y += spacing_small
     
+    
+    draw.rounded_rectangle(
+                    (x_start, y_start, x_start + 256, y_start + 250),
+                    radius=20,
+                    outline=fill_main,
+                )
+    
+    
     return y
     
     

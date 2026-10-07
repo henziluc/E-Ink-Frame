@@ -45,6 +45,12 @@ def display_news_widget(draw, image, x_start, y_start, news_data):
         line_counter += 3    
         y += 15 + (line_counter * spacing_small)  # Add extra space after each news item
         
+    draw.rounded_rectangle(
+                        (x_start, y_start, x_start + 660, y_start + 486),
+                        radius=20,
+                        outline=fill_main,
+                    )
+        
         
         
     

@@ -103,7 +103,7 @@ def make_dashbord(data):
         y = max(y_1, y_2) + widget_spacing            
         # draw news data
         try:
-            display_news_widget(draw, image, 30, y, data['news_data'])
+            display_news_widget(draw, image, 30, 1168, data['news_data'])
             print("display_news_widget not implemented yet")
         except:
             logger.exception("display_news_widget failed")
