@@ -34,7 +34,7 @@ def display_room_climate_widget(draw, image, x_start, y_start, df):
     
     # Draw temperature
     draw.text((x, y), "Temperature", font=font_small, fill=fill_main)
-    y += spacing_small - 3
+    y += spacing_small - 4
     draw.text((x, y), str(latest_values["temperature"]) + '°C', font=font_normal, fill=fill_main)
     
     diff_temperature = round(latest_values["temperature"] - compare_values ["temperature"])
@@ -55,7 +55,7 @@ def display_room_climate_widget(draw, image, x_start, y_start, df):
     
     # Draw Humidity
     draw.text((x, y), "Humidity", font=font_small, fill=fill_main)
-    y += spacing_small - 3
+    y += spacing_small - 4
     draw.text((x, y), str(latest_values["humidity"]) + '%', font=font_normal, fill=fill_main)
     
     diff_humidity = round(latest_values["humidity"] - compare_values ["humidity"])
@@ -77,7 +77,7 @@ def display_room_climate_widget(draw, image, x_start, y_start, df):
         
     # Draw CO2
     draw.text((x, y), "CO2", font=font_small, fill=fill_main)
-    y += spacing_small - 3
+    y += spacing_small - 4
     draw.text((x, y), str(latest_values["co2"]) + 'ppm', font=font_normal, fill=fill_main)
     
     diff_co2 = round(latest_values["co2"] - compare_values ["co2"])
@@ -98,7 +98,7 @@ def display_room_climate_widget(draw, image, x_start, y_start, df):
     
     
     draw.rounded_rectangle(
-                    (x_start, y_start, x_start + 256, y_start + 250),
+                    (x_start, y_start, x_start + 256, y_start + 240),
                     radius=20,
                     outline=fill_main,
                 )

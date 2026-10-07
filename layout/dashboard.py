@@ -79,14 +79,14 @@ def make_dashbord(data):
         
         # draw random picture
         try:
-            display_photo(draw, image, 30, 430, 690, 870)
+            display_photo(draw, image, 30, 430, 690, 774)
         except:
             logger.exception("display_photo failed")
         
         
         
         # Draw next holidays
-        y = 870 + widget_spacing
+        y = 774 + widget_spacing
         try:
             y_1 = display_holiday(draw, image, holidays, 30, y)
         except:
@@ -103,7 +103,7 @@ def make_dashbord(data):
         y = max(y_1, y_2) + widget_spacing            
         # draw news data
         try:
-            display_news_widget(draw, image, 30, 1168, data['news_data'])
+            display_news_widget(draw, image, 30, 1062, data['news_data'])
         except:
             logger.exception("display_news_widget failed")
         

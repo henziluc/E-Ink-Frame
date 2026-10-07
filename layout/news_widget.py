@@ -11,7 +11,7 @@ def display_news_widget(draw, image, x_start, y_start, news_data):
     x = x_start + frame_offset
     qr_code_size = 76  # Size of the QR code
     widget_width = 660
-    widget_height = 486
+    widget_height = 422
     
     
     # Draw news title
