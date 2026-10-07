@@ -50,7 +50,7 @@ def display_room_climate_widget(draw, image, x_start, y_start, df):
         
     icon_temperature_arrow = icon_temperature_arrow.resize((icon_size_small, icon_size_small))
     image.paste(icon_temperature_arrow, (x + 150, y + 2), icon_temperature_arrow)    
-    draw.text((x_start + 250 - frame_offset, y), diff_temperature, font=font_small, fill=fill_main, anchor = "ra")
+    draw.text((x_start + 270 - frame_offset, y), diff_temperature, font=font_small, fill=fill_main, anchor = "ra")
     y += spacing_normal
     
     # Draw Humidity
@@ -71,7 +71,7 @@ def display_room_climate_widget(draw, image, x_start, y_start, df):
         
     icon_humidity_arrow = icon_humidity_arrow.resize((icon_size_small, icon_size_small))
     image.paste(icon_humidity_arrow, (x + 150, y + 2), icon_humidity_arrow)    
-    draw.text((x_start + 250 - frame_offset, y), diff_humidity, font=font_small, fill=fill_main, anchor = "ra")
+    draw.text((x_start + 270 - frame_offset, y), diff_humidity, font=font_small, fill=fill_main, anchor = "ra")
     y += spacing_normal
    
         
@@ -83,17 +83,17 @@ def display_room_climate_widget(draw, image, x_start, y_start, df):
     diff_co2 = round(latest_values["co2"] - compare_values ["co2"])
     if diff_co2 > 0:
         icon_co2_arrow = Image.open(path_arrow_right_up).convert("RGBA")
-        diff_co2 = '+' + str(diff_co2) + 'ppm'
+        diff_co2 = '+' + str(diff_co2)
     elif diff_co2 < 0:
         icon_co2_arrow = Image.open(path_arrow_right_down).convert("RGBA")
-        diff_co2 = str(diff_co2) + 'ppm'
+        diff_co2 = str(diff_co2)
     else:
         icon_co2_arrow = Image.open(path_arrow_right).convert("RGBA")
-        diff_co2 = str(diff_co2) + 'ppm'
+        diff_co2 = str(diff_co2)
         
     icon_co2_arrow = icon_co2_arrow.resize((icon_size_small, icon_size_small))
     image.paste(icon_co2_arrow, (x + 150, y + 2), icon_co2_arrow)    
-    draw.text((x_start + 250 - frame_offset, y), diff_co2, font=font_small, fill=fill_main, anchor = "ra")
+    draw.text((x_start + 270 - frame_offset, y), diff_co2, font=font_small, fill=fill_main, anchor = "ra")
     y += spacing_normal
     
     
