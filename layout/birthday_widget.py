@@ -17,7 +17,7 @@ def display_birthday_widget(draw, image, x_start, y_start, birthday_data):
     x = x_start + frame_offset
     upcoming_birthdays = get_upcoming_birthdays(birthday_data, 5)
 
-    draw.text((x, y_start), 'Birthdays', font=font_large, fill=fill_main)
+    draw.text((x, y), 'Birthdays', font=font_large, fill=fill_main)
     
     y += spacing_large
     
