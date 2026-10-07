@@ -49,8 +49,8 @@ def display_room_climate_widget(draw, image, x_start, y_start, df):
         diff_temperature = str(diff_temperature) + '°C'
         
     icon_temperature_arrow = icon_temperature_arrow.resize((icon_size_small, icon_size_small))
-    image.paste(icon_temperature_arrow, (x + 150, y + 2), icon_temperature_arrow)    
-    draw.text((x_start + 270 - frame_offset, y), diff_temperature, font=font_small, fill=fill_main, anchor = "ra")
+    image.paste(icon_temperature_arrow, (x + 170, y + 2), icon_temperature_arrow)    
+    draw.text((x_start + 256 - frame_offset, y), diff_temperature, font=font_small, fill=fill_main, anchor = "ra")
     y += spacing_normal
     
     # Draw Humidity
@@ -70,8 +70,8 @@ def display_room_climate_widget(draw, image, x_start, y_start, df):
         diff_humidity = str(diff_humidity) + '%'
         
     icon_humidity_arrow = icon_humidity_arrow.resize((icon_size_small, icon_size_small))
-    image.paste(icon_humidity_arrow, (x + 150, y + 2), icon_humidity_arrow)    
-    draw.text((x_start + 270 - frame_offset, y), diff_humidity, font=font_small, fill=fill_main, anchor = "ra")
+    image.paste(icon_humidity_arrow, (x + 170, y + 2), icon_humidity_arrow)    
+    draw.text((x_start + 256 - frame_offset, y), diff_humidity, font=font_small, fill=fill_main, anchor = "ra")
     y += spacing_normal
    
         
@@ -92,8 +92,8 @@ def display_room_climate_widget(draw, image, x_start, y_start, df):
         diff_co2 = str(diff_co2)
         
     icon_co2_arrow = icon_co2_arrow.resize((icon_size_small, icon_size_small))
-    image.paste(icon_co2_arrow, (x + 150, y + 2), icon_co2_arrow)    
-    draw.text((x_start + 270 - frame_offset, y), diff_co2, font=font_small, fill=fill_main, anchor = "ra")
+    image.paste(icon_co2_arrow, (x + 170, y + 2), icon_co2_arrow)    
+    draw.text((x_start + 256 - frame_offset, y), diff_co2, font=font_small, fill=fill_main, anchor = "ra")
     y += spacing_normal
     
     
