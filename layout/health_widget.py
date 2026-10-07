@@ -46,11 +46,11 @@ def display_health_widget(draw, image, x_start, y_start, health_data):
         pace = True
 
     display_health_titles(draw, x, y,distance, pace)
-    x += 100
+    x += 120
     if 'Luca' in health_data:
         if health_data['Luca'] is not None and len(health_data['Luca']) > 5:
             y_1 = display_personal_health(draw, image, x, y, health_data['Luca'], "Luca")
-            x += 150
+            x += 170
           
     if 'Jojo' in health_data:
         if health_data['Jojo'] is not None and len(health_data['Jojo']) > 5:
@@ -86,6 +86,8 @@ def seconds_to_hours(seconds):
 def display_health_titles(draw, x_start, y_start, distance, pace):
     graph_height = 15
     y = y_start + spacing_medium
+    draw.line((x_start, y, 1160, y), fill=fill_main, width=1)
+    
     draw.text((x_start, y), 'Steps', font = font_small, fill = fill_main)
     y += spacing_small + graph_height
     draw.text((x_start, y), 'Battery', font = font_small, fill = fill_main)
@@ -97,7 +99,7 @@ def display_health_titles(draw, x_start, y_start, distance, pace):
     draw.text((x_start, y), 'Stress', font = font_small, fill = fill_main)
     y += spacing_small
     
-    draw.line((x_start, y - 2, 1160, y - 2), fill=fill_main, width=1)
+    draw.line((x_start, y, 1160, y), fill=fill_main, width=1)
     
     draw.text((x_start, y), 'Last Activity', font = font_large, fill = fill_main)
     y += spacing_large
