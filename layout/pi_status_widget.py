@@ -10,16 +10,8 @@ def display_pi_status(draw, x_start, y_start):
     
     pi_status = get_pi_status()
     
-    draw.text((x_start, y), "Pi Status", font=font_large, fill=fill_main)
-    y += spacing_large
-    #draw.text((x_start, y), f"CPU usage: {pi_status['cpu_percent']}%", font=font_small, fill=fill_main)
-    #y += spacing_small
-    draw.text((x_start, y), f"CPU Temperature: {pi_status['cpu_temp']}°C", font=font_small, fill=fill_main)
-    y += spacing_small
-    draw.text((x_start, y), f"RAM : {pi_status['ram_used']}/{pi_status['ram_total']} MB", font=font_small, fill=fill_main)
-    y += spacing_small
-    draw.text((x_start, y), f"Storage : {pi_status['storage_used']}/{pi_status['storage_total']} GB", font=font_small, fill=fill_main)
-    y += spacing_small
+    draw.text((x_start, y), f"CPU Temperature: {pi_status['cpu_temp']}°C   RAM : {pi_status['ram_used']}/{pi_status['ram_total']} MB   Storage : {pi_status['storage_used']}/{pi_status['storage_total']} GB", font=font_small, fill=fill_main)
+
 
 def get_pi_status():
 
