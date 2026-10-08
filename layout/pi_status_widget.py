@@ -2,7 +2,7 @@ import shutil
 import psutil
 from pathlib import Path
 
-from .fonts import font_small, font_normal, font_small_italic, font_large, fill_main, spacing_small, spacing_normal, spacing_medium, spacing_large
+from .fonts import font_small, font_normal, font_small_italic, font_large, fill_main, spacing_small, spacing_normal, spacing_medium, spacing_large, font_very_small
 
 
 def display_pi_status(draw, x_start, y_start):
@@ -10,7 +10,7 @@ def display_pi_status(draw, x_start, y_start):
     
     pi_status = get_pi_status()
     
-    draw.text((x_start, y), f"Pi CPU: {pi_status['cpu_temp']}°C   RAM: {pi_status['ram_used']}/{pi_status['ram_total']} MB   Storage: {pi_status['storage_used']}/{pi_status['storage_total']} GB", font=font_small, fill=fill_main)
+    draw.text((x_start, y), f"CPU: {pi_status['cpu_temp']}°C   RAM: {pi_status['ram_used']}/{pi_status['ram_total']} MB   Storage: {pi_status['storage_used']}/{pi_status['storage_total']} GB", font=font_very_small, fill=fill_main)
 
 
 def get_pi_status():

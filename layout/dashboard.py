@@ -36,7 +36,7 @@ from .quote_widget import display_quote_widget
 from .software_status_widget import display_software_status
 from .pi_status_widget import display_pi_status
 from .room_climate_widget import display_room_climate_widget
-from .fonts import font_small, font_medium, font_large, fill_main, fill_gray
+from .fonts import font_small, font_medium, font_large, fill_main, fill_gray, font_very_small
 
 
 def make_dashbord(data):
@@ -57,7 +57,7 @@ def make_dashbord(data):
         else:
             minute = str(now.minute)
         now_str = str(now.hour) + ':' + minute + '   ' + str(now.strftime("%d.%m.%Y"))
-        draw.text((30, 1575),"Last refresh: " + now_str, font=font_small,fill=fill_main)
+        draw.text((30, 1575),"Last refresh: " + now_str, font=font_very_small,fill=fill_main)
         
         # Draw welcome message
         try:
@@ -142,7 +142,7 @@ def make_dashbord(data):
         
         # draw pi status
         try:
-            display_pi_status(draw, 400, 1575)
+            display_pi_status(draw, 380, 1575)
             print("display_pi_status not implemented yet")
         except:
             logger.exception("display_pi_status failed")  
