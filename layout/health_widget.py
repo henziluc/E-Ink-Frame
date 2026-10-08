@@ -87,7 +87,7 @@ def display_health_titles(draw, x_start, y_start, distance, pace):
     graph_height = 15
     y = y_start + spacing_medium
     draw.line((x_start, y, 1160, y), fill=fill_main, width=1)
-    
+    y += 3
     draw.text((x_start, y), 'Steps', font = font_small, fill = fill_main)
     y += spacing_small + graph_height
     draw.text((x_start, y), 'Battery', font = font_small, fill = fill_main)
@@ -100,7 +100,7 @@ def display_health_titles(draw, x_start, y_start, distance, pace):
     y += spacing_small
     
     draw.line((x_start, y, 1160, y), fill=fill_main, width=1)
-    
+    y += 3
     draw.text((x_start, y), 'Last Activity', font = font_large, fill = fill_main)
     y += spacing_large
     draw.text((x_start, y), 'Type', font = font_small, fill = fill_main)
@@ -123,7 +123,7 @@ def display_personal_health(draw, image, x_start, y_start, health_data, name):
     graph_length = 100
     y = y_start
     draw.text((x_start, y), name, font = font_medium, fill = fill_main)
-    y += spacing_medium
+    y += spacing_medium + 3
     
     # Draw actual steps / target steps    
     actual_steps = str(health_data['steps'])
@@ -184,7 +184,7 @@ def display_personal_health(draw, image, x_start, y_start, health_data, name):
     y += spacing_small
 
     # Added spacing before last activity section
-    y += spacing_large
+    y += spacing_large + 3
     
     # Draw activity type
     activity_type = health_data['activity_type']
