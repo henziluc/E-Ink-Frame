@@ -42,15 +42,15 @@ def display_holiday(draw, image, df, x_start, y_start):
             picture = ImageEnhance.Brightness(picture).enhance(1.1)
             
             image.paste(picture, (x, y))
-            draw.text((x + picture_width + 5, y), row['location'], font=font_medium, fill=fill_main)
+            draw.text((x + picture_width + 8, y), row['location'], font=font_medium, fill=fill_main)
             y_end_photo = y + picture_height + 10
             y += spacing_medium
-            draw.text((x + picture_width + 5, y), days, font=font_medium, fill='red')
+            draw.text((x + picture_width + 8, y), days, font=font_medium, fill='red')
             bbox = draw.textbbox((0, 0), days, font=font_medium)
             width = bbox[2] - bbox[0]
-            draw.text((x + picture_width + 10 + width, y + font_medium.size), " days to go", font=font_normal, fill=fill_main, anchor="lb")
+            draw.text((x + picture_width + 8 + width, y + font_medium.size + 4), " days to go", font=font_normal, fill=fill_main, anchor="lb")
             y += spacing_medium
-            draw.text((x + picture_width + 5, y), row['start_date'].strftime("%d.%m.%Y"), font=font_normal, fill=fill_main)
+            draw.text((x + picture_width + 8, y), row['start_date'].strftime("%d.%m.%Y"), font=font_normal, fill=fill_main)
             y = y_end_photo
             next_holiday = 0
         # Other elements are printed smaller    
