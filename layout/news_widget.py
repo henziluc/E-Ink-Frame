@@ -31,15 +31,15 @@ def display_news_widget(draw, image, x_start, y_start, news_data):
         # Draw QR code for the news item
         qr_code_image = generate_qr(item['link'])
         qr_code_image = qr_code_image.resize((qr_code_size, qr_code_size))  # Resize QR code to fit in the widget
-        image.paste(qr_code_image, (x + widget_width - qr_code_size - frame_offset, y - 5))
+        image.paste(qr_code_image, (x_start + widget_width - qr_code_size - frame_offset, y - 5))
         
         
         lines = wrap_text_to_width(
         item["title"],
         font_small,
-        max_width= widget_width - qr_code_size - 3 *frame_offset,
-        draw=draw,
-        max_lines=2
+        max_width = widget_width - qr_code_size - 3 *frame_offset,
+        draw = draw,
+        max_lines = 3
 )       
         line_counter = 0
         for line in lines:
