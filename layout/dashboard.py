@@ -143,7 +143,6 @@ def make_dashbord(data):
         # draw pi status
         try:
             display_pi_status(draw, 380, 1575)
-            print("display_pi_status not implemented yet")
         except:
             logger.exception("display_pi_status failed")  
         # draw software status
