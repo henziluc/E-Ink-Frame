@@ -35,9 +35,6 @@ def get_news():
         "random": parse_feed(
             get_feed(NEWS_FEEDS["random"][0])
         ),
-        "sport": parse_feed(
-            get_feed(NEWS_FEEDS["sport"][0])
-        ),
         "economie": parse_feed(
             get_feed(NEWS_FEEDS["economie"][0])
         )
