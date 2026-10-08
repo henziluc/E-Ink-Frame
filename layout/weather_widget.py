@@ -50,12 +50,6 @@ def display_weather_graph(draw, image, df_hourly, df_daily, x_start, y_start):
     
     y +=  spacing_normal + 10
     
-    # draw top horizontal line of the graph
-    draw.line([(x, y), (x + graph_width, y)], fill= fill_main, width = 1)
-    
-    #draw vertical line at beginning of graph
-    draw.line([(x, y),(x, y + graph_height)], fill= fill_main, width = 1)
-    
     y += graph_height
     
     # draw graph
@@ -74,9 +68,6 @@ def display_weather_graph(draw, image, df_hourly, df_daily, x_start, y_start):
         else:
             hour_str = str(hour)
         
-        # Draw vertical line where the day ends
-        if int(hour) % 24 == 0:
-            draw.line([(x + i * hour_spacing, y),(x + i * hour_spacing, y - graph_height)], fill= fill_main, width = 1)
         
         #if hour % 2 == 0:
             #draw.line([(x + i * hour_spacing, y), (x + i * hour_spacing, y - 5)], fill= fill_main, width = 1)
@@ -146,10 +137,7 @@ def draw_temperature_graph(draw, df_from_now, x_start, y_start, graph_height, ho
         if temp % 5 == 0:
             draw.text((x_start - 5, y), str(temp) + '°', font=font_small, fill=fill_main, anchor= 'rm')
             number_of_y_values += 1
-            
-        # draw dotted helper lines at every 5°C step
-        if temp % 5 == 0 and i != 0 and i != temp_delta:
-            draw_dotted_line(draw,(x_start + 5, y ),(x_start + hour_spacing * 48, y), dot_length=2, gap=8, fill=fill_main, width=1)
+        
 
     return number_of_y_values
         
