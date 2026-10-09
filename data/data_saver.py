@@ -18,7 +18,7 @@ def save_data_to_file(data, file_path):
     data["weather_daily"] = data["weather_daily"].to_dict(orient='records')
     
     for birthday in data["birthday_data"]:
-        birthday["date"] = birthday["date"].isoformat() if pd.notna(birthday["date"]) else None
+        birthday["birthday"] = birthday["birthday"].isoformat() if pd.notna(birthday["birthday"]) else None
     
     with open(file_path, 'w') as f:
         json.dump(data, f, indent=4)
@@ -57,8 +57,8 @@ def load_data_from_file(file_path):
 
         # Restore birthday dates
         for birthday in data["birthday_data"]:
-            birthday["date"] = (
-                datetime.fromisoformat(birthday["date"])
+            birthday["birthday"] = (
+                datetime.fromisoformat(birthday["birthday"])
                 if birthday["date"] else None
             )    
         
