@@ -9,14 +9,6 @@ def save_data_to_file(data, file_path):
     data["health_data"]["Luca"]["last updated"] = datetime.isoformat(data["health_data"]["Luca"]["last updated"])
     data["health_data"]["Jojo"]["last updated"] = datetime.isoformat(data["health_data"]["Jojo"]["last updated"])
     
-    data["status"]["weather_timestamp"] = datetime.isoformat(data["status"]["weather_timestamp"]) if data["status"]["weather_timestamp"] else None
-    data["status"]["transport_timestamp"] = datetime.isoformat(data["status"]["transport_timestamp"]) if data["status"]["transport_timestamp"] else None
-    data["status"]["health_timestamp"] = datetime.isoformat(data["status"]["health_timestamp"]) if data["status"]["health_timestamp"] else None
-    data["status"]["moon_timestamp"] = datetime.isoformat(data["status"]["moon_timestamp"]) if data["status"]["moon_timestamp"] else None
-    data["status"]["news_timestamp"] = datetime.isoformat(data["status"]["news_timestamp"]) if data["status"]["news_timestamp"] else None
-    data["status"]["quote_timestamp"] = datetime.isoformat(data["status"]["quote_timestamp"]) if data["status"]["quote_timestamp"] else None
-    data["status"]["birthday_timestamp"] = datetime.isoformat(data["status"]["birthday_timestamp"]) if data["status"]["birthday_timestamp"] else None
-
     data["weather_hourly"]["date"] = data["weather_hourly"]["date"].apply(lambda x: x.isoformat() if pd.notna(x) else None)
     data["weather_hourly"] = data["weather_hourly"].to_dict(orient='records')
     
@@ -48,23 +40,6 @@ def load_data_from_file(file_path):
         data["health_data"]["Jojo"]["last updated"] = datetime.fromisoformat(
             data["health_data"]["Jojo"]["last updated"]
         ) if data["health_data"]["Jojo"]["last updated"] else None
-
-
-        # Restore status timestamps
-        for key in [
-            "weather_timestamp",
-            "transport_timestamp",
-            "health_timestamp",
-            "moon_timestamp",
-            "news_timestamp",
-            "quote_timestamp",
-            "birthday_timestamp"
-        ]:
-            data["status"][key] = (
-                datetime.fromisoformat(data["status"][key])
-                if data["status"][key] else None
-            )
-
 
         # Restore weather DataFrames
         data["weather_hourly"] = pd.DataFrame(data["weather_hourly"])
