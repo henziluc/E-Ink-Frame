@@ -36,6 +36,7 @@ def load_data_from_file(file_path):
  
     if file_path.exists():
         # Load existing data
+        print("Loading data from file.")
         with file_path.open("r", encoding="utf-8") as file:
             data = json.load(file)
             
@@ -88,6 +89,7 @@ def load_data_from_file(file_path):
         
     else:
         # Initialize data
+        print("Data file not found. Initializing new data.")
         data = {
             "weather_hourly": None,
             "weather_daily": None,
