@@ -4,6 +4,7 @@ from pathlib import Path
 
 from fetch_data import fetch_all_data
 from data.transport.transport import load_transport_data
+from data.data_saver import save_data_to_file, load_data_from_file
 from data.holiday_photo import prepare_holiday_photos
 from assets.holiday_data import holidays
 from layout.dashboard import make_dashbord
@@ -31,43 +32,8 @@ def main():
         prepare_holiday_photos(holidays)
     except:
         logger.exception("Getting holiday pictures failed")
-    data = {
-        "weather_hourly": None,
-        "weather_daily": None,
-        "departures_seen": None,
-        "departures_etzberg": None,
-        "health_data": {
-            "Luca": {
-                "last updated": datetime(2000, 1, 1, 0, 0),
-                "activity_distance": None,
-                "activity_pace": None,
-                },
-            "Jojo": {
-                "last updated": datetime(2000, 1, 1, 0, 0),
-                "activity_distance": None,
-                "activity_pace": None,
-                }
-        },
-        "moon_data": None,
-        "news_data": None,
-        "quote_data": [],
-        "birthday_data": None,
-        "status" : {
-            'weather' : None,
-            'weather_timestamp' : None,
-            'transport' : None,
-            'transport_timestamp' : None,
-            'health' : None,
-            'health_timestamp' : None,
-            'moon' : None,
-            'moon_timestamp' : None,
-            'news' : None,
-            'news_timestamp' : None,
-            'quote' : None,
-            'quote_timestamp' : None,
-            'birthday' : None,
-            'birthday_timestamp' : None,
-        }}
+        
+    data = load_data_from_file(Path("assets/projectdata/data.json"))
         
         
         
@@ -110,6 +76,8 @@ def main():
                     print(f"  {value}")
             
             logger.info(f"Status: {data['status']}")
+            
+            save_data_to_file(data, Path("assets/projectdata/data.json"))
             
             # 2. Create and display dashboard
             data = make_dashbord(data)
